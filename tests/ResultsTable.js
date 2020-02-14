@@ -29,21 +29,21 @@ table.addValue('A',99);
 table.show('MyTable');
 
 describe('ResultsTable', function () {
-  describe('  #getTitle()', function () {
+  describe('  #getTitle() => int', function () {
     it('should return the table's title', function () {
       const result = table.getTitle();
       expect(result).toBe('MyTable);
     });
   });
   
-  describe('  #size()', function () {
+  describe('  #size() => int', function () {
     it('should return the size (nRows)', function () {
       const result = table.size();
       expect(result).toBe(10);
     });
   });
 
-  describe('  #addValue(string,string)', function () {
+  describe('  #addValue(string,string) => double', function () {
     it('should return the value of the #1 column and row', function () {
       const result = table.getValue('A',0);
       expect(result).toBe(99);
