@@ -1,5 +1,5 @@
 // Simple JS Unit Testing
-// Based on https://codeburst.io/a-simple-javascript-test-framework-from-scratch-89d6e7d22e74
+// From https://codeburst.io/a-simple-javascript-test-framework-from-scratch-89d6e7d22e74
 
 let TUNIT = {
   not: false,
@@ -7,19 +7,26 @@ let TUNIT = {
   failed: 0,
   msg: '',
   level: 0,
+  count: 1,
+  start: 0,
   sum: () => this.passed + this.failed,
-  stats: () => print(`${this.passed} passing, ${this.failed} failing`)
+  stats: () => print(`\n${this.passed} passing, ${this.failed} failing`)
 };
 
 const describe = (desc, func) => {
   TUNIT.not = false;
-  IJ.log(desc);
+  let level = TUNIT.level++;
+  print(`${(level >= 1) ? '  #' :''}${desc}`);
   func();
+  if (level === 0) {
+    TUNIT.stats();
+  }
 }
 
 const it = (msg, func) => {
+  // Store info for display
   TUNIT.msg = msg;
-  TUNIT.level = msg.length - msg.trim().length;
+  TUNIT.start = new Date().getTime();
   func();
 }
 
@@ -31,16 +38,36 @@ const repeat = (char,n) => {
   return str;
 }
 
+const pass = (not,condition,msg) => {
+  let elapsed = new Date().getTime() - TUNIT.start;
+  if ((!TUNIT.not && condition) || (TUNIT.not && condition) ) {
+    print(`${repeat(' ',TUNIT.level)}${TUNIT.count++} ok: ${TUNIT.msg} (${elapsed}ms)`);
+    TUNIT.passed++;
+    return true;
+  }
+  else {
+    throw 'TestFailed';
+  }
+}
+
+const fail = () => {
+  // TODO must catch the exception
+  print(repeat(' ',TUNIT.level) + (TUNIT.count++) +' not ok: ' + TUNIT.msg.trim());
+  TUNIT.failed++;
+  return false;
+}
+
 const assert = (condition) => {
-    if ((!TUNIT.not && condition) || (TUNIT.not && condition) ) {
-      print(repeat(' ',TUNIT.level) + '  OK: ' + TUNIT.msg.trim() );
-      TUNIT.passed++;
-      return true;
-    } else {
-      print(repeat(' ',TUNIT.level) + '  KO: ' + TUNIT.msg.trim());
-      TUNIT.failed++;
-      return false;
-    }
+  let elapsed = new Date().getTime() - TUNIT.start;
+  if ((!TUNIT.not && condition) || (TUNIT.not && condition) ) {
+    print(`${repeat(' ',TUNIT.level)}${TUNIT.count++} ok: ${TUNIT.msg} (${elapsed}ms)`);
+    TUNIT.passed++;
+    return true;
+  } else {
+    print(repeat(' ',TUNIT.level) + (TUNIT.count++) +' not ok: ' + TUNIT.msg.trim());
+    TUNIT.failed++;
+    return false;
+  }
 }
 
 const matchers = (exp) => ({
