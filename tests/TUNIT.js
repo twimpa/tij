@@ -47,7 +47,7 @@ const repeat = (char,n) => {
 const pass = (not,condition,msg) => {
   let elapsed = new Date().getTime() - TUNIT.start;
   if ((!not && condition) || (not && condition) ) {
-    print(` ${repeat(' ',TUNIT.level)}${TUNIT.count++} ok: ${msg} (${elapsed}ms)`);
+    print(` ${repeat(' ',TUNIT.level)}  ☑ ok ${TUNIT.count++}: ${msg} (${elapsed}ms)`);
     TUNIT.passed++;
     return true;
   }
@@ -58,7 +58,7 @@ const pass = (not,condition,msg) => {
 
 const fail = (e) => {
   // TODO must catch the exception
-  print(repeat(' ',TUNIT.level) + (TUNIT.count++) +' not ok: ' + e);
+  print(`${repeat(' ',TUNIT.level)}  ☐ not ok ${TUNIT.count++}: ${e}`);
   TUNIT.failed++;
   return false;
 }
