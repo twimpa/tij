@@ -55,7 +55,132 @@ table2.columnExists('D');
 
 
 
+describe('ResultsTable', function () {
+  describe('  #getTitle() => int', function () {
+    it('should return the tables title', function () {
+      const result = table.getTitle();
+      expect(result).toBe('MyTable');
+    });
+  });
+  
+  describe('  #size() => int', function () {
+    it('should return the size (nRows)', function () {
+      const result = table.size();
+      expect(result).toBe(10);
+    });
+  });
 
+  describe('  #setLabel(String label,int row) => String', function () {
+    it('should give a label to the row', function () {
+      const result = table.getLabel(0);
+      expect(result).toBe('I');
+    });
+  });
+
+  describe('  #getLabel(int row) => String', function () {
+    it('should return the name of the row', function () {
+      const result = table.getLabel(0);
+      expect(result).toBe('I');
+    });
+  });
+
+  describe('  #addLabel(String label) => String', function () {
+    it('should add a label to the current row ', function () {
+      const result = table.getLabel(9);
+      expect(result).toBe('Current row');
+    });
+  });
+  
+  describe('  #addValue(String column, double value) => double', function () {
+    it('should return the value of the last row of the column', function () {
+      const result = table.getValue('A',9);
+      expect(result).toBe(99);
+    });
+  });
+
+  describe('  #addValue(int column, double value) => int', function () {
+    it('should return the value of the last row of the given column', function () {
+      const result = table.getValue('C2',9);
+      expect(result).toBe(98);
+    });
+  });
+  
+  describe('  #addValue(String column, String Value) => String', function () {
+    it('should add a String value to the last row of the column', function () {
+      const result = table.getStringValue('D',9);
+      expect(result).toBe('Un');
+    });
+  });
+
+  describe('  #getStringValue(String column, int row) => String', function () {
+    it('should return the String value of the column and row', function () {
+      const result = table.getStringValue('D',9);
+      expect(result).toBe('Un');
+    });
+  });
+
+  describe('  #getStringValue(int column, int row) => String', function () {
+    it('should return the String value of the column and row', function () {
+      const result = table.getStringValue(2,9);
+      expect(result).toBe('Un');
+    });
+  });
+  
+  describe('  #columnExists(String column) => boolean', function () {
+    it('should return true if the column exists and false otherwise', function () {
+      const result = table.columnExists('D');
+      expect(result).toBe(true);
+    });
+  });
+
+  describe('  #columnExists(int column) => boolean', function () {
+    it('should return true if the column exists and false otherwise', function () {
+      const result = table.columnExists(1);
+      expect(result).toBe(true);
+    });
+  });
+
+});
+
+
+table.deleteColumn('D');
+table.deleteRow(9);
+
+describe('ResultsTable', function () {
+  describe('  #deleteColumn(String column) => ', function () {
+    it('should delete the column ', function () {
+      const result = table.columnDeleted();
+      expect(result).toBe(true);
+    });
+  });
+
+  describe('  #columnDeleted() => boolean', function () {
+    it('should return true if a column is deleted and false otherwise ', function () {
+      const result = table.columnDeleted();
+      expect(result).toBe(true);
+    });
+  });
+
+  describe('  #deleteRow(int rowIndex) => ', function () {
+    it('should delete the specified row', function () {
+      const result = table.size();
+      expect(result).toBe(9);
+    });
+  });
+  
+});
+
+table.deleteRows(7,8);
+
+describe('ResultsTable', function () {
+  describe('  #deleteRows(int index1, int index2) => ', function () {
+    it('should delete the specified row', function () {
+      const result = table.size();
+      expect(result).toBe(7);
+    });
+  });
+
+});
 describe('ResultsTable', function () {
     
   //donne le label d'une colonne donnée 
