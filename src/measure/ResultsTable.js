@@ -53,19 +53,6 @@
     // Add HTML Table for display
   };
 
-   
-  /**
-   * Obsolete; use getLastColumn().
-   * 
-   * @const {int}
-   * @default
-   * 
-   * @author Created by ijdoc2js
-   */
-  static get MAX_COLUMNS() {
-    return 0;
-  };
-
   /**
    * 
    * @const {int}
@@ -541,13 +528,13 @@
 
   /**
    * Returns the ResultsTable used by the Measure command. This
- * table must be displayed in the "Results" window.
+   * table must be displayed in the "Results" window.
    * 
    * @return ResultsTable
    * 
    * @author Created by ijdoc2js
    */
-  getResultsTable() {
+  static getResultsTable() {
     throw "Not Implemented - ResultsTable.getResultsTable(..)";
   };
 

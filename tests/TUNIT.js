@@ -1,6 +1,13 @@
-// Simple JS Unit Testing
-// From https://codeburst.io/a-simple-javascript-test-framework-from-scratch-89d6e7d22e74
-
+/* Simple JS Unit Testing
+ * Based on the article and code written by Lachlan Miller
+ * From https://codeburst.io/a-simple-javascript-test-framework-from-scratch-89d6e7d22e74
+ *
+ * Authors:
+ * Lachlan Miller
+ * Jean-Christophe Taveau
+ */
+ 
+ 
 let TUNIT = {
   not: false,
   passed: 0,
@@ -58,7 +65,7 @@ const pass = (not,condition,msg) => {
 
 const fail = (e) => {
   // TODO must catch the exception
-  print(`${repeat(' ',TUNIT.level)}  ☐ not ok ${TUNIT.count++}: ${e}`);
+  print(`${repeat(' ',TUNIT.level)}   ☐ not ok ${TUNIT.count++}: ${e}`);
   TUNIT.failed++;
   return false;
 }
