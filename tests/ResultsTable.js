@@ -49,6 +49,9 @@ describe('ResultsTable', function () {
 
   describe('setLabel(String label,int row) => String', function () {
     it('should give a label to the row', function () {
+      let table = new ResultsTable(10);
+      table.show('MyTable');
+      table.setLabel('I',0);
       const result = table.getLabel(0);
       expect(result).toBe('I');
     });
@@ -56,6 +59,9 @@ describe('ResultsTable', function () {
 
   describe('getLabel(int row) => String', function () {
     it('should return the name of the row', function () {
+      let table = new ResultsTable(10);
+      table.show('MyTable');
+      table.setLabel('I',0);
       const result = table.getLabel(0);
       expect(result).toBe('I');
     });
@@ -63,6 +69,9 @@ describe('ResultsTable', function () {
 
   describe('addLabel(String label) => String', function () {
     it('should add a label to the current row ', function () {
+      let table = new ResultsTable(10);
+      table.show('MyTable');
+      table.addLabel('Current row');
       const result = table.getLabel(9);
       expect(result).toBe('Current row');
     });
@@ -70,6 +79,9 @@ describe('ResultsTable', function () {
   
   describe('addValue(String column, double value) => double', function () {
     it('should return the value of the last row of the column', function () {
+      let table = new ResultsTable(10);
+      table.show('MyTable');
+      table.addValue('A',99);
       const result = table.getValue('A',9);
       expect(result).toBe(99);
     });
@@ -77,13 +89,19 @@ describe('ResultsTable', function () {
 
   describe('addValue(int column, double value) => int', function () {
     it('should return the value of the last row of the given column', function () {
-      const result = table.getValue('C2',9);
+      let table = new ResultsTable(10);
+      table.show('MyTable');
+      table.addValue(0,98); 
+      const result = table.getValue('C1',9);
       expect(result).toBe(98);
     });
   });
   
   describe('addValue(String column, String Value) => String', function () {
     it('should add a String value to the last row of the column', function () {
+      let table = new ResultsTable(10);
+      table.show('MyTable');
+      table.addValue('D', 'Un');
       const result = table.getStringValue('D',9);
       expect(result).toBe('Un');
     });
@@ -91,6 +109,9 @@ describe('ResultsTable', function () {
 
   describe('getStringValue(String column, int row) => String', function () {
     it('should return the String value of the column and row', function () {
+      let table = new ResultsTable(10);
+      table.show('MyTable');
+      table.addValue('D', 'Un');
       const result = table.getStringValue('D',9);
       expect(result).toBe('Un');
     });
@@ -98,13 +119,19 @@ describe('ResultsTable', function () {
 
   describe('getStringValue(int column, int row) => String', function () {
     it('should return the String value of the column and row', function () {
-      const result = table.getStringValue(2,9);
+      let table = new ResultsTable(10);
+      table.show('MyTable');
+      table.addValue('D', 'Un');
+      const result = table.getStringValue(0,9);
       expect(result).toBe('Un');
     });
   });
   
   describe('columnExists(String column) => boolean', function () {
     it('should return true if the column exists and false otherwise', function () {
+      let table = new ResultsTable(10);
+      table.show('MyTable');
+      table.addValue('D', 'Un');
       const result = table.columnExists('D');
       expect(result).toBe(true);
     });
@@ -112,7 +139,11 @@ describe('ResultsTable', function () {
 
   describe('columnExists(int column) => boolean', function () {
     it('should return true if the column exists and false otherwise', function () {
-      const result = table.columnExists(1);
+      let table = new ResultsTable(10);
+      table.show('MyTable');
+      table.addValue(1, 98);
+      table.addValue('D', 'Un');
+      const result = table.columnExists(0);
       expect(result).toBe(true);
     });
   });
@@ -121,8 +152,10 @@ describe('ResultsTable', function () {
 
   describe('deleteColumn(String column) => ', function () {
     it('should delete the column ', function () {
+      let table = new ResultsTable(10);
+      table.show('MyTable');
+      table.addValue('D', 'Un');
       table.deleteColumn('D');
-      table.deleteRow(9);
       const result = table.columnDeleted();
       expect(result).toBe(true);
     });
@@ -130,6 +163,10 @@ describe('ResultsTable', function () {
 
   describe('columnDeleted() => boolean', function () {
     it('should return true if a column is deleted and false otherwise ', function () {
+      let table = new ResultsTable(10);
+      table.show('MyTable');
+      table.addValue('D', 'Un');
+      table.deleteColumn('D');
       const result = table.columnDeleted();
       expect(result).toBe(true);
     });
@@ -137,6 +174,11 @@ describe('ResultsTable', function () {
 
   describe('deleteRow(int rowIndex) => ', function () {
     it('should delete the specified row', function () {
+      let table = new ResultsTable(10);
+      table.show('MyTable');
+      table.addValue('D', 'Un');
+      table.deleteColumn('D');
+      table.deleteRow(9);
       const result = table.size();
       expect(result).toBe(9);
     });
@@ -144,9 +186,13 @@ describe('ResultsTable', function () {
   
   describe('deleteRows(int index1, int index2) => ', function () {
     it('should delete the specified row', function () {
+      let table = new ResultsTable(10);
+      table.show('MyTable');
+      table.addValue('D', 'Un');
+      table.deleteColumn('D');
       table.deleteRows(7,8);
       const result = table.size();
-      expect(result).toBe(7);
+      expect(result).toBe(8);
     });
   });
 
@@ -376,5 +422,7 @@ describe('getDefaultHeading(int index) => String', function () {
 
 });
 
+
+TUNIT.stats();
 
 
