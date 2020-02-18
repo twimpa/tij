@@ -25,6 +25,7 @@ const describe = (desc, func) => {
 
 const it = (msg, func) => {
   // Store info for display
+  TUNIT.level--;
   TUNIT.msg = msg;
   TUNIT.start = new Date().getTime();
   try {
@@ -46,7 +47,7 @@ const repeat = (char,n) => {
 const pass = (not,condition,msg) => {
   let elapsed = new Date().getTime() - TUNIT.start;
   if ((!not && condition) || (not && condition) ) {
-    print(`${repeat(' ',TUNIT.level)}${TUNIT.count++} ok: ${msg} (${elapsed}ms)`);
+    print(` ${repeat(' ',TUNIT.level)}${TUNIT.count++} ok: ${msg} (${elapsed}ms)`);
     TUNIT.passed++;
     return true;
   }
