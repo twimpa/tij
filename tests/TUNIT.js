@@ -27,7 +27,12 @@ const it = (msg, func) => {
   // Store info for display
   TUNIT.msg = msg;
   TUNIT.start = new Date().getTime();
-  func();
+  try {
+    func();
+  }
+  catch (e) {
+    fail(e);
+  }
 }
 
 const repeat = (char,n) => {
@@ -40,33 +45,30 @@ const repeat = (char,n) => {
 
 const pass = (not,condition,msg) => {
   let elapsed = new Date().getTime() - TUNIT.start;
-  if ((!TUNIT.not && condition) || (TUNIT.not && condition) ) {
-    print(`${repeat(' ',TUNIT.level)}${TUNIT.count++} ok: ${TUNIT.msg} (${elapsed}ms)`);
+  if ((!not && condition) || (not && condition) ) {
+    print(`${repeat(' ',TUNIT.level)}${TUNIT.count++} ok: ${msg} (${elapsed}ms)`);
     TUNIT.passed++;
     return true;
   }
   else {
-    throw 'TestFailed';
+    throw msg;
   }
 }
 
-const fail = () => {
+const fail = (e) => {
   // TODO must catch the exception
-  print(repeat(' ',TUNIT.level) + (TUNIT.count++) +' not ok: ' + TUNIT.msg.trim());
+  print(repeat(' ',TUNIT.level) + (TUNIT.count++) +' not ok: ' + e);
   TUNIT.failed++;
   return false;
 }
 
 const assert = (condition) => {
   let elapsed = new Date().getTime() - TUNIT.start;
-  if ((!TUNIT.not && condition) || (TUNIT.not && condition) ) {
-    print(`${repeat(' ',TUNIT.level)}${TUNIT.count++} ok: ${TUNIT.msg} (${elapsed}ms)`);
-    TUNIT.passed++;
-    return true;
-  } else {
-    print(repeat(' ',TUNIT.level) + (TUNIT.count++) +' not ok: ' + TUNIT.msg.trim());
-    TUNIT.failed++;
-    return false;
+  try {
+    pass(TUNIT.not,condition,TUNIT.msg);
+  }
+  catch (e) {
+    fail(e);
   }
 }
 
