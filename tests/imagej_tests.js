@@ -5,5 +5,7 @@ const IJ_TUNIT = IJ.getDirectory('');
 load(`${IJ_TUNIT}/TUNIT.js`);
 
 print('\\Clear');
+
+// Test Suite for ResultsTable
 load(`${IJ_TUNIT}/ResultsTable.js`);
 
