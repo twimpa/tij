@@ -7,7 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "dev": "webpack --mode development",
+    "dev": "webpack --env=dev",
+    "prod": "webpack --env=prod",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -30,6 +31,7 @@
   },
   "homepage": "https://github.com/twimpa/tij#readme",
   "devDependencies": {
+    "terser-webpack-plugin": "^2.3.5",
     "webpack": "^4.41.6",
     "webpack-cli": "^3.3.11"
   }

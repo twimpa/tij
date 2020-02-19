@@ -1,9 +1,4 @@
-const path = require('path');
+module.exports = (env) => {
+  return require(`./webpack.config.${env}.js`)
+}
 
-module.exports = {
-  entry: './src/index.js',
-  output: {
-    filename: 'tij.js',
-    path: path.resolve(__dirname, 'dist')
-  }
-};
