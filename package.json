@@ -1,0 +1,36 @@
+{
+  "name": "tij",
+  "version": "0.0.1",
+  "description": "Tiny ImageJ API",
+  "main": "src/index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "dev": "webpack --mode development",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/twimpa/tij.git"
+  },
+  "keywords": [
+    "ImageJ",
+    "JavaScript",
+    "HTML",
+    "CSS",
+    "image",
+    "image",
+    "processing"
+  ],
+  "author": "Jean-Christophe Taveau",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/twimpa/tij/issues"
+  },
+  "homepage": "https://github.com/twimpa/tij#readme",
+  "devDependencies": {
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11"
+  }
+}
