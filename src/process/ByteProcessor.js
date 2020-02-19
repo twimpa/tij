@@ -22,6 +22,7 @@
  * Jean-Christophe Taveau
  */
 
+import {ImageProcessor} from './ImageProcessor';
 
 /**
  * public class ByteProcessor

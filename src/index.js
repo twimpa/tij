@@ -29,13 +29,14 @@ import {Table} from './core/Table';
 
 import {Roi} from './gui/Roi';
 import {ResultsTable} from './measure/ResultsTable';
-// import {ImageProcessor} from './process/ImageProcessor';
-// import {ByteProcessor} from './process/ByteProcessor';
+import {ImageProcessor} from './process/ImageProcessor';
+import {ByteProcessor} from './process/ByteProcessor';
 import {ImagePlus} from './ImagePlus';
  
  
 export {
-//  ImageProcessor,
+  ImageProcessor,
+  ByteProcessor,
   ImagePlus,
   Table,
   ResultsTable,
