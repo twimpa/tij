@@ -77,28 +77,24 @@ describe('ResultsTable', function () {
     });
   });
   
-  describe('addValue(String column, double value) => double', function () {
-    it('should return the value of the last row of the column', function () {
+  describe('addValue( column, value) => content', function () {
+    it('(string,number) => should return a <number> of the last row of the column', function () {
       let table = new ResultsTable(10);
       table.show('MyTable');
       table.addValue('A',99);
       const result = table.getValue('A',9);
       expect(result).toBe(99);
     });
-  });
 
-  describe('addValue(int column, double value) => int', function () {
-    it('should return the value of the last row of the given column', function () {
+    it('(number, number) => should return a <number> of the last row of the given column', function () {
       let table = new ResultsTable(10);
       table.show('MyTable');
       table.addValue(0,98); 
       const result = table.getValue('C1',9);
       expect(result).toBe(98);
     });
-  });
-  
-  describe('addValue(String column, String Value) => String', function () {
-    it('should add a String value to the last row of the column', function () {
+
+    it('(string,string) => should add a <string> of the last row of the column', function () {
       let table = new ResultsTable(10);
       table.show('MyTable');
       table.addValue('D', 'Un');
@@ -107,18 +103,16 @@ describe('ResultsTable', function () {
     });
   });
 
-  describe('getStringValue(String column, int row) => String', function () {
-    it('should return the String value of the column and row', function () {
+  describe('getStringValue( column, row) => String', function () {
+    it('(string, number) => should return a <string> at (column,row)', function () {
       let table = new ResultsTable(10);
       table.show('MyTable');
       table.addValue('D', 'Un');
       const result = table.getStringValue('D',9);
       expect(result).toBe('Un');
     });
-  });
 
-  describe('getStringValue(int column, int row) => String', function () {
-    it('should return the String value of the column and row', function () {
+    it('(number, number) => should return a <string>  at (column,row)', function () {
       let table = new ResultsTable(10);
       table.show('MyTable');
       table.addValue('D', 'Un');
