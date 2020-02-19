@@ -40,50 +40,56 @@ export class ByteProcessor extends ImageProcessor {
    * 
    * @author Created by ijdoc2js
    */
-  constructor (img) {
-    throw new NotImplementedException("ByteProcessor.ByteProcessor(..)");
+  constructor (...args) {
+    // TODO
+    /**
+     * Creates a ByteProcessor from a TIC - Tiny Image Core - Image.
+     * @constructor
+     * 
+     * @param {java.awt.Image} img - 
+     * 
+     * @author Created by ijdoc2js
+     */
+    // constructor(img)
+    
+    /**
+     * Creates a ByteProcessor from a pixel array and IndexColorModel.
+     * @constructor
+     * 
+     * @param {int} width - 
+     * @param {int} height - 
+     * @param {byte[]} pixels - 
+     * @param {java.awt.image.ColorModel} cm - 
+     * 
+     * @author Created by ijdoc2js
+     */
+    // constructor (width, height, pixels=null, cm=undefined)
+    
+    /**
+     * Creates a ByteProcessor from a TYPE_BYTE_GRAY BufferedImage.
+     * @constructor
+     * 
+     * @param {java.awt.image.BufferedImage} bi - 
+     * 
+     * @author Created by ijdoc2js
+     */
+    // constructor(bufferedImage)
+
+    /**
+     * Creates a ByteProcessor from an ImageProcessor. 16-bit and 32-bit
+     * pixel data are scaled from min-max to 0-255 if 'scale' is true.
+     * @constructor
+     * 
+     * @param {ImageProcessor} ip - 
+     * @param {boolean} scale - 
+     * 
+     * @author Created by ijdoc2js
+     */
+    // constructor (ip, scale)
+    
+    throw new NotImplementedException("ByteProcessor.constructor(..)");
   };
 
-  /**
-   * Creates a ByteProcessor from a pixel array and IndexColorModel.
-   * @constructor
-   * 
-   * @param {int} width - 
-   * @param {int} height - 
-   * @param {byte[]} pixels - 
-   * @param {java.awt.image.ColorModel} cm - 
-   * 
-   * @author Created by ijdoc2js
-   */
-  constructor (width, height, pixels=null, cm=undefined) {
-    throw new NotImplementedException("ByteProcessor.ByteProcessor(..)");
-  };
-
-  /**
-   * Creates a ByteProcessor from a TYPE_BYTE_GRAY BufferedImage.
-   * @constructor
-   * 
-   * @param {java.awt.image.BufferedImage} bi - 
-   * 
-   * @author Created by ijdoc2js
-   */
-  constructor (bi) {
-    throw new NotImplementedException("ByteProcessor.ByteProcessor(..)");
-  };
-
-  /**
-   * Creates a ByteProcessor from an ImageProcessor. 16-bit and 32-bit
- * pixel data are scaled from min-max to 0-255 if 'scale' is true.
-   * @constructor
-   * 
-   * @param {ImageProcessor} ip - 
-   * @param {boolean} scale - 
-   * 
-   * @author Created by ijdoc2js
-   */
-  constructor (ip, scale) {
-    throw new NotImplementedException("ByteProcessor.ByteProcessor(..)");
-  };
 
   /**
    * Returns a copy of this image in the form of an AWT Image.

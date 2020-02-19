@@ -42,6 +42,14 @@
 export class Roi {
 
   /**
+   * Creates a  ROI.
+   * @constructor
+   * 
+   * 
+   * @author Created by ijdoc2js
+   */
+  constructor (...args) {
+  /**
    * Creates a new rounded rectangular ROI.
    * @constructor
    * 
@@ -53,11 +61,9 @@ export class Roi {
    * 
    * @author Created by ijdoc2js
    */
-  constructor (x, y, width, height, cornerDiameter=0) {
-    throw new NotImplementedException("Roi.Roi(..)");
-  };
-
-  /**
+  // constructor (x, y, width, height, cornerDiameter=0) {
+  
+    /**
    * Creates a new rectangular Roi.
    * @constructor
    * 
@@ -65,9 +71,7 @@ export class Roi {
    * 
    * @author Created by ijdoc2js
    */
-  constructor (r) {
-    throw new NotImplementedException("Roi.Roi(..)");
-  };
+  // constructor (r) 
 
   /**
    * Starts the process of creating a user-defined rectangular Roi,
@@ -80,9 +84,7 @@ export class Roi {
    * 
    * @author Created by ijdoc2js
    */
-  constructor (sx, sy, imp) {
-    throw new NotImplementedException("Roi.Roi(..)");
-  };
+  // constructor (sx, sy, imp) 
 
   /**
    * Starts the process of creating a user-defined rectangular Roi,
@@ -96,9 +98,7 @@ export class Roi {
    * 
    * @author Created by ijdoc2js
    */
-  constructor (sx, sy, imp, cornerDiameter) {
-    throw new NotImplementedException("Roi.Roi(..)");
-  };
+  // constructor (sx, sy, imp, cornerDiameter) 
 
   /**
    * <span class="deprecatedLabel">Deprecated.</span>&nbsp;
@@ -112,9 +112,12 @@ export class Roi {
    * 
    * @author Created by ijdoc2js
    */
-  constructor (x, y, width, height, imp) {
-    throw new NotImplementedException("Roi.Roi(..)");
+    // constructor (x, y, width, height, imp)
+
+
+    throw new NotImplementedException("Roi.constructor(..)");
   };
+
 
   /**
    * 
