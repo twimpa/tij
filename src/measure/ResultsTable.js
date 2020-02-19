@@ -22,6 +22,8 @@
  * Jean-Christophe Taveau
  */
 
+'use strict';
+
 
 /**
  * public class ResultsTable
@@ -33,7 +35,7 @@
  * ResultsTable used by the <i>Analyze/Measure</i> command.
 */
 
- class ResultsTable {
+export class ResultsTable {
   /**
    * Constructs a ResultsTable with 'nRows' rows.
    * Constructs an empty ResultsTable with the counter=0, no columns
@@ -535,7 +537,7 @@
    * @author Created by ijdoc2js
    */
   static getResultsTable() {
-    throw "Not Implemented - ResultsTable.getResultsTable(..)";
+    throw "Not Implemented - static ResultsTable.getResultsTable(..)";
   };
 
   /**
@@ -605,9 +607,9 @@
 
   /**
    * Adds a value to the end of the given column. If the column
- * does not exist, it is created.
- * There is an example at:<br>
- * http://imagej.nih.gov/ij/plugins/sine-cosine.html
+   * does not exist, it is created.
+   * There is an example at:<br>
+   * http://imagej.nih.gov/ij/plugins/sine-cosine.html
    * 
    * @param {java.lang.String} column - 
    * @param {double} value - 
@@ -1089,7 +1091,7 @@
    * 
    * @author Created by ijdoc2js
    */
-  d2s(n, decimalPlaces) {
+  static d2s(n, decimalPlaces) {
     throw "Not Implemented - ResultsTable.d2s(..)";
   };
 
