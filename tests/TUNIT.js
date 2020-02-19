@@ -16,13 +16,18 @@ let TUNIT = {
   level: 0,
   count: 1,
   start: 0,
+  previous: 'none',
   sum: () => this.passed + this.failed,
   stats: () => print(`\n${this.passed} passing, ${this.failed} failing`)
 };
 
 const describe = (desc, func) => {
   TUNIT.not = false;
-  let level = TUNIT.level++;
+  if (TUNIT.previous === 'describe') {
+    TUNIT.level++;
+  }
+  TUNIT.previous = 'describe';
+  let level = TUNIT.level;
   print(`${(level >= 1) ? '  #' :''}${desc}`);
   func();
   if (level === 0) {
@@ -32,7 +37,7 @@ const describe = (desc, func) => {
 
 const it = (msg, func) => {
   // Store info for display
-  TUNIT.level--;
+  TUNIT.previous = 'it';
   TUNIT.msg = msg;
   TUNIT.start = new Date().getTime();
   try {
