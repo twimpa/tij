@@ -2,6 +2,7 @@
 const IJ_TUNIT = IJ.getDirectory(''); 
 
 // Import.s
+// Tiny Homemade Jasmine-like framework running in ImageJ
 load(`${IJ_TUNIT}/TUNIT.js`);
 
 print('\\Clear');
