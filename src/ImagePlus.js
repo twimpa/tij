@@ -39,70 +39,19 @@
 
 export class ImagePlus {
   /**
-   * Constructs an uninitialized ImagePlus.
+   * Constructs an ImagePlus.
    * @constructor
    * 
-   * 
+   * @param {String} title - or path_to_url
+   * @param {java.awt.Image} data - can be a `ImageProcessor` or a  ImageStack`
+
    * @author Created by ijdoc2js
    */
-  constructor () {
-    throw new NotImplementedException("ImagePlus.ImagePlus(..)");
+  constructor (title="None", data=null) {
+    throw "Not Implemented - ImagePlus.ImagePlus(..)";
   };
 
-  /**
-   * Constructs an ImagePlus from an Image or BufferedImage. The first
- * argument will be used as the title of the window that displays the image.
- * Throws an IllegalStateException if an error occurs while loading the image.
-   * @constructor
-   * 
-   * @param {java.lang.String} title - 
-   * @param {java.awt.Image} image - 
-   * 
-   * @author Created by ijdoc2js
-   */
-  constructor (title, image) {
-    throw new NotImplementedException("ImagePlus.ImagePlus(..)");
-  };
 
-  /**
-   * Constructs an ImagePlus from an ImageProcessor.
-   * @constructor
-   * 
-   * @param {java.lang.String} title - 
-   * @param {ImageProcessor} ip - 
-   * 
-   * @author Created by ijdoc2js
-   */
-  constructor (title, ip) {
-    throw new NotImplementedException("ImagePlus.ImagePlus(..)");
-  };
-
-  /**
-   * Constructs an ImagePlus from a TIFF, BMP, DICOM, FITS,
-   * PGM, GIF or JPRG specified by a path or from a TIFF, DICOM,
-   * GIF or JPEG specified by a URL.
-   * @constructor
-   * 
-   * @param {java.lang.String} pathOrURL - 
-   * 
-   * @author Created by ijdoc2js
-   */
-  constructor (pathOrURL) {
-    throw new NotImplementedException("ImagePlus.ImagePlus(..)");
-  };
-
-  /**
-   * Constructs an ImagePlus from a stack.
-   * @constructor
-   * 
-   * @param {java.lang.String} title - 
-   * @param {ImageStack} stack - 
-   * 
-   * @author Created by ijdoc2js
-   */
-  constructor (title, stack) {
-    throw new NotImplementedException("ImagePlus.ImagePlus(..)");
-  };
 
   /**
    * 8-bit grayscale (unsigned)
@@ -112,7 +61,9 @@ export class ImagePlus {
    * 
    * @author Created by ijdoc2js
    */
-  static GRAY8 = 0;
+  static get GRAY8() {
+    return 8;
+  }
 
   /**
    * 16-bit grayscale (unsigned)
@@ -122,7 +73,9 @@ export class ImagePlus {
    * 
    * @author Created by ijdoc2js
    */
-  static GRAY16 = 0;
+  static get GRAY16() {
+    return 16;
+  }
 
   /**
    * 32-bit floating-point grayscale
@@ -132,7 +85,9 @@ export class ImagePlus {
    * 
    * @author Created by ijdoc2js
    */
-  static GRAY32 = 0;
+  static get GRAY32() {
+    return 32;
+  }
 
   /**
    * 8-bit indexed color
@@ -142,7 +97,9 @@ export class ImagePlus {
    * 
    * @author Created by ijdoc2js
    */
-  static COLOR_256 = 0;
+  static get COLOR_256() {
+    return 256;
+  }
 
   /**
    * 32-bit RGB color
@@ -152,7 +109,9 @@ export class ImagePlus {
    * 
    * @author Created by ijdoc2js
    */
-  static COLOR_RGB = 0;
+  static get COLOR_RGB() {
+    return 24;
+  }
 
   /**
    * Title of image used by Flatten command
@@ -162,7 +121,9 @@ export class ImagePlus {
    * 
    * @author Created by ijdoc2js
    */
-  static flattenTitle = 0;
+  static get flattenTitle() {
+    return 0;
+  }
 
   /**
    * True if any changes have been made to this image.
@@ -172,7 +133,9 @@ export class ImagePlus {
    * 
    * @author Created by ijdoc2js
    */
-  static changes = 0;
+  static get changes() {
+    return 0;
+  }
 
   /**
    * 
@@ -181,7 +144,9 @@ export class ImagePlus {
    * 
    * @author Created by ijdoc2js
    */
-  static setIJMenuBar = 0;
+  static get setIJMenuBar() {
+    return 0;
+  }
 
   /**
    * Locks the image so other threads can test to see if it is in use.
@@ -197,7 +162,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   lock() {
-    throw new NotImplementedException("ImagePlus.lock(..)");
+    throw "Not Implemented - ImagePlus.lock(..)";
   };
 
   /**
@@ -209,7 +174,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   lockSilently() {
-    throw new NotImplementedException("ImagePlus.lockSilently(..)");
+    throw "Not Implemented - ImagePlus.lockSilently(..)";
   };
 
   /**
@@ -222,7 +187,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   unlock() {
-    throw new NotImplementedException("ImagePlus.unlock(..)");
+    throw "Not Implemented - ImagePlus.unlock(..)";
   };
 
   /**
@@ -233,7 +198,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   isLocked() {
-    throw new NotImplementedException("ImagePlus.isLocked(..)");
+    throw "Not Implemented - ImagePlus.isLocked(..)";
   };
 
   /**
@@ -244,7 +209,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   isLockedByAnotherThread() {
-    throw new NotImplementedException("ImagePlus.isLockedByAnotherThread(..)");
+    throw "Not Implemented - ImagePlus.isLockedByAnotherThread(..)";
   };
 
   /**
@@ -257,7 +222,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   draw() {
-    throw new NotImplementedException("ImagePlus.draw(..)");
+    throw "Not Implemented - ImagePlus.draw(..)";
   };
 
   /**
@@ -271,7 +236,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   draw(x, y, width, height) {
-    throw new NotImplementedException("ImagePlus.draw(..)");
+    throw "Not Implemented - ImagePlus.draw(..)";
   };
 
   /**
@@ -284,7 +249,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   updateAndDraw() {
-    throw new NotImplementedException("ImagePlus.updateAndDraw(..)");
+    throw "Not Implemented - ImagePlus.updateAndDraw(..)";
   };
 
   /**
@@ -294,7 +259,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   updateVirtualSlice() {
-    throw new NotImplementedException("ImagePlus.updateVirtualSlice(..)");
+    throw "Not Implemented - ImagePlus.updateVirtualSlice(..)";
   };
 
   /**
@@ -306,7 +271,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setDisplayMode(mode) {
-    throw new NotImplementedException("ImagePlus.setDisplayMode(..)");
+    throw "Not Implemented - ImagePlus.setDisplayMode(..)";
   };
 
   /**
@@ -319,7 +284,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getDisplayMode() {
-    throw new NotImplementedException("ImagePlus.getDisplayMode(..)");
+    throw "Not Implemented - ImagePlus.getDisplayMode(..)";
   };
 
   /**
@@ -332,7 +297,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setActiveChannels(channels) {
-    throw new NotImplementedException("ImagePlus.setActiveChannels(..)");
+    throw "Not Implemented - ImagePlus.setActiveChannels(..)";
   };
 
   /**
@@ -345,7 +310,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   updateChannelAndDraw() {
-    throw new NotImplementedException("ImagePlus.updateChannelAndDraw(..)");
+    throw "Not Implemented - ImagePlus.updateChannelAndDraw(..)";
   };
 
   /**
@@ -358,7 +323,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getChannelProcessor() {
-    throw new NotImplementedException("ImagePlus.getChannelProcessor(..)");
+    throw "Not Implemented - ImagePlus.getChannelProcessor(..)";
   };
 
   /**
@@ -370,7 +335,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getLuts() {
-    throw new NotImplementedException("ImagePlus.getLuts(..)");
+    throw "Not Implemented - ImagePlus.getLuts(..)";
   };
 
   /**
@@ -382,7 +347,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   repaintWindow() {
-    throw new NotImplementedException("ImagePlus.repaintWindow(..)");
+    throw "Not Implemented - ImagePlus.repaintWindow(..)";
   };
 
   /**
@@ -395,7 +360,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   updateAndRepaintWindow() {
-    throw new NotImplementedException("ImagePlus.updateAndRepaintWindow(..)");
+    throw "Not Implemented - ImagePlus.updateAndRepaintWindow(..)";
   };
 
   /**
@@ -406,7 +371,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   updateImage() {
-    throw new NotImplementedException("ImagePlus.updateImage(..)");
+    throw "Not Implemented - ImagePlus.updateImage(..)";
   };
 
   /**
@@ -416,7 +381,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   hide() {
-    throw new NotImplementedException("ImagePlus.hide(..)");
+    throw "Not Implemented - ImagePlus.hide(..)";
   };
 
   /**
@@ -427,7 +392,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   close() {
-    throw new NotImplementedException("ImagePlus.close(..)");
+    throw "Not Implemented - ImagePlus.close(..)";
   };
 
   /**
@@ -437,7 +402,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   show() {
-    throw new NotImplementedException("ImagePlus.show(..)");
+    throw "Not Implemented - ImagePlus.show(..)";
   };
 
   /**
@@ -449,7 +414,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   show(statusMessage) {
-    throw new NotImplementedException("ImagePlus.show(..)");
+    throw "Not Implemented - ImagePlus.show(..)";
   };
 
   /**
@@ -459,7 +424,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setActivated() {
-    throw new NotImplementedException("ImagePlus.setActivated(..)");
+    throw "Not Implemented - ImagePlus.setActivated(..)";
   };
 
   /**
@@ -470,7 +435,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getImage() {
-    throw new NotImplementedException("ImagePlus.getImage(..)");
+    throw "Not Implemented - ImagePlus.getImage(..)";
   };
 
   /**
@@ -481,7 +446,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getBufferedImage() {
-    throw new NotImplementedException("ImagePlus.getBufferedImage(..)");
+    throw "Not Implemented - ImagePlus.getBufferedImage(..)";
   };
 
   /**
@@ -492,7 +457,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getID() {
-    throw new NotImplementedException("ImagePlus.getID(..)");
+    throw "Not Implemented - ImagePlus.getID(..)";
   };
 
   /**
@@ -505,7 +470,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setImage(image) {
-    throw new NotImplementedException("ImagePlus.setImage(..)");
+    throw "Not Implemented - ImagePlus.setImage(..)";
   };
 
   /**
@@ -518,7 +483,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setImage(imp) {
-    throw new NotImplementedException("ImagePlus.setImage(..)");
+    throw "Not Implemented - ImagePlus.setImage(..)";
   };
 
   /**
@@ -531,7 +496,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setProcessor(ip) {
-    throw new NotImplementedException("ImagePlus.setProcessor(..)");
+    throw "Not Implemented - ImagePlus.setProcessor(..)";
   };
 
   /**
@@ -545,7 +510,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setProcessor(title, ip) {
-    throw new NotImplementedException("ImagePlus.setProcessor(..)");
+    throw "Not Implemented - ImagePlus.setProcessor(..)";
   };
 
   /**
@@ -556,7 +521,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setStack(stack) {
-    throw new NotImplementedException("ImagePlus.setStack(..)");
+    throw "Not Implemented - ImagePlus.setStack(..)";
   };
 
   /**
@@ -569,7 +534,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setStack(title, newStack) {
-    throw new NotImplementedException("ImagePlus.setStack(..)");
+    throw "Not Implemented - ImagePlus.setStack(..)";
   };
 
   /**
@@ -582,7 +547,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setStack(newStack, channels, slices, frames) {
-    throw new NotImplementedException("ImagePlus.setStack(..)");
+    throw "Not Implemented - ImagePlus.setStack(..)";
   };
 
   /**
@@ -594,7 +559,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setFileInfo(fi) {
-    throw new NotImplementedException("ImagePlus.setFileInfo(..)");
+    throw "Not Implemented - ImagePlus.setFileInfo(..)";
   };
 
   /**
@@ -607,7 +572,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getWindow() {
-    throw new NotImplementedException("ImagePlus.getWindow(..)");
+    throw "Not Implemented - ImagePlus.getWindow(..)";
   };
 
   /**
@@ -618,7 +583,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   isVisible() {
-    throw new NotImplementedException("ImagePlus.isVisible(..)");
+    throw "Not Implemented - ImagePlus.isVisible(..)";
   };
 
   /**
@@ -629,7 +594,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setWindow(win) {
-    throw new NotImplementedException("ImagePlus.setWindow(..)");
+    throw "Not Implemented - ImagePlus.setWindow(..)";
   };
 
   /**
@@ -641,7 +606,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getCanvas() {
-    throw new NotImplementedException("ImagePlus.getCanvas(..)");
+    throw "Not Implemented - ImagePlus.getCanvas(..)";
   };
 
   /**
@@ -652,7 +617,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setColor(c) {
-    throw new NotImplementedException("ImagePlus.setColor(..)");
+    throw "Not Implemented - ImagePlus.setColor(..)";
   };
 
   /**
@@ -662,7 +627,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   isProcessor() {
-    throw new NotImplementedException("ImagePlus.isProcessor(..)");
+    throw "Not Implemented - ImagePlus.isProcessor(..)";
   };
 
   /**
@@ -677,7 +642,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getProcessor() {
-    throw new NotImplementedException("ImagePlus.getProcessor(..)");
+    throw "Not Implemented - ImagePlus.getProcessor(..)";
   };
 
   /**
@@ -688,7 +653,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   trimProcessor() {
-    throw new NotImplementedException("ImagePlus.trimProcessor(..)");
+    throw "Not Implemented - ImagePlus.trimProcessor(..)";
   };
 
   /**
@@ -701,7 +666,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getMask() {
-    throw new NotImplementedException("ImagePlus.getMask(..)");
+    throw "Not Implemented - ImagePlus.getMask(..)";
   };
 
   /**
@@ -715,7 +680,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   createRoiMask() {
-    throw new NotImplementedException("ImagePlus.createRoiMask(..)");
+    throw "Not Implemented - ImagePlus.createRoiMask(..)";
   };
 
   /**
@@ -729,7 +694,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   createThresholdMask() {
-    throw new NotImplementedException("ImagePlus.createThresholdMask(..)");
+    throw "Not Implemented - ImagePlus.createThresholdMask(..)";
   };
 
   /**
@@ -750,7 +715,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getStatistics() {
-    throw new NotImplementedException("ImagePlus.getStatistics(..)");
+    throw "Not Implemented - ImagePlus.getStatistics(..)";
   };
 
   /**
@@ -763,7 +728,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getAllStatistics() {
-    throw new NotImplementedException("ImagePlus.getAllStatistics(..)");
+    throw "Not Implemented - ImagePlus.getAllStatistics(..)";
   };
 
   /**
@@ -773,7 +738,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getRawStatistics() {
-    throw new NotImplementedException("ImagePlus.getRawStatistics(..)");
+    throw "Not Implemented - ImagePlus.getRawStatistics(..)";
   };
 
   /**
@@ -786,7 +751,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getStatistics(mOptions) {
-    throw new NotImplementedException("ImagePlus.getStatistics(..)");
+    throw "Not Implemented - ImagePlus.getStatistics(..)";
   };
 
   /**
@@ -800,7 +765,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getStatistics(mOptions, nBins) {
-    throw new NotImplementedException("ImagePlus.getStatistics(..)");
+    throw "Not Implemented - ImagePlus.getStatistics(..)";
   };
 
   /**
@@ -817,7 +782,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getStatistics(mOptions, nBins, histMin, histMax) {
-    throw new NotImplementedException("ImagePlus.getStatistics(..)");
+    throw "Not Implemented - ImagePlus.getStatistics(..)";
   };
 
   /**
@@ -828,20 +793,20 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getTitle() {
-    throw new NotImplementedException("ImagePlus.getTitle(..)");
+    throw "Not Implemented - ImagePlus.getTitle(..)";
   };
 
   /**
    * If the image title is a file name, returns the name
- * without the extension and with spaces removed,
- * otherwise returns the title shortened to the first space.
+   * without the extension and with spaces removed,
+   * otherwise returns the title shortened to the first space.
    * 
    * @return java.lang.String
    * 
    * @author Created by ijdoc2js
    */
   getShortTitle() {
-    throw new NotImplementedException("ImagePlus.getShortTitle(..)");
+    throw "Not Implemented - ImagePlus.getShortTitle(..)";
   };
 
   /**
@@ -852,7 +817,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setTitle(title) {
-    throw new NotImplementedException("ImagePlus.setTitle(..)");
+    throw "Not Implemented - ImagePlus.setTitle(..)";
   };
 
   /**
@@ -863,7 +828,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getWidth() {
-    throw new NotImplementedException("ImagePlus.getWidth(..)");
+    throw "Not Implemented - ImagePlus.getWidth(..)";
   };
 
   /**
@@ -874,7 +839,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getHeight() {
-    throw new NotImplementedException("ImagePlus.getHeight(..)");
+    throw "Not Implemented - ImagePlus.getHeight(..)";
   };
 
   /**
@@ -885,7 +850,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getSizeInBytes() {
-    throw new NotImplementedException("ImagePlus.getSizeInBytes(..)");
+    throw "Not Implemented - ImagePlus.getSizeInBytes(..)";
   };
 
   /**
@@ -896,7 +861,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getStackSize() {
-    throw new NotImplementedException("ImagePlus.getStackSize(..)");
+    throw "Not Implemented - ImagePlus.getStackSize(..)";
   };
 
   /**
@@ -907,7 +872,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getImageStackSize() {
-    throw new NotImplementedException("ImagePlus.getImageStackSize(..)");
+    throw "Not Implemented - ImagePlus.getImageStackSize(..)";
   };
 
   /**
@@ -922,7 +887,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setDimensions(nChannels, nSlices, nFrames) {
-    throw new NotImplementedException("ImagePlus.setDimensions(..)");
+    throw "Not Implemented - ImagePlus.setDimensions(..)";
   };
 
   /**
@@ -933,7 +898,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   isHyperStack() {
-    throw new NotImplementedException("ImagePlus.isHyperStack(..)");
+    throw "Not Implemented - ImagePlus.isHyperStack(..)";
   };
 
   /**
@@ -944,7 +909,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getNDimensions() {
-    throw new NotImplementedException("ImagePlus.getNDimensions(..)");
+    throw "Not Implemented - ImagePlus.getNDimensions(..)";
   };
 
   /**
@@ -955,7 +920,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   isDisplayedHyperStack() {
-    throw new NotImplementedException("ImagePlus.isDisplayedHyperStack(..)");
+    throw "Not Implemented - ImagePlus.isDisplayedHyperStack(..)";
   };
 
   /**
@@ -966,7 +931,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getNChannels() {
-    throw new NotImplementedException("ImagePlus.getNChannels(..)");
+    throw "Not Implemented - ImagePlus.getNChannels(..)";
   };
 
   /**
@@ -977,7 +942,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getNSlices() {
-    throw new NotImplementedException("ImagePlus.getNSlices(..)");
+    throw "Not Implemented - ImagePlus.getNSlices(..)";
   };
 
   /**
@@ -988,7 +953,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getNFrames() {
-    throw new NotImplementedException("ImagePlus.getNFrames(..)");
+    throw "Not Implemented - ImagePlus.getNFrames(..)";
   };
 
   /**
@@ -1000,7 +965,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getDimensions() {
-    throw new NotImplementedException("ImagePlus.getDimensions(..)");
+    throw "Not Implemented - ImagePlus.getDimensions(..)";
   };
 
   /**
@@ -1011,7 +976,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getDimensions(varify) {
-    throw new NotImplementedException("ImagePlus.getDimensions(..)");
+    throw "Not Implemented - ImagePlus.getDimensions(..)";
   };
 
   /**
@@ -1023,7 +988,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getType() {
-    throw new NotImplementedException("ImagePlus.getType(..)");
+    throw "Not Implemented - ImagePlus.getType(..)";
   };
 
   /**
@@ -1035,7 +1000,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getBitDepth() {
-    throw new NotImplementedException("ImagePlus.getBitDepth(..)");
+    throw "Not Implemented - ImagePlus.getBitDepth(..)";
   };
 
   /**
@@ -1046,7 +1011,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getBytesPerPixel() {
-    throw new NotImplementedException("ImagePlus.getBytesPerPixel(..)");
+    throw "Not Implemented - ImagePlus.getBytesPerPixel(..)";
   };
 
   /**
@@ -1055,7 +1020,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setTypeToColor256() {
-    throw new NotImplementedException("ImagePlus.setTypeToColor256(..)");
+    throw "Not Implemented - ImagePlus.setTypeToColor256(..)";
   };
 
   /**
@@ -1069,7 +1034,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getStringProperty(key) {
-    throw new NotImplementedException("ImagePlus.getStringProperty(..)");
+    throw "Not Implemented - ImagePlus.getStringProperty(..)";
   };
 
   /**
@@ -1084,7 +1049,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getNumericProperty(key) {
-    throw new NotImplementedException("ImagePlus.getNumericProperty(..)");
+    throw "Not Implemented - ImagePlus.getNumericProperty(..)";
   };
 
   /**
@@ -1097,7 +1062,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getProp(key) {
-    throw new NotImplementedException("ImagePlus.getProp(..)");
+    throw "Not Implemented - ImagePlus.getProp(..)";
   };
 
   /**
@@ -1108,7 +1073,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getInfoProperty() {
-    throw new NotImplementedException("ImagePlus.getInfoProperty(..)");
+    throw "Not Implemented - ImagePlus.getInfoProperty(..)";
   };
 
   /**
@@ -1120,7 +1085,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getProperty(key) {
-    throw new NotImplementedException("ImagePlus.getProperty(..)");
+    throw "Not Implemented - ImagePlus.getProperty(..)";
   };
 
   /**
@@ -1133,7 +1098,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setProperty(key, value) {
-    throw new NotImplementedException("ImagePlus.setProperty(..)");
+    throw "Not Implemented - ImagePlus.setProperty(..)";
   };
 
   /**
@@ -1144,7 +1109,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getProperties() {
-    throw new NotImplementedException("ImagePlus.getProperties(..)");
+    throw "Not Implemented - ImagePlus.getProperties(..)";
   };
 
   /**
@@ -1155,7 +1120,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   createLut() {
-    throw new NotImplementedException("ImagePlus.createLut(..)");
+    throw "Not Implemented - ImagePlus.createLut(..)";
   };
 
   /**
@@ -1167,7 +1132,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   isInvertedLut() {
-    throw new NotImplementedException("ImagePlus.isInvertedLut(..)");
+    throw "Not Implemented - ImagePlus.isInvertedLut(..)";
   };
 
   /**
@@ -1183,7 +1148,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getPixel(x, y) {
-    throw new NotImplementedException("ImagePlus.getPixel(..)");
+    throw "Not Implemented - ImagePlus.getPixel(..)";
   };
 
   /**
@@ -1195,7 +1160,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   createEmptyStack() {
-    throw new NotImplementedException("ImagePlus.createEmptyStack(..)");
+    throw "Not Implemented - ImagePlus.createEmptyStack(..)";
   };
 
   /**
@@ -1209,7 +1174,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getStack() {
-    throw new NotImplementedException("ImagePlus.getStack(..)");
+    throw "Not Implemented - ImagePlus.getStack(..)";
   };
 
   /**
@@ -1220,7 +1185,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getImageStack() {
-    throw new NotImplementedException("ImagePlus.getImageStack(..)");
+    throw "Not Implemented - ImagePlus.getImageStack(..)";
   };
 
   /**
@@ -1231,7 +1196,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getCurrentSlice() {
-    throw new NotImplementedException("ImagePlus.getCurrentSlice(..)");
+    throw "Not Implemented - ImagePlus.getCurrentSlice(..)";
   };
 
   /**
@@ -1241,7 +1206,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getChannel() {
-    throw new NotImplementedException("ImagePlus.getChannel(..)");
+    throw "Not Implemented - ImagePlus.getChannel(..)";
   };
 
   /**
@@ -1251,7 +1216,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getSlice() {
-    throw new NotImplementedException("ImagePlus.getSlice(..)");
+    throw "Not Implemented - ImagePlus.getSlice(..)";
   };
 
   /**
@@ -1261,7 +1226,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getFrame() {
-    throw new NotImplementedException("ImagePlus.getFrame(..)");
+    throw "Not Implemented - ImagePlus.getFrame(..)";
   };
 
   /**
@@ -1270,7 +1235,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   killStack() {
-    throw new NotImplementedException("ImagePlus.killStack(..)");
+    throw "Not Implemented - ImagePlus.killStack(..)";
   };
 
   /**
@@ -1284,7 +1249,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setPosition(channel, slice, frame) {
-    throw new NotImplementedException("ImagePlus.setPosition(..)");
+    throw "Not Implemented - ImagePlus.setPosition(..)";
   };
 
   /**
@@ -1298,7 +1263,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setPositionWithoutUpdate(channel, slice, frame) {
-    throw new NotImplementedException("ImagePlus.setPositionWithoutUpdate(..)");
+    throw "Not Implemented - ImagePlus.setPositionWithoutUpdate(..)";
   };
 
   /**
@@ -1309,7 +1274,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setC(channel) {
-    throw new NotImplementedException("ImagePlus.setC(..)");
+    throw "Not Implemented - ImagePlus.setC(..)";
   };
 
   /**
@@ -1320,7 +1285,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setZ(slice) {
-    throw new NotImplementedException("ImagePlus.setZ(..)");
+    throw "Not Implemented - ImagePlus.setZ(..)";
   };
 
   /**
@@ -1331,7 +1296,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setT(frame) {
-    throw new NotImplementedException("ImagePlus.setT(..)");
+    throw "Not Implemented - ImagePlus.setT(..)";
   };
 
   /**
@@ -1342,7 +1307,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getC() {
-    throw new NotImplementedException("ImagePlus.getC(..)");
+    throw "Not Implemented - ImagePlus.getC(..)";
   };
 
   /**
@@ -1353,7 +1318,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getZ() {
-    throw new NotImplementedException("ImagePlus.getZ(..)");
+    throw "Not Implemented - ImagePlus.getZ(..)";
   };
 
   /**
@@ -1364,7 +1329,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getT() {
-    throw new NotImplementedException("ImagePlus.getT(..)");
+    throw "Not Implemented - ImagePlus.getT(..)";
   };
 
   /**
@@ -1378,7 +1343,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getStackIndex(channel, slice, frame) {
-    throw new NotImplementedException("ImagePlus.getStackIndex(..)");
+    throw "Not Implemented - ImagePlus.getStackIndex(..)";
   };
 
   /**
@@ -1387,7 +1352,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   resetStack() {
-    throw new NotImplementedException("ImagePlus.resetStack(..)");
+    throw "Not Implemented - ImagePlus.resetStack(..)";
   };
 
   /**
@@ -1398,7 +1363,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setPosition(n) {
-    throw new NotImplementedException("ImagePlus.setPosition(..)");
+    throw "Not Implemented - ImagePlus.setPosition(..)";
   };
 
   /**
@@ -1410,969 +1375,30 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   convertIndexToPosition(n) {
-    throw new NotImplementedException("ImagePlus.convertIndexToPosition(..)");
+    throw "Not Implemented - ImagePlus.convertIndexToPosition(..)";
   };
 
   /**
    * 
- * <ul class="navList">
- * <li><a href="../ij/ImageListener.html" title="interface in ij"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
- * <li><a href="../ij/ImageStack.html" title="class in ij"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
- * </ul>
- * <ul class="navList">
- * <li><a href="../index.html?ij/ImagePlus.html" target="_top">Frames</a></li>
- * <li><a href="ImagePlus.html" target="_top">No&nbsp;Frames</a></li>
- * </ul>
- * <ul class="navList" id="allclasses_navbar_bottom">
- * <li><a href="../allclasses-noframe.html">All&nbsp;Classes</a></li>
- * </ul>
- * <div>
- * <script type="text/javascript"><!--
- * allClassesLink = document.getElementById("allclasses_navbar_bottom");
- * if(window==top) {
- * allClassesLink.style.display = "block";
- * }
- * else {
- * allClassesLink.style.display = "none";
- * }
- * //-->
- * </script>
- * </div>
- * <div>
- * <ul class="subNavList">
- * <li>Summary:&nbsp;</li>
- * <li>Nested&nbsp;|&nbsp;</li>
- * <li><a href="#field.summary">Field</a>&nbsp;|&nbsp;</li>
- * <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
- * <li><a href="#method.summary">Method</a></li>
- * </ul>
- * <ul class="subNavList">
- * <li>Detail:&nbsp;</li>
- * <li><a href="#field.detail">Field</a>&nbsp;|&nbsp;</li>
- * <li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
- * <li><a href="#method.detail">Method</a></li>
- * </ul>
- * </div>
- * <a name="skip.navbar.bottom">
- * 
- * <!-- --></a>
    * 
-   * @deprecated navbar.bottom">
- * 
- * <!-- --></a>
- * <div class="skipNav"><a href="#skip.navbar.bottom" title="Skip navigation links">Skip navigation links</a></div>
- * <a name="navbar.bottom.firstrow">
- * 
- * <!-- --></a>
- * <ul class="navList" title="Navigation">
- * <li><a href="../overview-summary.html">Overview</a></li>
- * <li><a href="package-summary.html">Package</a></li>
- * <li class="navBarCell1Rev">Class</li>
- * <li><a href="class-use/ImagePlus.html">Use</a></li>
- * <li><a href="package-tree.html">Tree</a></li>
- * <li><a href="../deprecated-list.html">Deprecated</a></li>
- * <li><a href="../index-all.html">Index</a></li>
- * <li><a href="../help-doc.html">Help</a></li>
- * </ul>
- * 
    * @param {int} n - 
    * 
    * @author Created by ijdoc2js
    */
   setSlice(n) {
-    throw new NotImplementedException("ImagePlus.setSlice(..)");
+    throw "Not Implemented - ImagePlus.setSlice(..)";
   };
 
   /**
    * Displays the specified stack image (1
- * 
- * 
- * <a name="getRoi--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>getRoi</h4>
- * <pre>public&nbsp;<a href="../ij/gui/Roi.html" title="class in ij.gui">Roi</a>&nbsp;getRoi()</pre>
- * <div class="block">Returns the current selection, or null if there is no selection.</div>
- * </li>
- * </ul>
- * <a name="setRoi-ij.gui.Roi-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>setRoi</h4>
- * <pre>public&nbsp;void&nbsp;setRoi(<a href="../ij/gui/Roi.html" title="class in ij.gui">Roi</a>&nbsp;newRoi)</pre>
- * <div class="block">Assigns the specified ROI to this image and displays it. Any existing
- * ROI is deleted if <code>roi</code> is null or its width or height is zero.</div>
- * </li>
- * </ul>
- * <a name="setRoi-ij.gui.Roi-boolean-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>setRoi</h4>
- * <pre>public&nbsp;void&nbsp;setRoi(<a href="../ij/gui/Roi.html" title="class in ij.gui">Roi</a>&nbsp;newRoi,
- * boolean&nbsp;updateDisplay)</pre>
- * <div class="block">Assigns 'newRoi' to this image and displays it if 'updateDisplay' is true.</div>
- * </li>
- * </ul>
- * <a name="setRoi-int-int-int-int-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>setRoi</h4>
- * <pre>public&nbsp;void&nbsp;setRoi(int&nbsp;x,
- * int&nbsp;y,
- * int&nbsp;width,
- * int&nbsp;height)</pre>
- * <div class="block">Creates a rectangular selection.</div>
- * </li>
- * </ul>
- * <a name="setRoi-java.awt.Rectangle-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>setRoi</h4>
- * <pre>public&nbsp;void&nbsp;setRoi(java.awt.Rectangle&nbsp;r)</pre>
- * <div class="block">Creates a rectangular selection.</div>
- * </li>
- * </ul>
- * <a name="createNewRoi-int-int-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>createNewRoi</h4>
- * <pre>public&nbsp;void&nbsp;createNewRoi(int&nbsp;sx,
- * int&nbsp;sy)</pre>
- * <div class="block">Starts the process of creating a new selection, where sx and sy are the
- * starting screen coordinates. The selection type is determined by which tool in
- * the tool bar is active. The user interactively sets the selection size and shape.</div>
- * </li>
- * </ul>
- * <a name="deleteRoi--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>deleteRoi</h4>
- * <pre>public&nbsp;void&nbsp;deleteRoi()</pre>
- * <div class="block">Deletes the current region of interest. Makes a copy of the ROI
- * so it can be recovered by Edit/Selection/Restore Selection.</div>
- * </li>
- * </ul>
- * <a name="okToDeleteRoi--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>okToDeleteRoi</h4>
- * <pre>public&nbsp;boolean&nbsp;okToDeleteRoi()</pre>
- * </li>
- * </ul>
- * <a name="killRoi--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>killRoi</h4>
- * <pre>public&nbsp;void&nbsp;killRoi()</pre>
- * <div class="block">Deletes the current region of interest.</div>
- * </li>
- * </ul>
- * <a name="saveRoi--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>saveRoi</h4>
- * <pre>public&nbsp;void&nbsp;saveRoi()</pre>
- * </li>
- * </ul>
- * <a name="restoreRoi--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>restoreRoi</h4>
- * <pre>public&nbsp;void&nbsp;restoreRoi()</pre>
- * </li>
- * </ul>
- * <a name="revert--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>revert</h4>
- * <pre>public&nbsp;void&nbsp;revert()</pre>
- * <div class="block">Implements the File/Revert command.</div>
- * </li>
- * </ul>
- * <a name="getFileInfo--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>getFileInfo</h4>
- * <pre>public&nbsp;<a href="../ij/io/FileInfo.html" title="class in ij.io">FileInfo</a>&nbsp;getFileInfo()</pre>
- * <div class="block">Returns a FileInfo object containing information, including the
- * pixel array, needed to save this image. Use getOriginalFileInfo()
- * to get a copy of the FileInfo object used to open the image.</div>
- * <dl>
- * <dt><span class="seeLabel">See Also:</span></dt>
- * <dd><a href="../ij/io/FileInfo.html" title="class in ij.io"><code>FileInfo</code></a>, 
- * <a href="../ij/ImagePlus.html#getOriginalFileInfo--"><code>getOriginalFileInfo()</code></a>, 
- * <a href="../ij/ImagePlus.html#setFileInfo-ij.io.FileInfo-"><code>setFileInfo(ij.io.FileInfo)</code></a></dd>
- * </dl>
- * </li>
- * </ul>
- * <a name="getOriginalFileInfo--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>getOriginalFileInfo</h4>
- * <pre>public&nbsp;<a href="../ij/io/FileInfo.html" title="class in ij.io">FileInfo</a>&nbsp;getOriginalFileInfo()</pre>
- * <div class="block">Returns the FileInfo object that was used to open this image.
- * Returns null for images created using the File/New command.</div>
- * <dl>
- * <dt><span class="seeLabel">See Also:</span></dt>
- * <dd><a href="../ij/io/FileInfo.html" title="class in ij.io"><code>FileInfo</code></a>, 
- * <a href="../ij/ImagePlus.html#getFileInfo--"><code>getFileInfo()</code></a></dd>
- * </dl>
- * </li>
- * </ul>
- * <a name="imageUpdate-java.awt.Image-int-int-int-int-int-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>imageUpdate</h4>
- * <pre>public&nbsp;boolean&nbsp;imageUpdate(java.awt.Image&nbsp;img,
- * int&nbsp;flags,
- * int&nbsp;x,
- * int&nbsp;y,
- * int&nbsp;w,
- * int&nbsp;h)</pre>
- * <div class="block">Used by ImagePlus to monitor loading of images.</div>
- * <dl>
- * <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
- * <dd><code>imageUpdate</code>&nbsp;in interface&nbsp;<code>java.awt.image.ImageObserver</code></dd>
- * </dl>
- * </li>
- * </ul>
- * <a name="flush--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>flush</h4>
- * <pre>public&nbsp;void&nbsp;flush()</pre>
- * <div class="block">Sets the ImageProcessor, Roi, AWT Image and stack image
- * arrays to null. Does nothing if the image is locked.</div>
- * </li>
- * </ul>
- * <a name="setIgnoreFlush-boolean-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>setIgnoreFlush</h4>
- * <pre>public&nbsp;void&nbsp;setIgnoreFlush(boolean&nbsp;ignoreFlush)</pre>
- * </li>
- * </ul>
- * <a name="duplicate--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>duplicate</h4>
- * <pre>public&nbsp;<a href="../ij/ImagePlus.html" title="class in ij">ImagePlus</a>&nbsp;duplicate()</pre>
- * <div class="block">Returns a copy of this image or stack.</div>
- * <dl>
- * <dt><span class="seeLabel">See Also:</span></dt>
- * <dd><a href="../ij/ImagePlus.html#crop--"><code>crop()</code></a>, 
- * <a href="../ij/plugin/Duplicator.html#run-java.lang.String-"><code>Duplicator.run(java.lang.String)</code></a></dd>
- * </dl>
- * </li>
- * </ul>
- * <a name="crop--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>crop</h4>
- * <pre>public&nbsp;<a href="../ij/ImagePlus.html" title="class in ij">ImagePlus</a>&nbsp;crop()</pre>
- * <div class="block">Returns a copy this image or stack slice, cropped if there is an ROI.</div>
- * <dl>
- * <dt><span class="seeLabel">See Also:</span></dt>
- * <dd><a href="../ij/ImagePlus.html#duplicate--"><code>duplicate()</code></a>, 
- * <a href="../ij/plugin/Duplicator.html#crop-ij.ImagePlus-"><code>Duplicator.crop(ij.ImagePlus)</code></a></dd>
- * </dl>
- * </li>
- * </ul>
- * <a name="crop-java.lang.String-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>crop</h4>
- * <pre>public&nbsp;<a href="../ij/ImagePlus.html" title="class in ij">ImagePlus</a>&nbsp;crop(java.lang.String&nbsp;options)</pre>
- * <div class="block">Returns a cropped copy this image or stack, where 'options'
- * can be "stack", "slice" or a range (e.g., "20-30").</div>
- * <dl>
- * <dt><span class="seeLabel">See Also:</span></dt>
- * <dd><a href="../ij/ImagePlus.html#duplicate--"><code>duplicate()</code></a>, 
- * <a href="../ij/ImagePlus.html#crop--"><code>crop()</code></a>, 
- * <a href="../ij/plugin/Duplicator.html#crop-ij.ImagePlus-"><code>Duplicator.crop(ij.ImagePlus)</code></a></dd>
- * </dl>
- * </li>
- * </ul>
- * <a name="createImagePlus--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>createImagePlus</h4>
- * <pre>public&nbsp;<a href="../ij/ImagePlus.html" title="class in ij">ImagePlus</a>&nbsp;createImagePlus()</pre>
- * <div class="block">Returns a new ImagePlus with this image's attributes
- * (e.g. spatial scale), but no image.</div>
- * </li>
- * </ul>
- * <a name="createHyperStack-java.lang.String-int-int-int-int-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>createHyperStack</h4>
- * <pre>public&nbsp;<a href="../ij/ImagePlus.html" title="class in ij">ImagePlus</a>&nbsp;createHyperStack(java.lang.String&nbsp;title,
- * int&nbsp;channels,
- * int&nbsp;slices,
- * int&nbsp;frames,
- * int&nbsp;bitDepth)</pre>
- * <div class="block">This method has been replaced by IJ.createHyperStack().</div>
- * </li>
- * </ul>
- * <a name="copyScale-ij.ImagePlus-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>copyScale</h4>
- * <pre>public&nbsp;void&nbsp;copyScale(<a href="../ij/ImagePlus.html" title="class in ij">ImagePlus</a>&nbsp;imp)</pre>
- * <div class="block">Copies the calibration of the specified image to this image.</div>
- * </li>
- * </ul>
- * <a name="copyAttributes-ij.ImagePlus-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>copyAttributes</h4>
- * <pre>public&nbsp;void&nbsp;copyAttributes(<a href="../ij/ImagePlus.html" title="class in ij">ImagePlus</a>&nbsp;imp)</pre>
- * <div class="block">Copies attributes (name, ID, calibration, path, plot) of the specified image to this image.</div>
- * </li>
- * </ul>
- * <a name="startTiming--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>startTiming</h4>
- * <pre>public&nbsp;void&nbsp;startTiming()</pre>
- * <div class="block">Calls System.currentTimeMillis() to save the current
- * time so it can be retrieved later using getStartTime()
- * to calculate the elapsed time of an operation.</div>
- * </li>
- * </ul>
- * <a name="getStartTime--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>getStartTime</h4>
- * <pre>public&nbsp;long&nbsp;getStartTime()</pre>
- * <div class="block">Returns the time in milliseconds when
- * startTiming() was last called.</div>
- * </li>
- * </ul>
- * <a name="getCalibration--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>getCalibration</h4>
- * <pre>public&nbsp;<a href="../ij/measure/Calibration.html" title="class in ij.measure">Calibration</a>&nbsp;getCalibration()</pre>
- * <div class="block">Returns this image's calibration.</div>
- * </li>
- * </ul>
- * <a name="setCalibration-ij.measure.Calibration-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>setCalibration</h4>
- * <pre>public&nbsp;void&nbsp;setCalibration(<a href="../ij/measure/Calibration.html" title="class in ij.measure">Calibration</a>&nbsp;cal)</pre>
- * <div class="block">Sets this image's calibration.</div>
- * </li>
- * </ul>
- * <a name="setGlobalCalibration-ij.measure.Calibration-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>setGlobalCalibration</h4>
- * <pre>public&nbsp;void&nbsp;setGlobalCalibration(<a href="../ij/measure/Calibration.html" title="class in ij.measure">Calibration</a>&nbsp;global)</pre>
- * <div class="block">Sets the system-wide calibration.</div>
- * </li>
- * </ul>
- * <a name="getGlobalCalibration--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>getGlobalCalibration</h4>
- * <pre>public&nbsp;<a href="../ij/measure/Calibration.html" title="class in ij.measure">Calibration</a>&nbsp;getGlobalCalibration()</pre>
- * <div class="block">Returns the system-wide calibration, or null.</div>
- * </li>
- * </ul>
- * <a name="getStaticGlobalCalibration--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>getStaticGlobalCalibration</h4>
- * <pre>public static&nbsp;<a href="../ij/measure/Calibration.html" title="class in ij.measure">Calibration</a>&nbsp;getStaticGlobalCalibration()</pre>
- * <div class="block">This is a version of getGlobalCalibration() that can be called from a static context.</div>
- * </li>
- * </ul>
- * <a name="getLocalCalibration--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>getLocalCalibration</h4>
- * <pre>public&nbsp;<a href="../ij/measure/Calibration.html" title="class in ij.measure">Calibration</a>&nbsp;getLocalCalibration()</pre>
- * <div class="block">Returns this image's local calibration, ignoring
- * the "Global" calibration flag.</div>
- * </li>
- * </ul>
- * <a name="setIgnoreGlobalCalibration-boolean-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>setIgnoreGlobalCalibration</h4>
- * <pre>public&nbsp;void&nbsp;setIgnoreGlobalCalibration(boolean&nbsp;ignoreGlobalCalibration)</pre>
- * </li>
- * </ul>
- * <a name="mouseMoved-int-int-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>mouseMoved</h4>
- * <pre>public&nbsp;void&nbsp;mouseMoved(int&nbsp;x,
- * int&nbsp;y)</pre>
- * <div class="block">Displays the cursor coordinates and pixel value in the status bar.
- * Called by ImageCanvas when the mouse moves.</div>
- * </li>
- * </ul>
- * <a name="updateStatusbarValue--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>updateStatusbarValue</h4>
- * <pre>public&nbsp;void&nbsp;updateStatusbarValue()</pre>
- * <div class="block">Redisplays the (x,y) coordinates and pixel value (which may
- * have changed) in the status bar. Called by the Next Slice and
- * Previous Slice commands to update the z-coordinate and pixel value.</div>
- * </li>
- * </ul>
- * <a name="getLocationAsString-int-int-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>getLocationAsString</h4>
- * <pre>public&nbsp;java.lang.String&nbsp;getLocationAsString(int&nbsp;x,
- * int&nbsp;y)</pre>
- * <div class="block">Converts the current cursor location to a string.</div>
- * </li>
- * </ul>
- * <a name="copy--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>copy</h4>
- * <pre>public&nbsp;void&nbsp;copy()</pre>
- * <div class="block">Copies the contents of the current selection, or the entire
- * image if there is no selection, to the internal clipboard.</div>
- * </li>
- * </ul>
- * <a name="copy-boolean-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>copy</h4>
- * <pre>public&nbsp;void&nbsp;copy(boolean&nbsp;cut)</pre>
- * <div class="block">Copies the contents of the current selection to the internal clipboard.
- * Copies the entire image if there is no selection. Also clears
- * the selection if <code>cut</code> is true.</div>
- * </li>
- * </ul>
- * <a name="paste--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>paste</h4>
- * <pre>public&nbsp;void&nbsp;paste()</pre>
- * <div class="block">Inserts the contents of the internal clipboard into the active image. If there
- * is a selection the same size as the image on the clipboard, the image is inserted
- * into that selection, otherwise the selection is inserted into the center of the image.</div>
- * </li>
- * </ul>
- * <a name="getClipboard--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>getClipboard</h4>
- * <pre>public static&nbsp;<a href="../ij/ImagePlus.html" title="class in ij">ImagePlus</a>&nbsp;getClipboard()</pre>
- * <div class="block">Returns the internal clipboard or null if the internal clipboard is empty.</div>
- * </li>
- * </ul>
- * <a name="resetClipboard--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>resetClipboard</h4>
- * <pre>public static&nbsp;void&nbsp;resetClipboard()</pre>
- * <div class="block">Clears the internal clipboard.</div>
- * </li>
- * </ul>
- * <a name="notifyListeners-int-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>notifyListeners</h4>
- * <pre>protected&nbsp;void&nbsp;notifyListeners(int&nbsp;id)</pre>
- * </li>
- * </ul>
- * <a name="addImageListener-ij.ImageListener-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>addImageListener</h4>
- * <pre>public static&nbsp;void&nbsp;addImageListener(<a href="../ij/ImageListener.html" title="interface in ij">ImageListener</a>&nbsp;listener)</pre>
- * </li>
- * </ul>
- * <a name="removeImageListener-ij.ImageListener-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>removeImageListener</h4>
- * <pre>public static&nbsp;void&nbsp;removeImageListener(<a href="../ij/ImageListener.html" title="interface in ij">ImageListener</a>&nbsp;listener)</pre>
- * </li>
- * </ul>
- * <a name="logImageListeners--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>logImageListeners</h4>
- * <pre>public static&nbsp;void&nbsp;logImageListeners()</pre>
- * <div class="block">For debug purposes, writes all registered (and possibly,
- * forgotten) ImageListeners to the log window</div>
- * </li>
- * </ul>
- * <a name="setOpenAsHyperStack-boolean-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>setOpenAsHyperStack</h4>
- * <pre>public&nbsp;void&nbsp;setOpenAsHyperStack(boolean&nbsp;openAsHyperStack)</pre>
- * </li>
- * </ul>
- * <a name="getOpenAsHyperStack--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>getOpenAsHyperStack</h4>
- * <pre>public&nbsp;boolean&nbsp;getOpenAsHyperStack()</pre>
- * </li>
- * </ul>
- * <a name="isComposite--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>isComposite</h4>
- * <pre>public&nbsp;boolean&nbsp;isComposite()</pre>
- * <div class="block">Returns true if this is a CompositeImage.</div>
- * </li>
- * </ul>
- * <a name="getCompositeMode--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>getCompositeMode</h4>
- * <pre>public&nbsp;int&nbsp;getCompositeMode()</pre>
- * <div class="block">Returns the display mode (IJ.COMPOSITE, IJ.COLOR
- * or IJ.GRAYSCALE) if this is a CompositeImage, otherwise returns -1.</div>
- * </li>
- * </ul>
- * <a name="setDisplayRange-double-double-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>setDisplayRange</h4>
- * <pre>public&nbsp;void&nbsp;setDisplayRange(double&nbsp;min,
- * double&nbsp;max)</pre>
- * <div class="block">Sets the display range of the current channel. With non-composite
- * images it is identical to ip.setMinAndMax(min, max).</div>
- * </li>
- * </ul>
- * <a name="getDisplayRangeMin--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>getDisplayRangeMin</h4>
- * <pre>public&nbsp;double&nbsp;getDisplayRangeMin()</pre>
- * </li>
- * </ul>
- * <a name="getDisplayRangeMax--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>getDisplayRangeMax</h4>
- * <pre>public&nbsp;double&nbsp;getDisplayRangeMax()</pre>
- * </li>
- * </ul>
- * <a name="setDisplayRange-double-double-int-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>setDisplayRange</h4>
- * <pre>public&nbsp;void&nbsp;setDisplayRange(double&nbsp;min,
- * double&nbsp;max,
- * int&nbsp;channels)</pre>
- * <div class="block">Sets the display range of specified channels in an RGB image, where 4=red,
- * 2=green, 1=blue, 6=red+green, etc. With non-RGB images, this method is
- * identical to setDisplayRange(min, max). This method is used by the
- * Image/Adjust/Color Balance tool .</div>
- * </li>
- * </ul>
- * <a name="resetDisplayRange--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>resetDisplayRange</h4>
- * <pre>public&nbsp;void&nbsp;resetDisplayRange()</pre>
- * </li>
- * </ul>
- * <a name="isThreshold--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>isThreshold</h4>
- * <pre>public&nbsp;boolean&nbsp;isThreshold()</pre>
- * <div class="block">Returns 'true' if this image is thresholded.</div>
- * </li>
- * </ul>
- * <a name="setDefault16bitRange-int-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>setDefault16bitRange</h4>
- * <pre>public static&nbsp;void&nbsp;setDefault16bitRange(int&nbsp;bitDepth)</pre>
- * <div class="block">Set the default 16-bit display range, where 'bitDepth' must be 0 (auto-scaling),
- * 8 (0-255), 10 (0-1023), 12 (0-4095, 14 (0-16383), 15 (0-32767) or 16 (0-65535).</div>
- * </li>
- * </ul>
- * <a name="getDefault16bitRange--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>getDefault16bitRange</h4>
- * <pre>public static&nbsp;int&nbsp;getDefault16bitRange()</pre>
- * <div class="block">Returns the default 16-bit display range, 0 (auto-scaling), 8, 10, 12, 14, 15 or 16.</div>
- * </li>
- * </ul>
- * <a name="updatePosition-int-int-int-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>updatePosition</h4>
- * <pre>public&nbsp;void&nbsp;updatePosition(int&nbsp;c,
- * int&nbsp;z,
- * int&nbsp;t)</pre>
- * </li>
- * </ul>
- * <a name="flatten--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>flatten</h4>
- * <pre>public&nbsp;<a href="../ij/ImagePlus.html" title="class in ij">ImagePlus</a>&nbsp;flatten()</pre>
- * <div class="block">Returns a "flattened" version of this image, in RGB format.</div>
- * </li>
- * </ul>
- * <a name="flattenStack--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>flattenStack</h4>
- * <pre>public&nbsp;void&nbsp;flattenStack()</pre>
- * <div class="block">Flattens all slices of this stack or HyperStack.<br></div>
- * <dl>
- * <dt><span class="throwsLabel">Throws:</span></dt>
- * <dd><code>java.lang.UnsupportedOperationException</code> - if this image<br>
- * does not have an overlay and the RoiManager overlay is null<br>
- * or Java version is less than 1.6.
- * Copied from OverlayCommands and modified by Marcel Boeglin
- * on 2014.01.08 to work with HyperStacks.</dd>
- * </dl>
- * </li>
- * </ul>
- * <a name="setLut-ij.process.LUT-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>setLut</h4>
- * <pre>public&nbsp;void&nbsp;setLut(<a href="../ij/process/LUT.html" title="class in ij.process">LUT</a>&nbsp;lut)</pre>
- * <div class="block">Assigns a LUT (lookup table) to this image.</div>
- * <dl>
- * <dt><span class="seeLabel">See Also:</span></dt>
- * <dd><a href="../ij/io/Opener.html#openLut-java.lang.String-"><code>Opener.openLut(java.lang.String)</code></a></dd>
- * </dl>
- * </li>
- * </ul>
- * <a name="setOverlay-ij.gui.Overlay-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>setOverlay</h4>
- * <pre>public&nbsp;void&nbsp;setOverlay(<a href="../ij/gui/Overlay.html" title="class in ij.gui">Overlay</a>&nbsp;overlay)</pre>
- * <div class="block">Installs a list of ROIs that will be drawn on this image as a non-destructive overlay.</div>
- * <dl>
- * <dt><span class="seeLabel">See Also:</span></dt>
- * <dd><a href="../ij/gui/Roi.html#setStrokeColor-java.awt.Color-"><code>Roi.setStrokeColor(java.awt.Color)</code></a>, 
- * <a href="../ij/gui/Roi.html#setStrokeWidth-float-"><code>Roi.setStrokeWidth(float)</code></a>, 
- * <a href="../ij/gui/Roi.html#setFillColor-java.awt.Color-"><code>Roi.setFillColor(java.awt.Color)</code></a>, 
- * <a href="../ij/gui/Roi.html#setLocation-int-int-"><code>Roi.setLocation(int, int)</code></a>, 
- * <a href="../ij/gui/Roi.html#setNonScalable-boolean-"><code>Roi.setNonScalable(boolean)</code></a></dd>
- * </dl>
- * </li>
- * </ul>
- * <a name="setOverlay-java.awt.Shape-java.awt.Color-java.awt.BasicStroke-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>setOverlay</h4>
- * <pre>public&nbsp;void&nbsp;setOverlay(java.awt.Shape&nbsp;shape,
- * java.awt.Color&nbsp;color,
- * java.awt.BasicStroke&nbsp;stroke)</pre>
- * <div class="block">Creates an Overlay from the specified Shape, Color
- * and BasicStroke, and assigns it to this image.</div>
- * <dl>
- * <dt><span class="seeLabel">See Also:</span></dt>
- * <dd><a href="../ij/ImagePlus.html#setOverlay-ij.gui.Overlay-"><code>setOverlay(ij.gui.Overlay)</code></a>, 
- * <a href="../ij/gui/Roi.html#setStrokeColor-java.awt.Color-"><code>Roi.setStrokeColor(java.awt.Color)</code></a>, 
- * <a href="../ij/gui/Roi.html#setStrokeWidth-float-"><code>Roi.setStrokeWidth(float)</code></a></dd>
- * </dl>
- * </li>
- * </ul>
- * <a name="setOverlay-ij.gui.Roi-java.awt.Color-int-java.awt.Color-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>setOverlay</h4>
- * <pre>public&nbsp;void&nbsp;setOverlay(<a href="../ij/gui/Roi.html" title="class in ij.gui">Roi</a>&nbsp;roi,
- * java.awt.Color&nbsp;strokeColor,
- * int&nbsp;strokeWidth,
- * java.awt.Color&nbsp;fillColor)</pre>
- * <div class="block">Creates an Overlay from the specified ROI, and assigns it to this image.</div>
- * <dl>
- * <dt><span class="seeLabel">See Also:</span></dt>
- * <dd><a href="../ij/ImagePlus.html#setOverlay-ij.gui.Overlay-"><code>setOverlay(ij.gui.Overlay)</code></a></dd>
- * </dl>
- * </li>
- * </ul>
- * <a name="getOverlay--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>getOverlay</h4>
- * <pre>public&nbsp;<a href="../ij/gui/Overlay.html" title="class in ij.gui">Overlay</a>&nbsp;getOverlay()</pre>
- * <div class="block">Returns the current overly, or null if this image does not have an overlay.</div>
- * </li>
- * </ul>
- * <a name="setHideOverlay-boolean-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>setHideOverlay</h4>
- * <pre>public&nbsp;void&nbsp;setHideOverlay(boolean&nbsp;hide)</pre>
- * </li>
- * </ul>
- * <a name="getHideOverlay--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>getHideOverlay</h4>
- * <pre>public&nbsp;boolean&nbsp;getHideOverlay()</pre>
- * </li>
- * </ul>
- * <a name="setAntialiasRendering-boolean-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>setAntialiasRendering</h4>
- * <pre>public&nbsp;void&nbsp;setAntialiasRendering(boolean&nbsp;antialiasRendering)</pre>
- * <div class="block">Enable/disable use of antialiasing by the flatten() method.</div>
- * </li>
- * </ul>
- * <a name="clone--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>clone</h4>
- * <pre>public&nbsp;java.lang.Object&nbsp;clone()</pre>
- * <div class="block">Returns a shallow copy of this ImagePlus.</div>
- * <dl>
- * <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
- * <dd><code>clone</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
- * </dl>
- * </li>
- * </ul>
- * <a name="plotHistogram--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>plotHistogram</h4>
- * <pre>public&nbsp;<a href="../ij/gui/PlotWindow.html" title="class in ij.gui">PlotWindow</a>&nbsp;plotHistogram()</pre>
- * <div class="block">Plots a 256 bin histogram of this image and returns the PlotWindow.</div>
- * </li>
- * </ul>
- * <a name="plotHistogram-int-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>plotHistogram</h4>
- * <pre>public&nbsp;<a href="../ij/gui/PlotWindow.html" title="class in ij.gui">PlotWindow</a>&nbsp;plotHistogram(int&nbsp;bins)</pre>
- * <div class="block">Plots a histogram of this image using the specified
- * number of bins and returns the PlotWindow.</div>
- * </li>
- * </ul>
- * <a name="toString--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>toString</h4>
- * <pre>public&nbsp;java.lang.String&nbsp;toString()</pre>
- * <dl>
- * <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
- * <dd><code>toString</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
- * </dl>
- * </li>
- * </ul>
- * <a name="setIJMenuBar-boolean-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>setIJMenuBar</h4>
- * <pre>public&nbsp;void&nbsp;setIJMenuBar(boolean&nbsp;b)</pre>
- * </li>
- * </ul>
- * <a name="setIJMenuBar--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>setIJMenuBar</h4>
- * <pre>public&nbsp;boolean&nbsp;setIJMenuBar()</pre>
- * </li>
- * </ul>
- * <a name="isStack--">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>isStack</h4>
- * <pre>public&nbsp;boolean&nbsp;isStack()</pre>
- * </li>
- * </ul>
- * <a name="setPlot-ij.gui.Plot-">
- * 
- * <!-- --></a>
- * <ul class="blockList">
- * <li class="blockList">
- * <h4>setPlot</h4>
- * <pre>public&nbsp;void&nbsp;setPlot(<a href="../ij/gui/Plot.html" title="class in ij.gui">Plot</a>&nbsp;plot)</pre>
- * </li>
- * </ul>
- * <a name="getPlot--">
- * 
- * <!-- --></a>
- * <ul class="blockListLast">
- * <li class="blockList">
- * <h4>getPlot</h4>
- * <pre>public&nbsp;<a href="../ij/gui/Plot.html" title="class in ij.gui">Plot</a>&nbsp;getPlot()</pre>
- * </li>
- * </ul>
- * 
- * 
- * 
- * 
- * 
+   * 
    * 
    * @param {int} n - 
    * 
    * @author Created by ijdoc2js
    */
   setSliceWithoutUpdate(n) {
-    throw new NotImplementedException("ImagePlus.setSliceWithoutUpdate(..)");
+    throw "Not Implemented - ImagePlus.setSliceWithoutUpdate(..)";
   };
 
   /**
@@ -2383,7 +1409,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getRoi() {
-    throw new NotImplementedException("ImagePlus.getRoi(..)");
+    throw "Not Implemented - ImagePlus.getRoi(..)";
   };
 
   /**
@@ -2395,7 +1421,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setRoi(newRoi) {
-    throw new NotImplementedException("ImagePlus.setRoi(..)");
+    throw "Not Implemented - ImagePlus.setRoi(..)";
   };
 
   /**
@@ -2407,7 +1433,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setRoi(newRoi, updateDisplay) {
-    throw new NotImplementedException("ImagePlus.setRoi(..)");
+    throw "Not Implemented - ImagePlus.setRoi(..)";
   };
 
   /**
@@ -2421,7 +1447,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setRoi(x, y, width, height) {
-    throw new NotImplementedException("ImagePlus.setRoi(..)");
+    throw "Not Implemented - ImagePlus.setRoi(..)";
   };
 
   /**
@@ -2432,7 +1458,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setRoi(r) {
-    throw new NotImplementedException("ImagePlus.setRoi(..)");
+    throw "Not Implemented - ImagePlus.setRoi(..)";
   };
 
   /**
@@ -2446,7 +1472,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   createNewRoi(sx, sy) {
-    throw new NotImplementedException("ImagePlus.createNewRoi(..)");
+    throw "Not Implemented - ImagePlus.createNewRoi(..)";
   };
 
   /**
@@ -2457,7 +1483,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   deleteRoi() {
-    throw new NotImplementedException("ImagePlus.deleteRoi(..)");
+    throw "Not Implemented - ImagePlus.deleteRoi(..)";
   };
 
   /**
@@ -2467,7 +1493,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   okToDeleteRoi() {
-    throw new NotImplementedException("ImagePlus.okToDeleteRoi(..)");
+    throw "Not Implemented - ImagePlus.okToDeleteRoi(..)";
   };
 
   /**
@@ -2477,7 +1503,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   killRoi() {
-    throw new NotImplementedException("ImagePlus.killRoi(..)");
+    throw "Not Implemented - ImagePlus.killRoi(..)";
   };
 
   /**
@@ -2486,7 +1512,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   saveRoi() {
-    throw new NotImplementedException("ImagePlus.saveRoi(..)");
+    throw "Not Implemented - ImagePlus.saveRoi(..)";
   };
 
   /**
@@ -2495,7 +1521,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   restoreRoi() {
-    throw new NotImplementedException("ImagePlus.restoreRoi(..)");
+    throw "Not Implemented - ImagePlus.restoreRoi(..)";
   };
 
   /**
@@ -2505,7 +1531,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   revert() {
-    throw new NotImplementedException("ImagePlus.revert(..)");
+    throw "Not Implemented - ImagePlus.revert(..)";
   };
 
   /**
@@ -2518,7 +1544,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getFileInfo() {
-    throw new NotImplementedException("ImagePlus.getFileInfo(..)");
+    throw "Not Implemented - ImagePlus.getFileInfo(..)";
   };
 
   /**
@@ -2530,7 +1556,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getOriginalFileInfo() {
-    throw new NotImplementedException("ImagePlus.getOriginalFileInfo(..)");
+    throw "Not Implemented - ImagePlus.getOriginalFileInfo(..)";
   };
 
   /**
@@ -2547,7 +1573,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   imageUpdate(img, flags, x, y, w, h) {
-    throw new NotImplementedException("ImagePlus.imageUpdate(..)");
+    throw "Not Implemented - ImagePlus.imageUpdate(..)";
   };
 
   /**
@@ -2558,7 +1584,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   flush() {
-    throw new NotImplementedException("ImagePlus.flush(..)");
+    throw "Not Implemented - ImagePlus.flush(..)";
   };
 
   /**
@@ -2568,7 +1594,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setIgnoreFlush(ignoreFlush) {
-    throw new NotImplementedException("ImagePlus.setIgnoreFlush(..)");
+    throw "Not Implemented - ImagePlus.setIgnoreFlush(..)";
   };
 
   /**
@@ -2579,7 +1605,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   duplicate() {
-    throw new NotImplementedException("ImagePlus.duplicate(..)");
+    throw "Not Implemented - ImagePlus.duplicate(..)";
   };
 
   /**
@@ -2590,7 +1616,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   crop() {
-    throw new NotImplementedException("ImagePlus.crop(..)");
+    throw "Not Implemented - ImagePlus.crop(..)";
   };
 
   /**
@@ -2603,7 +1629,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   crop(options) {
-    throw new NotImplementedException("ImagePlus.crop(..)");
+    throw "Not Implemented - ImagePlus.crop(..)";
   };
 
   /**
@@ -2615,7 +1641,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   createImagePlus() {
-    throw new NotImplementedException("ImagePlus.createImagePlus(..)");
+    throw "Not Implemented - ImagePlus.createImagePlus(..)";
   };
 
   /**
@@ -2631,7 +1657,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   createHyperStack(title, channels, slices, frames, bitDepth) {
-    throw new NotImplementedException("ImagePlus.createHyperStack(..)");
+    throw "Not Implemented - ImagePlus.createHyperStack(..)";
   };
 
   /**
@@ -2642,7 +1668,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   copyScale(imp) {
-    throw new NotImplementedException("ImagePlus.copyScale(..)");
+    throw "Not Implemented - ImagePlus.copyScale(..)";
   };
 
   /**
@@ -2653,7 +1679,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   copyAttributes(imp) {
-    throw new NotImplementedException("ImagePlus.copyAttributes(..)");
+    throw "Not Implemented - ImagePlus.copyAttributes(..)";
   };
 
   /**
@@ -2665,7 +1691,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   startTiming() {
-    throw new NotImplementedException("ImagePlus.startTiming(..)");
+    throw "Not Implemented - ImagePlus.startTiming(..)";
   };
 
   /**
@@ -2677,7 +1703,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getStartTime() {
-    throw new NotImplementedException("ImagePlus.getStartTime(..)");
+    throw "Not Implemented - ImagePlus.getStartTime(..)";
   };
 
   /**
@@ -2688,7 +1714,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getCalibration() {
-    throw new NotImplementedException("ImagePlus.getCalibration(..)");
+    throw "Not Implemented - ImagePlus.getCalibration(..)";
   };
 
   /**
@@ -2699,7 +1725,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setCalibration(cal) {
-    throw new NotImplementedException("ImagePlus.setCalibration(..)");
+    throw "Not Implemented - ImagePlus.setCalibration(..)";
   };
 
   /**
@@ -2710,7 +1736,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setGlobalCalibration(global) {
-    throw new NotImplementedException("ImagePlus.setGlobalCalibration(..)");
+    throw "Not Implemented - ImagePlus.setGlobalCalibration(..)";
   };
 
   /**
@@ -2721,18 +1747,18 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getGlobalCalibration() {
-    throw new NotImplementedException("ImagePlus.getGlobalCalibration(..)");
+    throw "Not Implemented - ImagePlus.getGlobalCalibration(..)";
   };
 
   /**
-   * This is a version of getGlobalCalibration() that can be called from a static context.
+   * This is a version of getGlobalCalibration() that can be called from a static get context.
    * 
    * @return Calibration
    * 
    * @author Created by ijdoc2js
    */
   getStaticGlobalCalibration() {
-    throw new NotImplementedException("ImagePlus.getStaticGlobalCalibration(..)");
+    throw "Not Implemented - ImagePlus.getStaticGlobalCalibration(..)";
   };
 
   /**
@@ -2744,7 +1770,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getLocalCalibration() {
-    throw new NotImplementedException("ImagePlus.getLocalCalibration(..)");
+    throw "Not Implemented - ImagePlus.getLocalCalibration(..)";
   };
 
   /**
@@ -2754,7 +1780,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setIgnoreGlobalCalibration(ignoreGlobalCalibration) {
-    throw new NotImplementedException("ImagePlus.setIgnoreGlobalCalibration(..)");
+    throw "Not Implemented - ImagePlus.setIgnoreGlobalCalibration(..)";
   };
 
   /**
@@ -2767,7 +1793,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   mouseMoved(x, y) {
-    throw new NotImplementedException("ImagePlus.mouseMoved(..)");
+    throw "Not Implemented - ImagePlus.mouseMoved(..)";
   };
 
   /**
@@ -2779,7 +1805,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   updateStatusbarValue() {
-    throw new NotImplementedException("ImagePlus.updateStatusbarValue(..)");
+    throw "Not Implemented - ImagePlus.updateStatusbarValue(..)";
   };
 
   /**
@@ -2792,7 +1818,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getLocationAsString(x, y) {
-    throw new NotImplementedException("ImagePlus.getLocationAsString(..)");
+    throw "Not Implemented - ImagePlus.getLocationAsString(..)";
   };
 
   /**
@@ -2803,7 +1829,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   copy() {
-    throw new NotImplementedException("ImagePlus.copy(..)");
+    throw "Not Implemented - ImagePlus.copy(..)";
   };
 
   /**
@@ -2816,7 +1842,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   copy(cut) {
-    throw new NotImplementedException("ImagePlus.copy(..)");
+    throw "Not Implemented - ImagePlus.copy(..)";
   };
 
   /**
@@ -2828,7 +1854,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   paste() {
-    throw new NotImplementedException("ImagePlus.paste(..)");
+    throw "Not Implemented - ImagePlus.paste(..)";
   };
 
   /**
@@ -2839,7 +1865,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getClipboard() {
-    throw new NotImplementedException("ImagePlus.getClipboard(..)");
+    throw "Not Implemented - ImagePlus.getClipboard(..)";
   };
 
   /**
@@ -2849,7 +1875,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   resetClipboard() {
-    throw new NotImplementedException("ImagePlus.resetClipboard(..)");
+    throw "Not Implemented - ImagePlus.resetClipboard(..)";
   };
 
   /**
@@ -2859,7 +1885,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   addImageListener(listener) {
-    throw new NotImplementedException("ImagePlus.addImageListener(..)");
+    throw "Not Implemented - ImagePlus.addImageListener(..)";
   };
 
   /**
@@ -2869,7 +1895,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   removeImageListener(listener) {
-    throw new NotImplementedException("ImagePlus.removeImageListener(..)");
+    throw "Not Implemented - ImagePlus.removeImageListener(..)";
   };
 
   /**
@@ -2880,7 +1906,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   logImageListeners() {
-    throw new NotImplementedException("ImagePlus.logImageListeners(..)");
+    throw "Not Implemented - ImagePlus.logImageListeners(..)";
   };
 
   /**
@@ -2890,7 +1916,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setOpenAsHyperStack(openAsHyperStack) {
-    throw new NotImplementedException("ImagePlus.setOpenAsHyperStack(..)");
+    throw "Not Implemented - ImagePlus.setOpenAsHyperStack(..)";
   };
 
   /**
@@ -2900,7 +1926,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getOpenAsHyperStack() {
-    throw new NotImplementedException("ImagePlus.getOpenAsHyperStack(..)");
+    throw "Not Implemented - ImagePlus.getOpenAsHyperStack(..)";
   };
 
   /**
@@ -2911,7 +1937,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   isComposite() {
-    throw new NotImplementedException("ImagePlus.isComposite(..)");
+    throw "Not Implemented - ImagePlus.isComposite(..)";
   };
 
   /**
@@ -2923,7 +1949,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getCompositeMode() {
-    throw new NotImplementedException("ImagePlus.getCompositeMode(..)");
+    throw "Not Implemented - ImagePlus.getCompositeMode(..)";
   };
 
   /**
@@ -2936,7 +1962,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setDisplayRange(min, max) {
-    throw new NotImplementedException("ImagePlus.setDisplayRange(..)");
+    throw "Not Implemented - ImagePlus.setDisplayRange(..)";
   };
 
   /**
@@ -2946,7 +1972,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getDisplayRangeMin() {
-    throw new NotImplementedException("ImagePlus.getDisplayRangeMin(..)");
+    throw "Not Implemented - ImagePlus.getDisplayRangeMin(..)";
   };
 
   /**
@@ -2956,7 +1982,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getDisplayRangeMax() {
-    throw new NotImplementedException("ImagePlus.getDisplayRangeMax(..)");
+    throw "Not Implemented - ImagePlus.getDisplayRangeMax(..)";
   };
 
   /**
@@ -2972,7 +1998,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setDisplayRange(min, max, channels) {
-    throw new NotImplementedException("ImagePlus.setDisplayRange(..)");
+    throw "Not Implemented - ImagePlus.setDisplayRange(..)";
   };
 
   /**
@@ -2981,7 +2007,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   resetDisplayRange() {
-    throw new NotImplementedException("ImagePlus.resetDisplayRange(..)");
+    throw "Not Implemented - ImagePlus.resetDisplayRange(..)";
   };
 
   /**
@@ -2992,7 +2018,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   isThreshold() {
-    throw new NotImplementedException("ImagePlus.isThreshold(..)");
+    throw "Not Implemented - ImagePlus.isThreshold(..)";
   };
 
   /**
@@ -3004,7 +2030,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setDefault16bitRange(bitDepth) {
-    throw new NotImplementedException("ImagePlus.setDefault16bitRange(..)");
+    throw "Not Implemented - ImagePlus.setDefault16bitRange(..)";
   };
 
   /**
@@ -3015,7 +2041,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getDefault16bitRange() {
-    throw new NotImplementedException("ImagePlus.getDefault16bitRange(..)");
+    throw "Not Implemented - ImagePlus.getDefault16bitRange(..)";
   };
 
   /**
@@ -3027,7 +2053,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   updatePosition(c, z, t) {
-    throw new NotImplementedException("ImagePlus.updatePosition(..)");
+    throw "Not Implemented - ImagePlus.updatePosition(..)";
   };
 
   /**
@@ -3038,7 +2064,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   flatten() {
-    throw new NotImplementedException("ImagePlus.flatten(..)");
+    throw "Not Implemented - ImagePlus.flatten(..)";
   };
 
   /**
@@ -3048,7 +2074,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   flattenStack() {
-    throw new NotImplementedException("ImagePlus.flattenStack(..)");
+    throw "Not Implemented - ImagePlus.flattenStack(..)";
   };
 
   /**
@@ -3059,7 +2085,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setLut(lut) {
-    throw new NotImplementedException("ImagePlus.setLut(..)");
+    throw "Not Implemented - ImagePlus.setLut(..)";
   };
 
   /**
@@ -3070,7 +2096,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setOverlay(overlay) {
-    throw new NotImplementedException("ImagePlus.setOverlay(..)");
+    throw "Not Implemented - ImagePlus.setOverlay(..)";
   };
 
   /**
@@ -3084,7 +2110,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setOverlay(shape, color, stroke) {
-    throw new NotImplementedException("ImagePlus.setOverlay(..)");
+    throw "Not Implemented - ImagePlus.setOverlay(..)";
   };
 
   /**
@@ -3098,7 +2124,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setOverlay(roi, strokeColor, strokeWidth, fillColor) {
-    throw new NotImplementedException("ImagePlus.setOverlay(..)");
+    throw "Not Implemented - ImagePlus.setOverlay(..)";
   };
 
   /**
@@ -3109,7 +2135,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getOverlay() {
-    throw new NotImplementedException("ImagePlus.getOverlay(..)");
+    throw "Not Implemented - ImagePlus.getOverlay(..)";
   };
 
   /**
@@ -3119,7 +2145,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setHideOverlay(hide) {
-    throw new NotImplementedException("ImagePlus.setHideOverlay(..)");
+    throw "Not Implemented - ImagePlus.setHideOverlay(..)";
   };
 
   /**
@@ -3129,7 +2155,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getHideOverlay() {
-    throw new NotImplementedException("ImagePlus.getHideOverlay(..)");
+    throw "Not Implemented - ImagePlus.getHideOverlay(..)";
   };
 
   /**
@@ -3140,7 +2166,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setAntialiasRendering(antialiasRendering) {
-    throw new NotImplementedException("ImagePlus.setAntialiasRendering(..)");
+    throw "Not Implemented - ImagePlus.setAntialiasRendering(..)";
   };
 
   /**
@@ -3151,7 +2177,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   clone() {
-    throw new NotImplementedException("ImagePlus.clone(..)");
+    throw "Not Implemented - ImagePlus.clone(..)";
   };
 
   /**
@@ -3162,7 +2188,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   plotHistogram() {
-    throw new NotImplementedException("ImagePlus.plotHistogram(..)");
+    throw "Not Implemented - ImagePlus.plotHistogram(..)";
   };
 
   /**
@@ -3175,7 +2201,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   plotHistogram(bins) {
-    throw new NotImplementedException("ImagePlus.plotHistogram(..)");
+    throw "Not Implemented - ImagePlus.plotHistogram(..)";
   };
 
   /**
@@ -3185,7 +2211,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   toString() {
-    throw new NotImplementedException("ImagePlus.toString(..)");
+    throw "Not Implemented - ImagePlus.toString(..)";
   };
 
   /**
@@ -3195,7 +2221,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setIJMenuBar(b) {
-    throw new NotImplementedException("ImagePlus.setIJMenuBar(..)");
+    throw "Not Implemented - ImagePlus.setIJMenuBar(..)";
   };
 
   /**
@@ -3205,7 +2231,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setIJMenuBar() {
-    throw new NotImplementedException("ImagePlus.setIJMenuBar(..)");
+    throw "Not Implemented - ImagePlus.setIJMenuBar(..)";
   };
 
   /**
@@ -3215,7 +2241,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   isStack() {
-    throw new NotImplementedException("ImagePlus.isStack(..)");
+    throw "Not Implemented - ImagePlus.isStack(..)";
   };
 
   /**
@@ -3225,7 +2251,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   setPlot(plot) {
-    throw new NotImplementedException("ImagePlus.setPlot(..)");
+    throw "Not Implemented - ImagePlus.setPlot(..)";
   };
 
   /**
@@ -3235,7 +2261,7 @@ export class ImagePlus {
    * @author Created by ijdoc2js
    */
   getPlot() {
-    throw new NotImplementedException("ImagePlus.getPlot(..)");
+    throw "Not Implemented - ImagePlus.getPlot(..)";
   };
 
 } // End of class ImagePlus

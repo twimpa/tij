@@ -82,6 +82,7 @@ const assert = (condition) => {
 
 const matchers = (exp) => ({
   toBe: (assertion) => assert(exp === assertion),
+  toBeNaN: () => assert(isNaN(exp)),
   toEqual: (assertion) => {
     let flag = false;
     if (Array.isArray(assertion) ) {
