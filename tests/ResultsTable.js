@@ -423,6 +423,4 @@ describe('getDefaultHeading(int index) => String', function () {
 });
 
 
-TUNIT.stats();
-
 

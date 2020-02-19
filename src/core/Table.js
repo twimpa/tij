@@ -38,6 +38,7 @@ export class Table {
    */
   constructor() {
     // TODO
+    console.info('core/Table created');
   }
 
   /**

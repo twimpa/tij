@@ -52,5 +52,5 @@ Run ImageJ, then go to `File > Open` for opening the file `imagej_tests.js`. Onc
 
 #### 1.4.2. In the browser
 
-In your web browser, open the file `web_tests.html`, all the tests suites are automatically run  &mdash; with jasmine &mdash; . 
+In your web browser &mdash; Firefox or Chrome &mdash; , open the file `web_tests.html`, all the tests suites are automatically run with jasmine. 
 

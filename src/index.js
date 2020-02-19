@@ -24,16 +24,20 @@
  
 'use strict';
 
-import {ImagePlus} from './ImagePlus';
+import {Table} from './core/Table';
+
+
 import {Roi} from './gui/Roi';
 import {ResultsTable} from './measure/ResultsTable';
-import {ByteProcessor} from './process/ByteProcessor';
-import {ImageProcessor} from './process/ImageProcessor';
+// import {ImageProcessor} from './process/ImageProcessor';
+// import {ByteProcessor} from './process/ByteProcessor';
+import {ImagePlus} from './ImagePlus';
  
  
 export {
+//  ImageProcessor,
   ImagePlus,
-  ImageProcessor,
+  Table,
   ResultsTable,
   Roi
 }

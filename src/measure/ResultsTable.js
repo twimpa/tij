@@ -24,7 +24,6 @@
 
 'use strict';
 
-
 /**
  * public class ResultsTable
  * extends java.lang.Object
@@ -50,9 +49,12 @@ export class ResultsTable {
     this.nRows = nRows;
     this.nColumns = 0;
     this.title = 'undefined';
-    // TODO 
+    
+    // ALl we need to display the ResultsTable in HTML
+    this.table = new Table();
+    
     // Add data2d for data storage
-    // Add HTML Table for display
+    // TODO 
   };
 
   /**
