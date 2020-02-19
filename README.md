@@ -16,13 +16,26 @@ git clone https://github.com/twimpa/tij.git`
 
 ### 1.2. Configuration
 
-Check you already have npm version > 6.x.x installed.
+1. Check you already have node installed.
+
+`node -v`
+If you get a version like...
+
+`v11.12.0`
+
+... all is fine.
+
+2. Check you already have npm version > 6.x.x installed.
+
 In your terminal, type:
+
 `npm -v`
 If you get a version like...
+
 `6.13.7`
 
-Then, `cd` in the `tij `directory and type in your terminal
+3. Then, `cd` in the `tij `directory and type in your terminal:
+
 `npm install`
 
 ### 1.3. Create the bundle file
