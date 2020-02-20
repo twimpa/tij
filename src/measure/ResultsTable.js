@@ -54,7 +54,7 @@ export class ResultsTable {
     this.table = new Table();
     
     // Add data2d for data storage
-    // TODO 
+    this.dataset = new DataFrame(); 
   };
 
   /**

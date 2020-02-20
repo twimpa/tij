@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "webpack --env=dev",
     "prod": "webpack --env=prod",
+    "start": "webpack-dev-server --env=dev --open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -33,6 +34,7 @@
   "devDependencies": {
     "terser-webpack-plugin": "^2.3.5",
     "webpack": "^4.41.6",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
   }
 }

@@ -25,7 +25,7 @@
 'use strict';
 
 import {Table} from './core/Table';
-
+import {DataFrame} from './core/DataFrame';
 
 import {Roi} from './gui/Roi';
 import {ResultsTable} from './measure/ResultsTable';
