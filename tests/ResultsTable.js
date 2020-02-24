@@ -414,6 +414,173 @@ describe('getDefaultHeading(int index) => String', function () {
     });
   });
 
+  //donner un tableau "double" de la colonne donné ou null si la colonne est vide
+  describe(' #getColumnAsDoubles() => float[] / null', function(){
+    it('should return a copy of the given column as a double array, or null if the column is empty', function(){
+        let table = new ResultsTable(4);
+        table.addValue('B',99);
+        table.addValue(1,98);
+        table.addValue('D',97);
+        table.setLabel('I',0);
+        table.setLabel('II',1);
+        table.setLabel('III',2);
+        table.addLabel('Last row');
+        table.show('MyTable');
+        const result = table.getColumnAsDoubles(0);
+        expect(result).toEqual([0,0,0,99]);
+    });
+});
+
+//définir les décimales d'une colonne donnée
+describe(' #setDecimalPlaces(int column, int digits', function(){
+    it('should set the decimal places of a given column', function(){
+        let table = new ResultsTable(4);
+        table.addValue('B',99);
+        table.addValue(1,98);
+        table.addValue('D',97);
+        table.setLabel('I',0);
+        table.setLabel('II',1);
+        table.setLabel('III',2);
+        table.addLabel('Last row');
+        table.show('MyTable');
+        const set_digits = table.setDecimalPlaces(0,3);
+        const result = table.getColumnAsDoubles(0);
+        expect(result).toEqual([0.000, 0.000, 0.000, 99.000]);
+    });
+});
+
+//définir le titre d'une colonne donnée
+describe(' #setHeading(int column, String heading', function(){
+    it('should set heading of a given column', function(){
+        let table = new ResultsTable(4);
+        table.addValue('B',99.8967);
+        table.addValue(1,98.4354);
+        table.addValue('D',97.356784);
+        table.setLabel('I',0);
+        table.setLabel('II',1);
+        table.setLabel('III',2);
+        table.addLabel('Last row');
+        table.setHeading(2,"3ème colonne");
+        table.show('MyTable');
+        const set_Heading = table.setHeading(2,"3ème colonne");
+        const result = table.getHeadings();
+        expect(result).toEqual(["Label","B","C2","3ème colonne"]);
+    });
+});
+
+//donner un tableau de chaînes des noms de colonne
+describe(' #getHeadings() => String[]', function(){
+    it('should return the column headings as an array of Strings', function(){
+        let table = new ResultsTable(4);
+        table.addValue('B',99.8967);
+        table.addValue(1,98.4354);
+        table.addValue('D',97.356784);
+        table.setLabel('I',0);
+        table.setLabel('II',1);
+        table.setLabel('III',2);
+        table.addLabel('Last row');
+        table.setHeading(2,"3ème colonne");
+        table.show('MyTable');
+        const result = table.getHeadings();
+        expect(result).toEqual(["Label","B","C2","3ème colonne"]);
+    });
+});
+
+//définir les décimales qui sont utilisées lorsque le tableau de résultats est affiché
+describe(' #setPrecision(int precision)', function(){
+    it('should set the decimal places that are used when this table is displayed', function(){
+        let table = new ResultsTable(4);
+        table.addValue('B',99);
+        table.addValue(1,98);
+        table.addValue('D',97);
+        table.setLabel('I',0);
+        table.setLabel('II',1);
+        table.setLabel('III',2);
+        table.addLabel('Last row');
+        table.show('MyTable');
+        const setPrecision = table.setPrecision(2);
+        const result = table.getColumn(0);
+        expect(result).toEqual([0.00, 0.00, 0.00, 99.00]);
+    });
+}); 
+
+//renommer le nom de la colonne
+describe(' #renameColumn(String oldName, String newName', function(){
+    it('should rename a given column', function(){
+        let table = new ResultsTable(4);
+        table.addValue('B',99);
+        table.addValue(1,98); 
+        table.addValue('D', 97);
+        table.setLabel('I',0);
+        table.setLabel('II',1);
+        table.setLabel('III',2);
+        table.addLabel('Last row');
+        table.getHeadings();
+        table.setHeading(2,"3ème colonne");
+        table.show('MyTable');
+        const rename_Column = table.renameColumn("C2","2ème colonne");
+        const result = table.getHeadings();
+        expect(result).toEqual(["Label", "B", "2ème colonne", "3ème colonne"]);
+    });
+}); 
+
+//définir les valeurs type "double" correspond à la ligne et à la colonne qu'il se positionne
+describe(' #setValue(int column, int row, double value)', function(){
+    it('should set the value of the given column and row, where 0<=row<size()', function(){
+        let table = new ResultsTable(4);
+        table.addValue('B',99);
+        table.addValue(1,98); 
+        table.addValue('D', 97);
+        const setValue = table.setValue(0,0,2.33);
+        table.show('MyTable');
+        const result = table.getValue("B",0);
+        expect(result).toBe(2.33);
+    });
+});
+
+//définir les valeurs type "String" correspond à la ligne et à la colonne qu'il se positionne
+describe(' #setValue(int column, int row, String value)', function(){
+    it('should set the string value of the given column and row, where 0<=column<=(lastRow+1 and 0<=row<=size()', function(){
+        let table = new ResultsTable(4);
+        table.addValue('B',99);
+        table.addValue(1,98); 
+        table.addValue('D', 97);
+        const set_value = table.setValue(1,0,"Un");
+        table.show('MyTable');
+        const result = table.getStringValue(1,0);
+        expect(result).toBe("Un");
+    });
+});
+
+//définir les valeurs type "double" de la colonne et de la ligne données, où 0<=linge<size()
+describe(' #setValue(String column, int row, double value)', function(){
+    it('should set the value of the given column and row', function(){
+        let table = new ResultsTable(4);
+        table.addValue('B',99);
+        table.addValue(1,98); 
+        table.addValue('D', 97);
+        const set_value = table.setValue("D",0,5);
+        table.show('MyTable');
+        const result = table.getValue("D",0)
+        expect(result).toBe(5);
+    });
+});
+
+//définir les valeurs type "String" de la colonne et de la ligne données, où 0<= ligne <size()
+describe(' #setValue(String column, int row, String value)', function(){
+    it('should set the value of the given dolumn and row', function(){
+        let table = new ResultsTable(4);
+        table.addValue('B',99);
+        table.addValue(1,98); 
+        table.addValue('D', 97);
+        const set_value = table.setValue("D",2,"Sept");
+        table.show('MyTable');
+        const result = table.getStringValue("D",2);
+        expect(result).toBe("Sept");
+    });
+});
+
+
 });
 
 
