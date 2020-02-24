@@ -414,7 +414,6 @@ describe('getDefaultHeading(int index) => String', function () {
     });
   });
 
-  //donner un tableau "double" de la colonne donné ou null si la colonne est vide
   describe(' #getColumnAsDoubles() => float[] / null', function(){
     it('should return a copy of the given column as a double array, or null if the column is empty', function(){
         let table = new ResultsTable(4);
@@ -431,7 +430,6 @@ describe('getDefaultHeading(int index) => String', function () {
     });
 });
 
-//définir les décimales d'une colonne donnée
 describe(' #setDecimalPlaces(int column, int digits', function(){
     it('should set the decimal places of a given column', function(){
         let table = new ResultsTable(4);
@@ -449,7 +447,6 @@ describe(' #setDecimalPlaces(int column, int digits', function(){
     });
 });
 
-//définir le titre d'une colonne donnée
 describe(' #setHeading(int column, String heading', function(){
     it('should set heading of a given column', function(){
         let table = new ResultsTable(4);
@@ -468,7 +465,6 @@ describe(' #setHeading(int column, String heading', function(){
     });
 });
 
-//donner un tableau de chaînes des noms de colonne
 describe(' #getHeadings() => String[]', function(){
     it('should return the column headings as an array of Strings', function(){
         let table = new ResultsTable(4);
@@ -486,7 +482,6 @@ describe(' #getHeadings() => String[]', function(){
     });
 });
 
-//définir les décimales qui sont utilisées lorsque le tableau de résultats est affiché
 describe(' #setPrecision(int precision)', function(){
     it('should set the decimal places that are used when this table is displayed', function(){
         let table = new ResultsTable(4);
@@ -504,7 +499,6 @@ describe(' #setPrecision(int precision)', function(){
     });
 }); 
 
-//renommer le nom de la colonne
 describe(' #renameColumn(String oldName, String newName', function(){
     it('should rename a given column', function(){
         let table = new ResultsTable(4);
@@ -524,7 +518,6 @@ describe(' #renameColumn(String oldName, String newName', function(){
     });
 }); 
 
-//définir les valeurs type "double" correspond à la ligne et à la colonne qu'il se positionne
 describe(' #setValue(int column, int row, double value)', function(){
     it('should set the value of the given column and row, where 0<=row<size()', function(){
         let table = new ResultsTable(4);
@@ -538,7 +531,6 @@ describe(' #setValue(int column, int row, double value)', function(){
     });
 });
 
-//définir les valeurs type "String" correspond à la ligne et à la colonne qu'il se positionne
 describe(' #setValue(int column, int row, String value)', function(){
     it('should set the string value of the given column and row, where 0<=column<=(lastRow+1 and 0<=row<=size()', function(){
         let table = new ResultsTable(4);
@@ -552,7 +544,6 @@ describe(' #setValue(int column, int row, String value)', function(){
     });
 });
 
-//définir les valeurs type "double" de la colonne et de la ligne données, où 0<=linge<size()
 describe(' #setValue(String column, int row, double value)', function(){
     it('should set the value of the given column and row', function(){
         let table = new ResultsTable(4);
@@ -566,7 +557,6 @@ describe(' #setValue(String column, int row, double value)', function(){
     });
 });
 
-//définir les valeurs type "String" de la colonne et de la ligne données, où 0<= ligne <size()
 describe(' #setValue(String column, int row, String value)', function(){
     it('should set the value of the given dolumn and row', function(){
         let table = new ResultsTable(4);
