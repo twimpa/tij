@@ -2101,6 +2101,1406 @@ describe('ImageProcessor', function () {
        expect(result).toBe("sun.font.FontDesignMetrics[font=java.awt.Font[family=SansSerif,name=SansSerif,style=plain,size=12]ascent=12, descent=3, height=15]");
     });
  });
+
+   describe('#getWidth()', function(){
+      it('should return the width of the 8-bit image in pixels', function(){
+         let imp8 = test8();
+         const result = imp8.getWidth();
+         expect(result).toBe(3);
+         });
+
+
+      it('should return the width of the 16-bit image in pixels', function(){
+         let imp16 = test16();
+         const result = imp16.getWidth();
+         expect(result).toBe(3);
+         });
+
+      it('should return the width of the 32-bit image in pixels', function(){
+         let imp32 = test32();
+         const result = imp32.getWidth();
+         expect(result).toBe(3);
+         });
+
+      it('should return the width of the RGB image in pixels', function(){
+         let impRGB = testRGB();
+         const result = impRGB.getWidth();
+         expect(result).toBe(3);
+      });
+   });
+
+   describe('#getHeight()', function(){
+      it('should return the height of the 8-bit image in pixels', function(){
+         let imp8 = test8();
+         const result = imp8.getHeight();
+         expect(result).toBe(3);
+      });
+
+      it('should return the height of the 16-bit image in pixels', function(){
+         let imp16 = test16();
+         const result = imp16.getHeight();
+         expect(result).toBe(3);
+      });
+
+      it('should return the height of the 32-bit image in pixels', function(){
+         let imp32 = test32();
+         const result = imp32.getHeight();
+         expect(result).toBe(3);
+      });
+
+      it('should return the height of the RGB image in pixels', function(){
+         let impRGB = testRGB();
+         const result = impRGB.getHeight();
+         expect(result).toBe(3);
+      });
+   }); 
+
+   describe('#invertLut()', function(){
+      it('should invert the values in the 8-bit images LUT. Does nothing if this is a ColorProcessor', function(){
+         let imp8 = test8();
+         imp8.invertLut();
+         const result = imp8.isInvertedLut();
+         expect(result).toBe(true);
+      });
+
+      it('should invert the values in the 16-bit images LUT. Does nothing if this is a ColorProcessor', function(){
+         let imp16 = test8();
+         imp16.invertLut();
+         const result = imp16.isInvertedLut();
+         expect(result).toBe(true);
+      });
+
+      it('should invert the values in the 32-bit images LUT. Does nothing if this is a ColorProcessor', function(){
+         let imp32 = test32();
+         imp32.invertLut();
+         const result = imp32.isInvertedLut();
+         expect(result).toBe(true);
+      }); 
+
+      it('Does nothing if this is a ColorProcessor', function(){
+         let impRGB = testRGB();
+         impRGB.invertLut();
+         const result = impRGB.isInvertedLut();
+         expect(result).toBe(false);
+      });
+   });
+
+   describe('#isInvertLutedLut()', function(){
+      it('should return false if the 8-bit image does not use an inverting LUT that displays 0 as white and 255 as black.', function(){
+         let imp8 = test8();
+         const result = imp8.isInvertedLut();
+         expect(result).toBe(false);
+      });
+      it('should return true if the 8-bit image uses an inverting LUT that displays 0 as white and 255 as black.', function(){
+         let imp8 = test8();
+         imp8.invertLut();
+         const result = imp8.isInvertedLut();
+         expect(result).toBe(true);
+      });
+
+      it('should return false if the 16-bit image does not use an inverting LUT that displays 0 as white and 255 as black.', function(){
+         let imp16 = test16();
+         const result = imp16.isInvertedLut();
+         expect(result).toBe(false);
+      });
+      it('should return true if the 16-bit image uses an inverting LUT that displays 0 as white and 255 as black.', function(){
+         let imp16 = test16();
+         imp16.invertLut();
+         const result = imp16.isInvertedLut();
+         expect(result).toBe(true);
+      });
+
+      it('should return false if the 32-bit image does not use an inverting LUT that displays 0 as white and 255 as black.', function(){
+         let imp32 = test32();
+         const result = imp32.isInvertedLut();
+         expect(result).toBe(false);
+      });
+      it('should return true if the 32-bit image uses an inverting LUT that displays 0 as white and 255 as black.', function(){
+         let imp32 = test32();
+         imp32.invertLut();
+         const result = imp32.isInvertedLut();
+         expect(result).toBe(true);
+      });
+
+      it('Does nothing if this is a ColorProcessor', function(){
+         let impRGB = testRGB();
+         const result = impRGB.isInvertedLut();
+         expect(result).toBe(false);
+      });
+      it('Does nothing if this is a ColorProcessor', function(){
+         let impRGB = testRGB();
+         impRGB.invertLut();
+         const result = impRGB.isInvertedLut();
+         expect(result).toBe(false);
+      });
+   }); 
+
+   describe('#isBinary()', function(){
+      it('should return true if this is a binary image (8-bit-image with only 0 and 255)', function(){
+         let imp8 = test8();
+         imp8.autoThreshold();
+         const result = imp8.isBinary();
+         expect(result).toBe(true);
+      });
+      it('should return false if this is not a binary image (8-bit-image with only 0 and 255)', function(){
+         let imp8 = test8();
+         const result = imp8.isBinary();
+         expect(result).toBe(false);
+      });
+
+      it('should return false if this is not a binary image (8-bit-image with only 0 and 255)', function(){
+         let imp16 = test16();
+         const result = imp16.isBinary();
+         expect(result).toBe(false);
+      });
+
+      it('should return false if this is not a binary image (8-bit-image with only 0 and 255)', function(){
+         let imp32 = test32();
+         const result = imp32.isBinary();
+         expect(result).toBe(false);
+      });
+
+      it('should return false if this is not a binary image (8-bit-image with only 0 and 255)', function(){
+         let impRGB = testRGB();
+         const result = impRGB.isBinary();
+         expect(result).toBe(false);
+      });
+   }); 
+
+   describe('#getNChannels()', function(){
+      it('should return the number of color channels = 1 for grayscale images', function(){
+         let imp8 = test8();
+         const result = imp8.getNChannels();
+         expect(result).toBe(1);
+      });
+      
+      it('should return the number of color channels = 1 for grayscale images', function(){
+         let imp16 = test16();
+         const result = imp16.getNChannels();
+         expect(result).toBe(1);
+      });
+
+      it('should return the number of color channels = 1 for grayscale images', function(){
+         let imp32 = test32();
+         const result = imp32.getNChannels();
+         expect(result).toBe(1);
+      });
+
+      it('should return 3 for RGB images', function(){
+         let impRGB= testRGB();
+         const result = impRGB.getNChannels();
+         expect(result).toBe(3);
+      });        
+   }); 
+
+   describe('#getBitDepth()', function(){
+      it('should return 8 if pixels is instance of byte[]', function(){
+         let imp8 =  test8();
+         const result = imp8.getBitDepth();
+         expect(result).toBe(8);
+      });
+
+      it('should return 16 if pixels is instance of short[]', function(){
+         let imp16 =  test16();
+         const result = imp16.getBitDepth();
+         expect(result).toBe(16);
+      });
+
+      it('should return 32 if pixels is instance of float[]', function(){
+         let imp32 =  test32();
+         const result = imp32.getBitDepth();
+         expect(result).toBe(32);
+      });
+
+      it('should return 24 for RGB image', function(){
+         let impRGB =  testRGB();
+         const result = impRGB.getBitDepth();
+         expect(result).toBe(24);
+      });
+   });
+
+   describe('#setSliceNumber(int value)', function(){
+      it('For 8-bit image, PlugInFilterRunner uses this method to set the slice number and return 1 if sliceNumber<1', function(){
+         let imp8 = test8();
+         imp8.setSliceNumber(0);
+         const result = imp8.getSliceNumber();
+         expect(result).toBe(1);
+      }); 
+      it('For 8-bit image, set the slice number and return sliceNumber if sliceNumber>=1', function(){
+         let imp8 = test8();
+         imp8.setSliceNumber(2);
+         const result = imp8.getSliceNumber();
+         expect(result).toBe(2);
+      }); 
+
+      it('For 16-bit image, PlugInFilterRunner uses this method to set the slice number and return 1 if sliceNumber<1', function(){
+         let imp16 = test16();
+         imp16.setSliceNumber(0);
+         const result = imp16.getSliceNumber();
+         expect(result).toBe(1);
+      }); 
+      it('For 16-bit image, set the slice number and return sliceNumber if sliceNumber>=1', function(){
+         let imp16 = test16();
+         imp16.setSliceNumber(2);
+         const result = imp16.getSliceNumber();
+         expect(result).toBe(2);
+      }); 
+
+      it('For 32-bit image, PlugInFilterRunner uses this method to set the slice number and return 1 if sliceNumber<1', function(){
+         let imp32 = test32();
+         imp32.setSliceNumber(0);
+         const result = imp32.getSliceNumber();
+         expect(result).toBe(1);
+      });
+      it('For 32-bit image, set the slice number and return sliceNumber if sliceNumber>=1', function(){
+         let imp32 = test32();
+         imp32.setSliceNumber(2);
+         const result = imp32.getSliceNumber();
+         expect(result).toBe(2);
+      });
+      
+      it('For RGB image, PlugInFilterRunner uses this method to set the slice number and return 1 if sliceNumber<1', function(){
+         let impRGB = testRGB();
+         impRGB.setSliceNumber(0);
+         const result = impRGB.getSliceNumber();
+         expect(result).toBe(1);
+      }); 
+      it('For RGB image, set the slice number and return sliceNumber if sliceNumber>=1', function(){
+         let impRGB = testRGB();
+         impRGB.setSliceNumber(2);
+         const result = impRGB.getSliceNumber();
+         expect(result).toBe(2);
+      }); 
+   }); 
+
+   describe('#getSliceNumber()', function(){
+      it('should return 1 if sliceNumber<1 for 8-bit image', function(){
+         let imp8 = test8();
+         imp8.setSliceNumber(0);
+         const result = imp8.getSliceNumber();
+         expect(result).toBe(1);
+      });
+      it('should return sliceNumber if sliceNumber>=1 for 8-bit image', function(){
+         let imp8 = test8();
+         imp8.setSliceNumber(2);
+         const result = imp8.getSliceNumber();
+         expect(result).toBe(2);
+      });
+
+      it('should return 1 if sliceNumber<1 for 16-bit image', function(){
+         let imp16 = test16();
+         imp16.setSliceNumber(0);
+         const result = imp16.getSliceNumber();
+         expect(result).toBe(1);
+      });
+      it('should return sliceNumber if sliceNumber>=1 for 16-bit image', function(){
+         let imp16 = test16();
+         imp16.setSliceNumber(2);
+         const result = imp16.getSliceNumber();
+         expect(result).toBe(2);
+      });
+
+      it('should return 1 if sliceNumber<1 for 32-bit image', function(){
+         let imp32 = test32();
+         imp32.setSliceNumber(0);
+         const result = imp32.getSliceNumber();
+         expect(result).toBe(1);
+      });
+      it('should return sliceNumber if sliceNumber>=1 for 32-bit image', function(){
+         let imp32 = test32();
+         imp32.setSliceNumber(2);
+         const result = imp32.getSliceNumber();
+         expect(result).toBe(2);
+      });
+
+      it('should return 1 if sliceNumber<1 for RGB image', function(){
+         let impRGB = testRGB();
+         impRGB.setSliceNumber(0);
+         const result = impRGB.getSliceNumber();
+         expect(result).toBe(1);
+      });
+      it('should return sliceNumber if sliceNumber>=1 for RGB image', function(){
+         let impRGB = testRGB();
+         impRGB.setSliceNumber(2);
+         const result = impRGB.getSliceNumber();
+         expect(result).toBe(2);
+      });
+   }); 
+
+   describe('#getLutUpdateMode()', function(){
+      it('for 8-bit image, should returns the LUT update mode, which can be RED_LUT, BLACK_AND_WHITE_LUT, OVER_UNDER_LUT or NO_LUT_UPDATE', function(){
+         let imp8 = test8();
+         imp8.setThreshold(4,120,0);
+         const result = imp8.getLutUpdateMode();
+         expect(result).toBe(0);
+      });
+      it('for 16-bit image, should returns the LUT update mode, which can be RED_LUT, BLACK_AND_WHITE_LUT, OVER_UNDER_LUT or NO_LUT_UPDATE', function(){
+         let imp16 = test16();
+         imp16.setThreshold(4,120,0);
+         const result = imp16.getLutUpdateMode();
+         expect(result).toBe(0);
+      });
+      it('for 32-bit image, should returns the LUT update mode, which can be RED_LUT, BLACK_AND_WHITE_LUT, OVER_UNDER_LUT or NO_LUT_UPDATE', function(){
+         let imp32 = test32();
+         imp32.setThreshold(4,120,0);
+         const result = imp32.getLutUpdateMode();
+         expect(result).toBe(0);
+      });
+      it('for RGB image, should returns the LUT update mode, which can be RED_LUT, BLACK_AND_WHITE_LUT, OVER_UNDER_LUT or NO_LUT_UPDATE', function(){
+         let impRGB = testRGB();
+         impRGB.setThreshold(4,120,0);
+         const result = impRGB.getLutUpdateMode();
+         expect(result).toBe(0);
+      });    
+   }); 
+
+   describe('#isSigned16Bit()', function(){
+      it('should return true if this is a signed 16-bit image', function(){
+         let imp16 = test16();
+         const result = imp16.isSigned16Bit();
+         expect(result).toBe(false);
+      });
+   }); 
+
+   describe('#setHistogramRange()', function(){
+      it('should set the range used for histograms of float images.', function(){
+         let imp32 = test32();
+         imp32.setHistogramRange(24,155);
+         const getMin = imp32.getHistogramMin();
+         const getMax = imp32.getHistogramMax();
+         expect(getMin).toBe(24);
+         expect(getMax).toBe(155);        
+      }); 
+   });
+
+   describe('#setHistogramSize(int size)', function(){
+      it('should set the range used for histograms of float images.', function(){
+         let imp32 = test32();
+         imp32.setHistogramSize(244);
+         const result = imp32.getHistogramSize();
+         expect(result).toBe(244);
+      }); 
+   });
+
+   describe('#getHistogramSize(int size)', function(){
+      it('should return the number of float image histogram bins. The bin count is fixed at 256 for the other three data types', function(){
+         let imp32 = test32();
+         const result = imp32.getHistogramSize();
+         expect(result).toBe(256);
+      }); 
+   });
+
+   describe('#getHistogramMin()', function(){
+      it('should return the minimum histogram value used for histograms of float images', function(){
+         let imp32 = test32();
+         imp32.setHistogramRange(3,255);
+         const result = imp32.getHistogramMin();
+         expect(result).toBe(3);
+      }); 
+   });
+
+   describe('#getHistogramMax()', function(){
+      it('should return the maximum histogram value used for histograms of float images', function(){
+         let imp32 = test32();
+         imp32.setHistogramRange(3,238);
+         const result = imp32.getHistogramMax();
+         expect(result).toBe(238);
+      });
+   });
+
+   describe('set(double value)', function(){
+      it('should assign value to each pixel in the 8-bit image or ROI', function(){
+         let imp8 = test8();
+         imp8.set(8);
+         let arrayf = imp8.getFloatArray();
+         const result = toArray2D(arrayf, 3, 3);
+         expect(result).toBe('888888888');
+      });
+
+      it('should assign value to each pixel in the 16-bit image or ROI', function(){
+         let imp16 = test16();
+         imp16.set(8);
+         let arrayf = imp16.getFloatArray();
+         const result = toArray2D(arrayf, 3, 3);
+         expect(result).toBe('888888888');
+      });
+
+      it('should assign value to each pixel in the 32-bit image or ROI', function(){
+         let imp32 = test8();
+         imp32.set(8);
+         let arrayf = imp32.getFloatArray();
+         const result = toArray2D(arrayf, 3, 3);
+         expect(result).toBe('888888888');
+      });
+
+      it('should assign value to each pixel in the RGB image or ROI', function(){
+         let impRGB = testRGB();
+         impRGB.set(8);
+         let arrayf = impRGB.getFloatArray();
+         const result = toArray2D(arrayf, 3, 3);
+         IJ.log(result);
+         expect(result).toBe('-16250872-16250872-16250872-16250872-16250872-16250872-16250872-16250872-16250872');
+      });
+   });
+
+   describe('#setBinaryThreshold()', function(){
+      it('set the threshold levels of an 8-bit image', function(){
+         let imp8 = test8();
+         imp8.setBinaryThreshold();
+         let getMin = imp8.getMinThreshold();
+         let getMax = imp8.getMaxThreshold(); 
+         expect(getMin).toBe(0);
+         expect(getMax).toBe(0);
+      });
+   }); 
+
+   describe('#resetBinaryThreshold()', function(){
+      it('reset the threshold if minThreshold=maxThreshold and lutUpdateMode=NO_LUT_UPDATE. This removes the invisible threshold set by the MakeBinary and Convert to Mask commands', function(){
+         let imp8 = test8();
+         imp8.resetBinaryThreshold();
+         let getMin = imp8.getMinThreshold();
+         let getMax = imp8.getMaxThreshold(); 
+         let getLut = imp8.getLutUpdateMode();
+         expect(getMin).toBe(-808080);
+         expect(getMax).toBe(-808080);
+         expect(getLut).toBe(0);
+      });
+   }); 
+
+   describe('#setThreshold(double minThreshold, double maxThreshold, int lutUpdate))', function(){
+      it('should set the lower and upper threshold levels for 8-bit image', function(){
+         let imp8 = test8();
+         imp8.setThreshold(4.55,120.55,3);
+         let getMin = imp8.getMinThreshold();
+         let getMax = imp8.getMaxThreshold();
+         let getLut = imp8.getLutUpdateMode();
+         expect(getMin).toBe(4.55);
+         expect(getMax).toBe(120.55);
+         expect(getLut).toBe(3);
+      });
+      
+      it('should set the lower and upper threshold levels for 16-bit image', function(){
+         let imp16 = test16();
+         let ip = imp16.convertToByte(false);
+         let set = ip.setThreshold(4.55,120.55,3);
+         let getMin = ip.getMinThreshold();
+         let getMax = ip.getMaxThreshold();
+         let getLut = ip.getLutUpdateMode();
+         expect(getMin).toBe(4.55);
+         expect(getMax).toBe(120.55);
+         expect(getLut).toBe(3);
+      });
+
+      it('should set the lower and upper threshold levels for 32-bit image', function(){
+         let imp32 = test32();
+         let ip = imp32.convertToByte(false);
+         let set = ip.setThreshold(4.55,120.55,3);
+         let getMin = ip.getMinThreshold();
+         let getMax = ip.getMaxThreshold();
+         let getLut = ip.getLutUpdateMode();
+         expect(getMin).toBe(4.55);
+         expect(getMax).toBe(120.55);
+         expect(getLut).toBe(3);
+      });
+
+      it('should set the lower and upper threshold levels for RGB image', function(){
+         let impRGB = testRGB();
+         let ip = impRGB.convertToByte(false);
+         let set = ip.setThreshold(4.55,120.55,3);
+         let getMin = ip.getMinThreshold();
+         let getMax = ip.getMaxThreshold();
+         let getLut = ip.getLutUpdateMode();
+         expect(getMin).toBe(4.55);
+         expect(getMax).toBe(120.55);
+         expect(getLut).toBe(3);
+      });
+   });
+
+   describe('#isDefaultLut()', function(){
+      it('should return false for ColorProcessor', function(){
+         let impRGB = testRGB();
+         const scale = impRGB.isDefaultLut();
+         expect(scale).toBe(false);
+      });
+
+      it('should return true if the image is using the default grayscale LUT (case of ByteProcessor)', function(){
+         let imp8= test8();
+         const scale = imp8.isDefaultLut();
+         expect(scale).toBe(true);
+      });
+
+      it('should return true if the image is using the default grayscale LUT (case of ByteProcessor)', function(){
+         let imp16= test16();
+         const scale = imp16.isDefaultLut();
+         expect(scale).toBe(true);
+      });
+
+      it('should return true if the image is using the default grayscale LUT (case of ByteProcessor)', function(){
+         let imp32= test32();
+         const scale = imp32.isDefaultLut();
+         expect(scale).toBe(true);
+      });
+   });
+
+   describe('#getMinThreshold()', function(){
+      it('should return the lower threshold level for 8-bit image', function(){
+         let imp8 = test8();
+         const result = imp8.getMinThreshold();
+         expect(result).toBe(-808080);
+      });
+   
+      it('should return the lower threshold level for 16-bit image', function(){
+         let imp16 = test16();
+         let ip = imp16.convertToByte(false);
+         const result = ip.getMinThreshold();
+         expect(result).toBe(-808080);
+      });
+   
+      it('should return the lower threshold level for 32-bit image', function(){
+         let imp32 = test32();
+         let ip = imp32.convertToByte(false);
+         const result = ip.getMinThreshold();
+         expect(result).toBe(-808080);
+      });
+   
+      it('should return the lower threshold level for RGB image', function(){
+         let impRGB = testRGB();
+         let ip = impRGB.convertToByte(false);
+         const result = ip.getMinThreshold();
+         expect(result).toBe(-808080);
+      });
+   });
+   
+   describe('#getMaxThreshold()', function(){
+      it('should return the upper threshold level for 8-bit image', function(){
+         let imp8 = test8();
+         const result = imp8.getMaxThreshold();
+         expect(result).toBe(-808080);
+      });
+   
+      it('should return the upper threshold level for 16-bit image', function(){
+         let imp16 = test16();
+         let ip = imp16.convertToByte(false);
+         const result = ip.getMaxThreshold();
+         expect(result).toBe(-808080);
+      });
+   
+      it('should return the upper threshold level for 32-bit image', function(){
+         let imp32 = test32();
+         let ip = imp32.convertToByte(false);
+         const result = ip.getMaxThreshold();
+         expect(result).toBe(-808080);
+      });
+   
+      it('should return the upper threshold level for RGB image', function(){
+         let impRGB = testRGB();
+         let ip = impRGB.convertToByte(false);
+         const result = ip.getMaxThreshold();
+         expect(result).toBe(-808080);
+      });
+   });
+
+   describe('#setLineWidth()', function(){
+      it('should set the line width used by lineTo() and drawDot() for 8-bit image', function(){
+         let imp8= test8();
+         imp8.setLineWidth(2);
+         const result = imp8.getLineWidth();
+         expect(result).toBe(2);
+      });
+
+      it('should set the line width used by lineTo() and drawDot() for 16-bit image', function(){
+         let imp16= test16();
+         imp16.setLineWidth(2);
+         const result = imp16.getLineWidth();
+         expect(result).toBe(2);
+      });
+
+      it('should set the line width used by lineTo() and drawDot() for 32-bit image', function(){
+         let imp32= test32();
+         imp32.setLineWidth(2);
+         const result = imp32.getLineWidth();
+         expect(result).toBe(2);
+      });
+
+      it('should set the line width used by lineTo() and drawDot() for RGB image', function(){
+         let impRGB= testRGB();
+         impRGB.setLineWidth(2);
+         const result = impRGB.getLineWidth();
+         expect(result).toBe(2);
+      });
+   });
+
+   describe('#resetThreshold()', function(){
+      it('should disable thresholding for 8-bit image', function(){
+         let imp8 = test8();
+         imp8.setThreshold(14.55,25.55,1);
+         imp8.resetThreshold();
+         const getMinThreshold = imp8.getMinThreshold();
+         expect(getMinThreshold).toBe(-808080.0);
+      });
+
+      it('should disable thresholding for 16-bit image', function(){
+         let imp16 = test16();
+         let ip = imp16.convertToByte(false)
+         ip.setThreshold(14.55,25.55,1);
+         ip.resetThreshold();
+         const getMinThreshold = ip.getMinThreshold();
+         expect(getMinThreshold).toBe(-808080.0);
+      });
+
+      it('should disable thresholding for 32-bit image', function(){
+         let imp32 = test32();
+         let ip = imp32.convertToByte(false)
+         ip.setThreshold(14.55,25.55,1);
+         ip.resetThreshold();
+         const getMinThreshold = ip.getMinThreshold();
+         expect(getMinThreshold).toBe(-808080.0);
+      });
+
+      it('should disable thresholding for RGB image', function(){
+         let impRGB = testRGB();
+         let ip = impRGB.convertToByte(false)
+         ip.setThreshold(14.55,25.55,1);
+         ip.resetThreshold();
+         const getMinThreshold = ip.getMinThreshold();
+         expect(getMinThreshold).toBe(-808080.0);
+      });
+   });
+
+   describe('autoThreshold()', function(){
+      it('convert the image to binary using an automatically determined threshold. For byte and short images, convert to binary using an automatically determined threshold. For RGB images, convert each channel to binary. For float images, does nothing', function(){
+         let imp8 = test8();
+         imp8.autoThreshold();
+         let getMin = imp8.getMinThreshold();
+         let getMax = imp8.getMaxThreshold();
+         expect(getMin).toBe(-808080);
+         expect(getMax).toBe(-808080);            
+      });
+      it('convert the image to binary using an automatically determined threshold. For byte and short images, convert to binary using an automatically determined threshold. For RGB images, convert each channel to binary. For float images, does nothing', function(){
+         let imp16 = test16();
+         imp16.autoThreshold();
+         let getMin = imp16.getMinThreshold();
+         let getMax = imp16.getMaxThreshold();
+         expect(getMin).toBe(-808080);
+         expect(getMax).toBe(-808080);            
+      });
+   });
+
+   describe('#putPixelValue(int x, int y, double value)', function(){
+      it('should store the specified value at (x,y) for 8-bit image', function(){
+         let imp8 = test8();
+         imp8.putPixelValue(2,2,146);
+         let result = imp8.getPixelValue(2,2);
+         expect(result).toBe(146);
+      });
+
+      it('should store the specified value at (x,y) for 16-bit image', function(){
+         let imp16 = test16();
+         imp16.putPixelValue(1,1,146);
+         let result = imp16.getPixelValue(1,1);
+         expect(result).toBe(146);
+      });
+
+      it('should store the specified value at (x,y) for 32-bit image', function(){
+         let imp32 = test32();
+         imp32.putPixelValue(2,2,146);
+         let result = imp32.getPixelValue(2,2);
+         expect(result).toBe(146);
+      });
+
+      it('should store the specified value at (x,y) for RGB image', function(){
+         let impRGB = testRGB();
+         impRGB.putPixelValue(1,1,146);
+         let result = impRGB.getPixelValue(1,1);
+         expect(result).toBe(146);
+      });
+   });
+
+   describe('#getPixel(int x, int y)', function(){
+      it('should return zero if either the x or y coodinate is out of range for 8-bit image', function(){
+         let imp8= test8();
+         const result = imp8.getPixel(25,52);
+         expect(result).toBe(0);
+      });
+
+      it('should return zero if either the x or y coodinate is out of range for 16-bit image', function(){
+         let imp16= test16();
+         const result = imp16.getPixel(25,52);
+         expect(result).toBe(0);
+      });
+
+      it('should return zero if either the x or y coodinate is out of range for 32-bit image', function(){
+         let imp32= test32();
+         const result = imp32.getPixel(25,52);
+         expect(result).toBe(0);
+      });
+
+      it('should return zero if either the x or y coodinate is out of range for RGB image', function(){
+         let imp32= test32();
+         const result = imp32.getPixel(25,52);
+         expect(result).toBe(0);
+      });
+
+      it('should return the value of the pixel at (x,y). Use getValue(x,y) to get calibrated values from 8-bit images.', function(){
+         let imp8 = test8();
+         const result = imp8.getPixel(2,2);
+         expect(result).toBe(9);
+      });
+
+      it('should return the value of the pixel at (x,y). Use getValue(x,y) to get calibrated values from 16-bit images.', function(){
+         let imp16 = test16();
+         const result = imp16.getPixel(2,2);
+         expect(result).toBe(9);
+      });
+
+      it('should return the value of the pixel at (x,y). For float images, the value must be converted using Float.intBitsToFloat()', function(){
+         let imp32 = test32();
+         let getPixel = imp32.getPixel(2,2);
+         let arrayf = imp32.getFloatArray();
+         const result = toArray2D(arrayf, 3, 3);
+         expect(result).toBe('1234567810');
+      });
+
+      it('should return the value of the pixel at (x,y). For float images, the value must be converted using Float.intBitsToFloat()', function(){
+         let impRGB = testRGB();
+         const result = impRGB.getPixel(2,2);
+         expect(result).toBe(9);
+      });        
+   });
+
+   describe('#getMin()', function(){
+      it('should return the smallest displayed pixel value of the 8-bit image', function(){
+         let imp8= test8();
+         const result = imp8.getMin();
+         expect(result).toBe(0);
+      });
+
+      it('should return the smallest displayed pixel value of the 16-bit image', function(){
+      let imp16= test16();
+      const result = imp16.getMin();
+      expect(result).toBe(1);
+      });
+
+      it('should return the smallest displayed pixel value of the 32-bit image', function(){
+      let imp32= test32();
+      const result = imp32.getMin();
+      expect(result).toBe(1);
+      });
+
+      it('should return the smallest displayed pixel value of the RGB image', function(){
+      let impRGB= testRGB();
+      const result = impRGB.getMin();
+      expect(result).toBe(0);
+      });
+   }); 
+
+   describe('#getMax()', function(){
+      it('should return the largest displayed pixel value of the 8-bit image', function(){
+      let imp8 = test8(); 
+      const result = imp8.getMax();
+      expect(result).toBe(255);
+      });
+
+      it('should return the largest displayed pixel value of the 16-bit image', function(){
+      let imp16 = test16(); 
+      const result = imp16.getMax();
+      expect(result).toBe(9);
+      });
+
+      it('should return the largest displayed pixel value of the 32-bit image', function(){
+      let imp32 = test32(); 
+      const result = imp32.getMax();
+      expect(result).toBe(10);
+      });
+
+      it('should return the largest displayed pixel value of the RGB image', function(){
+      let impRGB = testRGB(); 
+      const result = impRGB.getMax();
+      expect(result).toBe(255);
+      });
+   });      
+
+   describe('#setMinAndMax()', function(){
+      it('the 8-bit image will be displayed by mapping pixel values in the range min-max to screen values in the range 0-255', function(){
+      let imp8 = test8();
+      imp8.setMinAndMax(12,234);
+      let testMin = imp8.getMin();
+      let testMax = imp8.getMax();
+      expect(testMin).toBe(12);
+      expect(testMax).toBe(234);
+      });
+
+      it('the 16-bit image will be displayed by mapping pixel values in the range min-max to screen values in the range 0-255', function(){
+      let imp16 = test16();
+      imp16.setMinAndMax(12,234);
+      let testMin = imp16.getMin();
+      let testMax = imp16.getMax();
+      expect(testMin).toBe(12);
+      expect(testMax).toBe(234);
+      });
+
+      it('the 32-bit image will be displayed by mapping pixel values in the range min-max to screen values in the range 0-255', function(){
+      let imp32 = test8();
+      imp32.setMinAndMax(12,234);
+      let testMin = imp32.getMin();
+      let testMax = imp32.getMax();
+      expect(testMin).toBe(12);
+      expect(testMax).toBe(234);
+      });
+
+      it('the RGB image will be displayed by mapping pixel values in the range min-max to screen values in the range 0-255', function(){
+      let impRGB = testRGB();
+      impRGB.setMinAndMax(12,234);
+      let testMin = impRGB.getMin();
+      let testMax = impRGB.getMax();
+      expect(testMin).toBe(12);
+      expect(testMax).toBe(234);
+      });
+   }); 
+
+   describe('#minValue()', function(){
+      it('should return the minimum possible pixel value of 8-bit image', function(){
+         let imp8 = test8();  
+         const result = imp8.minValue();
+         expect(result).toBe(0);
+      });
+                  
+      it('should return the minimum possible pixel value of 16-bit image', function(){
+         let imp16 = test16();  
+         const result = imp16.minValue();
+         expect(result).toBe(0);
+      });
+
+      it('should return the minimum possible pixel value of 32-bit image', function(){
+      let imp32 = test32();  
+      const result = imp32.minValue();
+      expect(result).toBe(1.401298464324817e-45);
+      });
+
+      it('should return the minimum possible pixel value of RGB image', function(){
+      let impRGB = testRGB();  
+      const result = impRGB.minValue();
+      expect(result).toBe(0);
+      });
+   }); 
+
+   describe('#maxValue()', function(){
+      it('should return the maximum possible pixel value of 8-bit image', function(){
+         let imp8 = test8();  
+         const result = imp8.maxValue();
+         expect(result).toBe(255);
+      });
+                  
+      it('should return the maximum possible pixel value of 16-bit image', function(){
+         let imp16 = test16();  
+         const result = imp16.maxValue();
+         expect(result).toBe(65535);
+      });
+
+      it('should return the maximum possible pixel value of 32-bit image', function(){
+      let imp32 = test32();  
+      const result = imp32.maxValue();
+      expect(result).toBe(3.4028234663852886e+38);
+      });
+
+      it('should return the maximum possible pixel value of RGB image', function(){
+      let impRGB = testRGB();  
+      const result = impRGB.maxValue();
+      expect(result).toBe(255);
+      });
+   }); 
+
+   describe('#getLineWidth()', function(){
+      it('should return the current line width of the 8-bit image', function(){
+      let imp8 = test8();  
+      const result = imp8.getLineWidth();
+      expect(result).toBe(1);
+      });
+   
+      it('should return the current line width of the 16-bit image', function(){
+      let imp16 = test16();  
+      const result = imp16.getLineWidth();
+      expect(result).toBe(1);
+      });
+   
+      it('should return the current line width of the 32-bit image', function(){
+      let imp32 = test32();  
+      const result = imp32.getLineWidth();
+      expect(result).toBe(1);
+      });
+
+      it('should return the current line width of the RGB image', function(){
+      let impRGB = testRGB();  
+      const result = impRGB.getLineWidth();
+      expect(result).toBe(1);
+      });
+   }); 
+
+   describe('#setValue(double value)', function(){
+      it('should set the default fill/draw value of the 8-bit image', function(){
+      let imp8 = test8();
+      imp8.setValue(18);
+      imp8.fill()
+      const result = imp8.getPixelValue(0,0);
+      expect(result).toBe(18);
+      }); 
+
+      it('should set the default fill/draw value of the 16-bit image', function(){
+      let imp16 = test16();
+      imp16.setValue(16);
+      imp16.fill()
+      const result = imp16.getPixelValue(0,0);
+      IJ.log(result);
+      expect(result).toBe(16);
+      }); 
+   
+      it('should set the default fill/draw value of the 32-bit image', function(){
+      let imp32 = test32();
+      imp32.setValue(18.200000762939453);
+      imp32.fill()
+      const result = imp32.getPixelValue(0,0);
+      IJ.log(result);
+      expect(result).toBe(18.200000762939453);
+      }); 
+
+      it('should set the default fill/draw value of the RGB image', function(){
+      let impRGB = testRGB();
+      impRGB.setValue(24);
+      impRGB.fill()
+      const result = impRGB.getPixelValue(0,0);
+      expect(result).toBe(8);
+      }); 
+   }); 
+
+   describe('#setBackgroundValue(double value)', function(){
+      it('set the background fill value used by the rotate() and scale() methods', function(){
+      let imp8 = test8();
+      let set = imp8.setBackgroundValue(243); 
+      let result = imp8.getBackgroundValue();
+      expect(result).toBe(243);
+      });
+
+      it('set the background fill value used by the rotate() and scale() methods', function(){
+      let imp16 = test16();
+      let set = imp16.setBackgroundValue(0); 
+      let result = imp16.getBackgroundValue();
+      IJ.log(result);
+      expect(result).toBe(0);
+      });
+
+      it('set the background fill value used by the rotate() and scale() methods', function(){
+      let imp32 = test32();
+      let set = imp32.setBackgroundValue(0); 
+      let result = imp32.getBackgroundValue();
+      expect(result).toBe(0);
+      });
+
+      it('set the background fill value used by the rotate() and scale() methods', function(){
+      let impRGB = testRGB();
+      let set = impRGB.setBackgroundValue(143); 
+      let result = impRGB.getBackgroundValue();
+      expect(result).toBe(143);
+      });
+   });
+
+   describe('#getPixelValue(int x, int y)', function(){
+      it('returns the value of the pixel at (x,y) of the 8-bit image', function(){
+         let imp8 = test8();
+         const result = imp8.getPixelValue(0,0);
+         IJ.log(result);
+         expect(result).toBe(1);
+      });
+
+      it('returns the value of the pixel at (x,y) of the 16-bit image', function(){
+      let imp16 = test16();
+      const result = imp16.getPixelValue(1,1);
+      IJ.log(result);
+      expect(result).toBe(5);
+      });
+
+      it('returns the value of the pixel at (x,y) of the 32-bit image', function(){
+      let imp32 = test32();
+      const result = imp32.getPixelValue(2,2);
+      IJ.log(result);
+      expect(result).toBe(10);
+      });
+
+      it('For RGB images, returns the luminance value', function(){
+      let impRGB = test32();
+      const result = impRGB.getPixelValue(3,3);
+      IJ.log(result);
+      expect(result).toBe(0);
+      });
+   }); 
+
+   describe('#set(int x, int y, int value)', function(){
+      it('should store the specified value at (x,y) for 8-bit image', function(){
+      let imp8 = test8();
+      imp8.set(0,0,2);
+      let result = imp8.getPixelValue(0,0);
+      expect(result).toBe(2);
+      });
+
+      it('should store the specified value at (x,y) for 16-bit image', function(){
+      let imp16 = test16();
+      imp16.set(1,1,3);
+      let result = imp16.getPixelValue(1,1);
+      expect(result).toBe(3);
+      });
+
+      it('should store the specified value at (x,y) for 32-bit image', function(){
+      let imp32 = test32();
+      imp32.set(2,2,4);
+      let result = imp32.getPixelValue(2,2);
+      expect(result).toBe(5.605193857299268e-45);
+      });
+
+      it('should store the specified value at (x,y) for RGB image', function(){
+      let impRGB = testRGB();
+      impRGB.set(0,0,3);
+      let result = impRGB.getPixelValue(0,0);
+      expect(result).toBe(1);
+      });
+   }); 
+
+   describe('#get(int x, int y)', function(){
+      it('this is a faster version of getPixel() that does not do bounds checking (for 8-bit image)', function(){
+      let imp8 = test8();
+      const result = imp8.get(0,0);
+      expect(result).toBe(1);
+      });
+
+      it('this is a faster version of getPixel() that does not do bounds checking (for 16-bit image)', function(){
+      let imp16 = test16();
+      const result = imp16.get(1,1);
+      expect(result).toBe(5);
+      });
+
+      it('this is a faster version of getPixel() that does not do bounds checking (for 32-bit image)', function(){
+      let imp32 = test32();
+      const result = imp32.get(0,1);
+      IJ.log(result);
+      expect(result).toBe(1082130432);
+      });
+
+      it('this is a faster version of getPixel() that does not do bounds checking (for RGB image)', function(){
+      let impRGB = testRGB();
+      const result = impRGB.get(0,2);
+      IJ.log(result);
+      expect(result).toBe(7);
+      });
+   }); 
+
+   describe('#set(int index, int value)', function(){
+      it('set the value at a specified index of the 8-bit image', function(){
+         let imp8 = test8();
+         let set = imp8.set(2,53);
+         const result = imp8.get(2);
+         expect(result).toBe(53);
+      });
+
+      it('set the value at a specified index of the 16-bit image', function(){
+      let imp16 = test16();
+      let set = imp16.set(0,232);
+      const result = imp16.get(0);
+      expect(result).toBe(232);
+      });
+
+      it('set the value at a specified index of the 32-bit image', function(){
+      let imp32 = test32();
+      let set = imp32.set(1,23);
+      const result = imp32.get(1);
+      expect(result).toBe(23);
+      });
+
+      it('set the value at a specified index of the RGB image', function(){
+      let impRGB = testRGB();
+      let set = impRGB.set(0,10);
+      const result = impRGB.get(0);
+      expect(result).toBe(10);
+      });
+   });    
+
+   describe('#get(int index)', function(){
+      it('get the value at a specifiec index of the 8-bit image', function(){
+      let imp8 = test8();
+      const result = imp8.get(0);
+      expect(result).toBe(1);
+      });
+
+      it('get the value at a specifiec index of the 16-bit image', function(){
+      let imp16 = test16();
+      const result = imp16.get(1);
+      expect(result).toBe(2);
+      });
+
+      it('get the value at a specifiec index of the 32-bit image', function(){
+      let imp32 = test32();
+      const result = imp32.get(2);
+      expect(result).toBe(1077936128);
+      });
+
+      it('get the value at a specifiec index of the RGB image', function(){
+      let impRGB = testRGB();
+      const result = impRGB.get(3);
+      expect(result).toBe(4);
+      });
+   }); 
+
+   describe('#getStatistics()', function(){
+      it('calculates and returns complete uncalibrated (raw) statistics for the 8-bit image or ROI but it is up to 70 times slower than getStats().', function(){
+         let imp8 = test8();
+         const result = imp8.getStatistics();
+         expect(result).toEqual("stats[count=9, mean=5.0, min=1.0, max=9.0]")
+      });
+
+      it('calculates and returns complete uncalibrated (raw) statistics for the 16-bit image or ROI but it is up to 70 times slower than getStats().', function(){
+      let imp16 = test16();
+      const result = imp16.getStatistics();
+      expect(result).toEqual("stats[count=9, mean=5.0, min=1.0, max=9.0]")
+      });
+
+      it('calculates and returns complete uncalibrated (raw) statistics for the 32-bit image or ROI but it is up to 70 times slower than getStats().', function(){
+      let imp32 = test32();
+      const result = imp32.getStatistics();
+      IJ.log(result);
+      expect(result).toEqual("stats[count=9, mean=5.111111111111111, min=1.0, max=10.0]")
+      });
+
+      it('calculates and returns complete uncalibrated (raw) statistics for the RGB image or ROI but it is up to 70 times slower than getStats().', function(){
+      let impRGB = testRGB();
+      const result = impRGB.getStatistics();
+      IJ.log(result);
+      expect(result).toEqual("stats[count=9, mean=1.6666666666666667, min=0.0, max=3.0]")
+      });
+   });
+
+   describe('#getStats()', function(){
+      it('calculates and returns uncalibrated statistics for the 8-bit image or ROI, including histogram, area, mean, min and max, standard deviation, and mode.', function(){
+         let imp8 = test8();
+         const result = imp8.getStats();
+         expect(result).toEqual("stats[count=9, mean=5.0, min=1.0, max=9.0]")
+      });
+
+      it('calculates and returns uncalibrated statistics for the 16-bit image or ROI, including histogram, area, mean, min and max, standard deviation, and mode.', function(){
+      let imp16 = test16();
+      const result = imp16.getStats();
+      expect(result).toEqual("stats[count=9, mean=5.0, min=1.0, max=9.0]")
+      });
+
+      it('calculates and returns uncalibrated statistics for the 32-bit image or ROI, including histogram, area, mean, min and max, standard deviation, and mode.', function(){
+      let imp32 = test32();
+      const result = imp32.getStats();
+      expect(result).toEqual("stats[count=9, mean=5.111111111111111, min=1.0, max=10.0]")
+      });
+
+      it('calculates and returns uncalibrated statistics for the RGB image or ROI, including histogram, area, mean, min and max, standard deviation, and mode.', function(){
+      let impRGB = testRGB();
+      const result = impRGB.getStats();
+      expect(result).toEqual("stats[count=9, mean=1.6666666666666667, min=0.0, max=3.0]")
+      });
+   }); 
+
+   describe('#setRoi(Roi roi)', function(){
+      it('(for 8-bit image) should define a non-rectangular region of interest that will consist of a rectangular ROI and a mask.', function(){
+      let imp8 = test8();
+      let roi = new OvalRoi(1,1,2,2);
+      imp8.setRoi(roi);
+      const result = imp8.getRoi();
+      expect(result).toEqual("java.awt.Rectangle[x=1,y=1,width=2,height=2]");
+      });
+
+      it('(for 16-bit image) should define a non-rectangular region of interest that will consist of a rectangular ROI and a mask.', function(){
+      let imp16 = test16();
+      let roi = new OvalRoi(1,1,2,2);
+      imp16.setRoi(roi);
+      const result = imp16.getRoi();
+      expect(result).toEqual("java.awt.Rectangle[x=1,y=1,width=2,height=2]");
+      });
+
+      it('(for 32-bit image) should define a non-rectangular region of interest that will consist of a rectangular ROI and a mask.', function(){
+      let imp32 = test32();
+      let roi = new OvalRoi(1,1,2,2);
+      imp32.setRoi(roi);
+      const result = imp32.getRoi();
+      expect(result).toEqual("java.awt.Rectangle[x=1,y=1,width=2,height=2]");
+      });
+
+      it('(for RGB image) should define a non-rectangular region of interest that will consist of a rectangular ROI and a mask.', function(){
+      let impRGB = testRGB();
+      let roi = new OvalRoi(1,1,2,2);
+      impRGB.setRoi(roi);
+      const result = impRGB.getRoi();
+      expect(result).toEqual("java.awt.Rectangle[x=1,y=1,width=2,height=2]");
+      });
+   }); 
+
+   describe('#toString()', function(){
+      it('returns a string containing information about the 8-bit image', function(){
+         let imp8 = test8();
+         const result = imp8.getPixel(0,0).toString();
+         expect(result).toBe('1');
+      });
+
+      it('returns a string containing information about the 16-bit image', function(){
+      let imp16 = test16();
+      const result = imp16.getPixel(1,1).toString();
+      expect(result).toBe('5');
+      });
+
+      it('returns a string containing information about the 32-bit image', function(){
+      let imp32 = test32();
+      const result = imp32.getWidth().toString();
+      expect(result).toBe('3');
+      });
+
+      it('returns a string containing information about the RGB image', function(){
+      let imp32 = test32();
+      const result = imp32.getHeight().toString();
+      expect(result).toBe('3');
+      });
+   }); 
+
+   describe('#setFont(java.awt.Font font)', function(){
+      it('should set the font used by drawString() for the 8-bit image', function(){
+      let imp8 = test8();
+      imp8.setColor(0);
+      imp8.setFont(new Font("Monospaced",Font.PLAIN,16));
+      let x = 1;
+      let y = 1;
+      let drawstr = imp8.drawString("IMAGE PROJECT", x, y, Color.white);
+      const result = imp8.getFont();
+      expect(result).toEqual("java.awt.Font[family=Monospaced,name=Monospaced,style=plain,size=16]");
+      });
+
+      it('should set the font used by drawString() for the 16-bit image', function(){
+      let imp16 = test16();
+      imp16.setColor(0);
+      imp16.setFont(new Font("Monospaced",Font.PLAIN,16));
+      let x = 1;
+      let y = 1;
+      let drawstr = imp16.drawString("IMAGE PROJECT", x, y, Color.white);
+      const result = imp16.getFont();
+      expect(result).toEqual("java.awt.Font[family=Monospaced,name=Monospaced,style=plain,size=16]");
+      });
+
+      it('should set the font used by drawString() for the 32-bit image', function(){
+      let imp32 = test32();
+      imp32.setColor(0);
+      imp32.setFont(new Font("Monospaced",Font.PLAIN,16));
+      let x = 1;
+      let y = 1;
+      let drawstr = imp32.drawString("IMAGE PROJECT", x, y, Color.white);
+      const result = imp32.getFont();
+      expect(result).toEqual("java.awt.Font[family=Monospaced,name=Monospaced,style=plain,size=16]");
+      });
+
+      it('should set the font used by drawString() for the RGB image', function(){
+      let impRGB = testRGB();
+      impRGB.setColor(0);
+      impRGB.setFont(new Font("Monospaced",Font.PLAIN,16));
+      let x = 1;
+      let y = 1;
+      let drawstr = impRGB.drawString("IMAGE PROJECT", x, y, Color.white);
+      const result = impRGB.getFont();
+      expect(result).toEqual("java.awt.Font[family=Monospaced,name=Monospaced,style=plain,size=16]");
+      });
+   }); 
+
+   describe('#getFont()', function(){
+      it('should return the current font for the 8-bit image', function(){
+      let imp8 = test8();
+         imp8.setColor(0);
+         let drawstr = imp8.drawString("IMAGE PROJECT", 1, 0, Color.white);
+         const result = imp8.getFont();
+         IJ.log(result);
+         expect(result).toEqual("java.awt.Font[family=SansSerif,name=SansSerif,style=plain,size=12]");
+      });
+
+      it('should return the current font for the 16-bit image', function(){
+      let imp16 = test16();
+         imp16.setColor(0);
+         let drawstr = imp16.drawString("IMAGE PROJECT", 1, 0, Color.white);
+         const result = imp16.getFont();
+         IJ.log(result);
+         expect(result).toEqual("java.awt.Font[family=SansSerif,name=SansSerif,style=plain,size=12]");
+      });
+
+      it('should return the current font for the 32-bit image', function(){
+      let imp32= test32();
+         imp32.setColor(0);
+         let drawstr = imp32.drawString("IMAGE PROJECT", 1, 0, Color.white);
+         const result = imp32.getFont();
+         IJ.log(result);
+         expect(result).toEqual("java.awt.Font[family=SansSerif,name=SansSerif,style=plain,size=12]");
+      });
+
+      it('should return the current font for the RGB image', function(){
+      let impRGB = testRGB();
+         impRGB.setColor(0);
+         let drawstr = impRGB.drawString("IMAGE PROJECT", 1, 0, Color.white);
+         const result = impRGB.getFont();
+         IJ.log(result);
+         expect(result).toEqual("java.awt.Font[family=SansSerif,name=SansSerif,style=plain,size=12]");
+      });
+   }); 
+
+   describe('#putPixel(int x, int y, int value)', function(){
+      it('should store the specified value at (x,y) for 8-bit image', function(){
+      let imp8 = test8();
+      imp8.putPixel(0,0,146);
+      let result = imp8.get(0,0);
+      expect(result).toBe(146);
+      });
+
+      it('should store the specified value at (x,y) for 16 image', function(){
+      let imp16 = test16();
+      imp16.putPixel(0,1,120);
+      let result = imp16.get(0,1);
+      expect(result).toBe(120);
+      });
+
+      it('should store the specified value at (x,y) for 32 image', function(){
+      let imp32 = test32();
+      imp32.putPixel(1,1,3);
+      let result = imp32.get(0,1);
+      expect(result).toBe(1082130432);
+      });
+
+      it('should store the specified value at (x,y) for RGB-image', function(){
+      let impRGB = testRGB();
+      impRGB.putPixel(2,2,60);
+      let result = impRGB.get(2,2);
+      expect(result).toBe(60);
+      });
+   }); 
+
+   describe('#getPixelCount()', function(){
+      it('should return the result of width*height of the 8-bit image', function(){
+         let imp8 = test8();
+         const result = imp8.getPixelCount();
+         expect(result).toBe(9);
+      });
+
+      it('should return the result of width*height of the 16-bit image', function(){
+      let imp16 = test16();
+      const result = imp16.getPixelCount();
+      expect(result).toBe(9);
+      });
+
+      it('should return the result of width*height of the 32-bit image', function(){
+      let imp32 = test32();
+      const result = imp32.getPixelCount();
+      expect(result).toBe(9);
+      });
+
+      it('should return the result of width*height of the RGB-bit image', function(){
+      let impRGB = testRGB();
+      const result = impRGB.getPixelCount();
+      expect(result).toBe(9);
+      });
+   }); 
+
 });
 
 TUNIT.stats();
