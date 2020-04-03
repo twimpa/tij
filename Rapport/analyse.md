@@ -80,3 +80,31 @@ Afin de vérifier que les différentes étapes d'un script marchent, une petite 
         IJ.log("Hello World");
 
 Il sera possible de stopper tous processus avec la méthode **exit** ne prenant aucun argument.
+
+#### Architecture du programme.
+
+
+Les codes développés dans ce projet constituent seulement un module pour un programme plus grand, celui-ci sera plus tard lié à d'autres afin de créer une application/logiciel web : **TWIMPA**. TWIMPA (**Tiny Web ImageJ Processing and Analysis Main**) sera un logiciel web qui rendra accessible toutes où du moins une majeure partie des fonctionnalités d'un logiciel de manipulation d'images : **IMAGEJ** via un navigateur web. L'architecture générale de celui-ci se présentera dans un premier temps sur **3 niveaux (modules)** comme présenté dans la *fig. 1*, interdépendants les uns des autres ce qui peut présenter un certains nombres de risques et d'inconvénients pour la stabilité de l'application. Et **1 bas-niveau** qui forme l'**API** où l'on retrouve le **CPU** qui permettra d'effectuer les **opérations vectorielles** de base en JS et sera principalement utilisé par le **TAG** et le **GPU** qui servira aux opérations graphiques (par pixel) de **TIC**. C'est pour cela, qu'une seconde architecture que l'on peut dire optimisée a été pensée (*voir fig 2.*) en se présentant sur seulement 2 niveaux (modules) et 1 bas-niveau qu'est l'API. Les modules étant plus indépendants les uns des autres garantissant une certaine pérennité de chacun.
+
+![Interface](https://zupimages.net/up/20/14/quv7.jpg)
+
+*fig 1. Architecture Générale de TWIMPA.*
+
+
+![Interface_optimisée](https://zupimages.net/up/20/14/jezv.jpg)
+*fig 2. Architecture optimisée de TWIMPA.*
+
+
+On retrouve différents modules aux fonctions distinctes :
++ **TIJ** : (Tiny ImageJ Interface) 
++ **TIC** : (TWIMPA ImageJ Core) 
++ **TUI** : (TWIMPA Utilisateur Interface) 
++ **TML** : (TWIMPA Machine Learning) 
++ **TAG** : (TWIMPA Advanced Graphics) 
+Certains modules ont déjà été développés par des étudiants les années précédentes et nous ont été fournis comme TIC. 
+
+
+Cette année dans notre projet, nous allons développer la partie TIJ de TWIMPA qui contiendra les différentes méthodes composant les 4 classes que nous avons décidé d’implanter avec le langage **javascript** sur le schéma une cinquième classe est présente, car c'est une classe qu'il est envisagé d'implanter dans le futur. L’architecture de ce module sera assez simple, nous allons créer un fichier par classe contenant les méthodes correspondantes à chacune. On utilisera un module indépendant Webpack pour faciliter l’organisation du programme. 
+
+![Interface_optimisée](https://zupimages.net/up/20/14/hp5u.png)
+*Fig 3 : Organisation de TIJ.*
