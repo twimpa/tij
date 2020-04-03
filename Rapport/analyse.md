@@ -1,4 +1,17 @@
-#1. Analyse (pour le rapport)
+#1. Analyse (pour le rapport) (Relecture non faite pour les fautes d'orthographe).
+
+> Possible plan
+> 1. Objectifs.  
+> 1.1. Les objectifs.  
+> 1.2. Les classes.  
+> 1.2.1. ResultsTable :  
+> 1.2.2. ImageProcessor :  
+> 1.2.3. ImagePlus :  
+> 1.2.4. IJ :   
+> 2. Architecture du programme.  
+> 3. Besoins.  
+> 3.1. Les besoins non-fonctionnels.  
+> 3.2. Les besoins fonctionnels.   
 
 ## 1.1 Objectifs
 
