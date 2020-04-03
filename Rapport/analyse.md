@@ -43,4 +43,27 @@ Si l'on ne souhaite pas créer une image de toutes pièces, il sera possible d'*
 
         open("/home/alice/Images/file.csv"); 
         
+Afin de pouvoir manipuler une image, notamment à travers un script nous avons besoin pour cela de stocker et récupérer les informations que celle-ci contient : ses pixels et les valeurs qui leur sont associées par exemple. Pour cela nous avons besoin de deux éléments : l'**image** et le **processor** qui lui est associé. Pour cela, nous avons choisi d'implanter une méthode pour chaque objet.  
+
++ **getImage**, ne prend aucun argument et renverra **une référence à l'image active** et ses stacks, ainsi que toutes les informations qui lui sont liées (taille, nombres de pixels, type etc). Si jamais il n'y a aucune image ouverte, un message d'erreur sera affiché pour prévenir l'utilisateur. Cette méthode est étroitement liée à la classe **ImagePlus**.
+
+        open("/home/alice/Images/file.png");
+        let a = IJ.getImage();
         
++ **getProcessor**, encore une fois, cette méthode ne prend aucun argument. Elle va retourner l'image active ou les staks en tant qu'**imageProcessor** et retourne un message d'erreur si aucune image n'est ouverte. Cela va nous donner un accès direct aux données algébriques d'une image. Cette méthode dépend fortement des deux classes **ImageProcessor** et **ImagePlus**.
+
+
+        let img = open("/home/alice/Images/file.png");
+        let ip = img.getProcessor();
+
+Comme la possibilité de pouvoir faire **tourner de petits scripts** fait partie des buts principaux de cette application. Un bouton run permettra de faire tourner ces scripts directement dans l'interface. Il sera relié à une méthode nommée **run** qui prendra en **argument un string** (soit un nom de commande ou de script).     
+
+        IJ.run("command"); 
+
+
+Afin de vérifier que les différentes étapes d'un script marchent, une petite console sera disponible en bas à gauche de l'écran. Elle servira à afficher les erreurs, mais aussi les **print** faits dans le script à travers la méthode **log** qui prendra un string en argument.
+
+
+        IJ.log("Hello World");
+
+Il sera possible de stopper tous processus avec la méthode **exit** ne prenant aucun argument.
