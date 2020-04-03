@@ -20,9 +20,10 @@ Comme expliqué plus haut, il sera possible de **créer une image** à partir de
      let a = IJ.createImage (string titre, int largeur, int hauteur, int depth, int type);  
      a.show();
       
-+ **newImage** , est la seconde méthode possible, elle prend en argument les mêmes éléments que createImage à une exception près : le \textbf{titre} (\textbf{string}), le \textbf{type} de l'image (\textbf{string}), la \textbf{largeur} en pixels (\textbf{int}), la \textbf{hauteur} en pixel (\textbf{int}) et la \textbf{profondeur} (\textbf{int}). Cela retournera une image avec les caractéristiques demandées, celle-ci apparaîtra directement à l'écran sans qu'une étape supplémentaire ne soit nécessaire. Les pixels de l'image créée auront pour valeur \textbf{255} donnant ainsi un \textbf{background blanc}. Cette méthode est en lien avec la classe \textbf{ImagePlus}. Ce sera cette méthode qui sera appelé lors de l'utilisation de l'onglet new dans le menu (input -> new).
-    \par\leavevmode\par
-        \begin{lstlisting}
-    IJ.newImage (string titre, string type, int largeur, int hauteur, int depth); 
-    \end{lstlisting}
-    \end{itemize}
++ **newImage** , est la seconde méthode possible, elle prend en argument les mêmes éléments que createImage à une exception près : le **titre** (**string**), le **type** de l'image (**string**), la **largeur** en pixels (**int**), la **hauteur** en pixel (**int**) et la **profondeur** (**int**). Cela retournera une image avec les caractéristiques demandées, celle-ci apparaîtra directement à l'écran sans qu'une étape supplémentaire ne soit nécessaire. Les pixels de l'image créée auront pour valeur **255** donnant ainsi un **background blanc**. Cette méthode est en lien avec la classe **ImagePlus**. Ce sera cette méthode qui sera appelé lors de l'utilisation de l'onglet new dans le menu (input -> new).  
+
+
+    IJ.newImage (string titre, string type, int largeur, int hauteur, int depth);  
+    
+    
+Si l'on ne souhaite pas créer une image de toutes pièces, il sera possible d'**ouvrir une image** (**/!/** uniquement une image) déjà existante sur notre ordinateur/ dossiers personnels. Pour cela, il y aura aussi deux possibilités. Une se faisant exclusivement via l'interface web de notre application et une autre utilisable directement dans un script.
