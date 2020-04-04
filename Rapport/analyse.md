@@ -121,6 +121,271 @@ Pour cette classe nous implanterons 26 méthodes qui permettront de lire et écr
        table.size();
 
 #### 1.2.2. ImageProcessor :  
+
+La deuxième classe s’appelle **ImageProcessor**. Cette classe abstraite est la superclasse des classes qui traitent les quatre types de données (byte, short, float et RGB) pris en charge par ImageJ. Un ImageProcessor contient les données de pixels d’une image 2D et quelques méthodes de base pour la manipuler. Il existe quatre sous-classes différentes de la classe ImageProcessor, qui sont liées aux différents types d’images :
+
++ **ByteProcessor** qui regroupera les images 8-bits et binaires.
++ **ShortProcessor** pour les images 16-bits.
++ **FloatProcessor** pour les images dites flottantes (32-bits).
++ **ColorProcessor** pour les images couleurs (RGB).
+
+Pour cette classe, on va implanter 40 méthodes qui portent des fonctionnalités différentes :
+
++ **add**, ce sera la première méthode. Elle prendra en argument un valeur du type (**int**) ou du type (**double**). Cela nous permet d’ajouter une valeur à chaque pixel de l’image ou du ROI. La partie code suivant vous montrer comment utiliser cette méthode :
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.add(2); // ou ip.add(3.5)
+       
++ **bin**, prendra en argument une valeur entière du facteur de rétrécissement. Cela renvoie une copie d’une image dont la taille a été réduite à l’aide du groupement des données par classe (binning).
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.bin(2);
+
+Gaussian blur est un type de filtre de bruit d’une image qui utilise une fonction gaussienne qui exprime également la distribution normale dans les statistiques pour calculer la transformation à appliquer à chaque pixel de l’image. Le paramètre Sigma influence la forme de la distribution gaussienne. Une valeur Sigma plus petite crée une distribution étroite avec une grande valeur maximale. Une valeur Sigma plus grande crée une distribution plate et large. Le filtre Sigma est également identifié comme un filtre de voisinage. Il remplace la valeur d’intensité du pixel actuel par la moyenne de toutes les valeurs d’intensité dont la distance est inférieure à Sigma par rapport à la valeur d’intensité actuelle. La valeur Sigma définit donc l’intervalle d’intensité dans lequel les pixels du voisinage sont censés se trouver.
+
++ **blurGaussian**, prendra en argument une valeur double de sigma. Cette méthode rend flou une image en convoluant avec une fonction gaussienne.
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.blurGaussian(2.5);
+       
++ **clone**, ne prend aucun arguement et renverra une copie superficielle de ce ImageProcessor où cette image et la copie partagent des données de pixels. La méthode duplicate() est ensuite utilisé pour créer une copie qui ne partage pas les données de pixels.
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.clone();
+       
++ **createMask**, ne prend aucun argument et renverra un masque binaire ou null si aucun seuil n’est défini ou s’il s’agit d’une image RGB. 
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.setAutoThreshold("Huang dark");
+       ip.createMask();
+       
++ **convertToByte**, prend en argument une valeur booléene qui indique si les données de pixels 16 bits et 32 bits sont mises à l’échelle de min-max à 0-255 et renverra une version 8 bits de cette image en tant que ByteProcessor. 
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.convertToByte();
+       
++ **draw**, prend en argument une instance de la classe Roi. Cette méthode est utilisée pour dessiner une région d’intérêt rectangulaire spécifiée sur une image en utilisant la largeur et la couleur de trait et la couleur de remplissage définies par roi.setStrokeWidth(), roi.setStrokeColor () et roi.setFillColor (). Cette méthode fonctionne avec des images RGB et à l’inverse, elle ne fonctionne pas avec des images de 16 bits et du type float. 
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       let roi = new Roi(1,1,1,1);
+       ip.draw(roi);
+       
++ **drawOval**, prend en argument des coordonnées x et y (**int**) du centre d’un oval, sa largeur (**int**) et sa longueur (**int**). On utilise cette méthode afin de dessiner une forme elliptique. 
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.drawOval(1,1,1,1);
+       
++ **drawRoi**, prend en argument une instance de la classe Roi. Cela permet de dessiner une région d’intérêt rectangulaire spécifiée sur une image en utilisant la largeur et la couleur de trait et la couleur de remplissage définies par roi.setStrokeWidth(), roi.setStrokeColor() et roi.setFillColor(). Cette méthode fonctionne avec des images RGB et ne fonctionne pas avec des images de 16 bits et du type float. 
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       let roi = new Roi(1,1,1,1);
+       ip.drawRoi(roi);
+       
++ **duplicate**, ne prend aucun argument et renverra un double de cette image.  
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.duplicate();
+     
++ **erode**, ne prend aucun argument. Cela est nécessaire pour éroder une image de 8 bits ou de type RGB ou le ROI à l’aide d’un filtre maximum 3x3.
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.erode();
+       
++ **fill**, ne prend aucun argument et est utilisée pour remplit une image ou un rectangle de délimitation de la classe ROI avec la valeur de remplissage / dessin actuelle. Les méthodes fill(Roi) ou fill(ip.getMask ()) sont recomandées pour remplir les sélections non rectangulaires. 
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.fill();
+       
++ **fillOval**, prend en argument des coordonnées x, y du centre d’un oval, sa largeur et sa longueur. Cela permet de remplir une forme elliptique.
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.fillOval(0,0,2,2);
+       
++ **fillValueSet**, ne prend aucun argument et renverra «vrai» si la valeur de remplissage / tirage a été définie.   
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.fillValueSet();
+       
++ **getBitDepth**, ne prend aucun argument et renverra la profondeur de bits : 8, 16, 24 (RGB) ou 32. Des images RGB utilisent actuellement 32 bits par pixel.      
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.getBitDepth();
+       
++ **getColumn**, prend en argument une position de départ x (**int**) et une position final y (**int**) de la colonne que l’on souhaite obtenir, une liste de données entières (**int[] data**) et la longueur de cette liste (**int**). Cette méthode reverra des valeurs des pixels dans la colonne à partir de (x, y).
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.getColumn(int x, int y, int[] data, int length);
+       
++ **getf**, prend en argument des coordonnées x (**int**) et y (**int**) d’un pixel et reverra sa valeur sous forme **float**. Cette méthode est
+plus rapide que **getPixelValue ()** car aucune vérification des limites n’est effectuée.   
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.getf(2,5);
+       
++ **getf**, prend en argument la position du pixel souhaité obtenir (**int**) et renverra sa valeur sous forme entier (**int**).
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.getf(2);
+       
++ **getHistogram**, ne prend aucun argument et renverra l’histogramme de l’image ou du ROI. Cette méthode renverra aussi un histogramme de luminosité pour des images de RGB et nulle pour des images de type float. Pour des images 8 bits et 16 bits, elle renverra un tableau avec une entrée pour chaque valeur possible qu’un pixel peut avoir, de 0 à 255 (image 8 bits) ou 0-65535 (image 16 bits). Ainsi, la taille du tableau est 256 ou 65536, et la largeur du bin en unités non calibrées est 1. Pour des images RGB, la luminosité est évaluée à l’aide des poids de couleur (ce qui entraînerait une valeur float) et arrondie à un int. Cela donne 256 bins. FloatProcessor.getHistogram n’est pas implémenté (retourne null).   
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.getHistogram();
+       
++ **getHistogram**, prend en argument le nombre bin spécifié et l’utilise pour renvoyer l’histogramme d’une image ou du ROI.
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.getHistogram(256);
+      
++ **getIntArray**, ne prend aucun argument et renverra une copie des données de pixels sous forme de tableau int 2D avec les dimensions [x = 0..width-1] [y = 0..height-1]. Pour des images RGB, des valeurs renvoyées sont au format ARGB compressé. Pour des images float, des valeurs renvoyées doivent être converties en float à l’aide de Float.intBitsToFloat().  
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.getIntArray();
+       
++ **getLine**, prend en argument des valeurs sous forme double des coordonnées de la position du départ (x1,y1) et des coordonnées de la position final (x2,y2) et renverra un tableau contenant les valeurs de pixels le long de la ligne commençant à (x1, y1) et se terminant à (x2, y2). Des valeurs des pixels sont échantillonnées à l’aide de getInterpolatedValue (double, double) si l’interpolation est activée ou getPixelValue(int, int) dans le cas contraire. Pour des images de byte et short, cela renverra des valeurs calibrées si une table de calibrage a été définie à l’aide de setCalibrationTable(). La longueur du tableau retourné, moins un, est
+approximativement égale à la longueur de la ligne.   
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.getLine(0,0,0,2);
+       
+++ **getPixel**, prend en argument des coordonnées x et y int du pixel souhaité obtenu et sa valeur. Pour des images RGB, des valeurs argb sont regroupées dans un int. Pour des images du type float, la valeur doit être convertie à l’aide de Float.intBitsToFloat (). Cela renverra zéro si des coordonnées x ou y est hors de limites. getValue (x, y) est recommandé pour obtenir des valeurs calibrées à partir des images 8 bits et 16 bits afin d’obtenir des valeurs d’intensité à partir des images RGB et des valeurs float à partir des images 32 bits.  
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.getPixel(3,2);
+       
+++ **getRow**, prend en argument des coordonnées x et y int, un tableau des données du type float et la longueur de ce tableau int. Cela renverra des valeurs des pixels le long de la ligne horizontale à partir de (x, y). 
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.getRow(int x, int y, float[] data, int length);
+
+++ **getHeight**, ne prend aucun argument et renverra la hauteur d’une image en pixels.
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.getHeight();
+       
+++ **getWidth**, ne prend aucun argument et renverra la largeur d’une image en pixels.    
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.getWidth();
+       
+++ **isBinary**, ne prend aucun argument et renverra «vrai» s’il s’agit d’une image binaire (image 8 bits avec seulement 0 et 255).   
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.isBinary();
+       
+++ **multiply**, prend en argument une valeur de type double et est utilisé pour le but de multiplier chaque pixel d’une image ou du ROI par «valeur».
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.multiply(2.5);
+       
+++ **putPixel**, prend en argument des coordonnées x et y et une valeur du type int et utilisée pour stocker une valeur spécifiée à (x, y). Cette méthode ne fait rien si (x, y) est en dehors de la limite de l’image. Pour des images 8 bits et 16 bits, des valeurs hors de limites sont bloquées. Pour des images RGB, les valeurs argb sont regroupées dans «valeur». Pour des images float, la «valeur» devrait être un float converti en entier à l’aide de Float.floatToIntBits(). 
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.putPixel(2,3,5);
+       
+++ **set**, prend en argument des coordonnées x et y et une valeur entière. Il s’agit d’une version plus rapide de putPixel () qui n’écrase pas les valeurs hors du rang et ne vérifie pas les limites.   
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.set(2,3,5);
+       
+++ **set**, prend en argument l’indice int et une valeur entière. Cela permet de définir une valeur spécifiéé à une position précisée. 
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.set(2,3);
+
+++ **setAutoThreshold**, prend en argument la méthode définie le seuil de AutoThresholder.Method, une valeur booléenne pour le darkBackground et une valeur de lutUpdate int. Cela permet de définir automatiquement les niveaux de seuil inférieur et supérieur, où ’méthode’ doit être ISODATA ou ISODATA2 et ’lutUpdate’ doit être RED LUT, BLACK AND WHITE LUT, OVER UNDER LUT ou NO LUT UPDATE.
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.setAutoThreshold("Default", false, 0);
+       
+++ **setColor**, prend en argument une valeur double et permet de définir la valeur de remplissage / dessin par défaut.
+       
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.setColor(123.67);
+       
+++ **setColor**, prend en argument une valeur int et permet de définir la valeur de remplissage / dessin par défaut. 
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.setColor(125);
+       
+++ **setColor**, prend en argument le java.awt.Color color et permet de définir la valeur de remplissage / dessin par défaut sur la valeur de pixel la plus proche de la couleur spécifiée.     
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.setColor(java.awt.Color color);
+       
+++ **setPixels**, prend en argument le java.lang.Object pixels des pixels et définira un nouveau tableau de pixels pour une image. La longueur du tableau doit être égale à largeur * hauteur. setSnapshotPixels (null) est ensuite utilisée pour effacer le snapshot buffer. 
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.setColor(java.lang.Object pixels);
+       
+++ **setRoi**, , prend en argument le roi de java.awt.Rectangle et cela permet de définira une région d’intérêt rectangulaire et définira le masque = null si ce ROI n’est pas de la même taille que le précédent.    
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.setRoi(java.awt.Rectangle roi);
+       
+++ **setRoi**, prend en argument des coordonnées x et y du Roi (int), sa largeur (int) et sa longueur. Cela permet de définira une région d’intérêt rectangulaire et définira le masque = null si ce ROI n’est pas de la même taille que le précédent.
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.setRoi(int x, int y, int rwidth, int rheight);
+       
+++ **setRoi**, prend en argument le roi de la classe Roi et cela permet de définir une région d’intérêt non rectangulaire qui consistera en un ROI rectangulaire et un masque. Après le traitement, on appelle le reset(mask) pour restaurer les pixels non masqués.
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       ip.setRoi(new OvalRoi(50, 50, 100, 50);
+       ip.fill();
+       ip.reset(ip.getMask());
+       
+++ **setRoi**, prend en argument le roi de java.awt.Polygon. Cette méthode définira une région polygonale d’intérêt qui consistera en un ROI rectangulaire et un masque. Après le traitement, on appelle le reset(mask) pour restaurer les pixels non masqués.      
+
+       let imp = IJ.openImage ("http://imagej.nih.gov/ij/images/blobs.gif");
+       let ip = imp.getProcessor();
+       let p = new Polygon();
+       p.addPoint(50,0); 
+       p.addPoint(100, 100);
+       p.addPoint(0, 100);
+       ip.setRoi(triangle);
+       ip.invert();
+       ip.reset(ip.getMask());
+       
 #### 1.2.3. ImagePlus :
 #### 1.2.4  IJ :
 Cette dernière classe nommée **IJ** sera principalement utilitaire, elle contiendra des méthodes et fonctions qui n'ont pas un rôle dans la manipulation d'image à proprement parler. On y retrouvera des fonctionnalités essentielles au commencement d'un travail et à sa fin. C'est en effet grâce à cette classe qu'il sera possible d'ouvrir ou fermer un fichier, de créer une 
