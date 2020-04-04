@@ -387,6 +387,63 @@ approximativement égale à la longueur de la ligne.
        ip.reset(ip.getMask());
        
 #### 1.2.3. ImagePlus :
+La classe **ImagePlus** représente la troisième classe, elle est un objet qui représente une image. Il est basé sur un ImageProcessor, classe qui manipule le tableau de pixels et traite donc réellement l'image. Le type d' ImageProcessor utilisé dépend du type d'image. Ces types d'images sont représentées par des constantes dans ImagePlus qui sont: **8bits**, **16bits**, **32bits** et **RGB**.
+Plusieurs méthodes seront implantées pour cette classe :
+**createImagePlus()**, cette méthode répond à nos interrogations sur la manière de créer une image. On pourra en fixer le type dans un second temps à l'aide de différents arguments. Faudra donc explorer la documentation de l'API pour les connaître. 
+
+      let ImagePlus = new createImagePlus();
+
+**getTitle()**, sans argument,  retourne le nom de l’image.
+
+       let imp = new ImagePlus() ;
+       let title = imp.getTitle();
+
+**getPixel()** renvoie la valeur de pixel à (x, y) sous la forme d'un tableau à 4 éléments, les valeurs de niveaux de gris sont réaccordées dans le premier élément et les valeurs RGB sont renvoyées dans les 3 premiers éléments. Pour les images couleur indexées, les valeurs RGB sont renvoyées dans les 3 premiers éléments et l'index (0-255) est renvoyé dans le dernier.
+
+       let imp = new ImagePlus() ;
+       imp.getPixel(1, 2) ;
+
+**getWeidth()** ne prend aucun argument,  renvoie la largeur de  l’image en pixels.
+
+       let imp = new ImagePlus() ;
+       imp.getWeidth() ;
+
+**getHeight()**, ne prend pas d’argument et renvoie la hauteur de l’image en pixels.
+
+       let imp = new ImagePlus() ;
+       let Heigth = imp.getHeight() ;
+
+**getBitDepth()** nous renvoie la profondeur de bits, 8, 16, 24 (RVB) ou 32, ou 0 si la profondeur de bits est inconnue. Les images RGB utilisent en fait 32 bits par pixel. Il ne prend pas d’argument.
+
+       let imp = new ImagePlus() ;
+       let bitDepth = imp.getBitDepth() ;
+
+**clone()**, cette méthode est sans argument, elle va nous renvoyer une copie superficielle de notre imagePlus.
+
+       let imp = new ImagePlus() ;
+       let clone = imp.clone()
+
+**duplicate()**, cette méthode renvoie une copie de notre image, elle est sans argument. 
+       
+       let imp = new ImagePlus() ;
+       let dup = imp.duplicate() ;
+
+**getDimensions()** nous renvoie les dimensions de  l’image (largeur, hauteur, nChannels, nSlices, nFrames) sous la forme d'un tableau int à 5 éléments. Cette méthode ne prend pas d’argument.
+
+       let imp = new ImagePlus() ;
+       let dimensions = imp.getDimensions() ;
+
+**setRoi(java.awt.Rectangle r)**, cette méthode crée une sélection rectangulaire. Elle attribue le ROI r spécifié à cette image et l'affiche. Tout retour sur investissement existant est supprimé si le roi est nul ou si sa largeur ou sa hauteur est nulle.
+
+       let imp = new ImagePlus() ;
+       imp.setRoi(java.awt.Rectangle roi) ;
+
+
+**paste()** insère le contenu interne du presse dans l'image active. S'il existe une sélection de la même taille que l'image dans le presse, l'image est insérée dans cette sélection, sinon la sélection est insérée au centre de l'image.    
+
+       let imp = new ImagePlus ();
+       imp.paste();
+
 #### 1.2.4  IJ :
 Cette dernière classe nommée **IJ** sera principalement utilitaire, elle contiendra des méthodes et fonctions qui n'ont pas un rôle dans la manipulation d'image à proprement parler. On y retrouvera des fonctionnalités essentielles au commencement d'un travail et à sa fin. C'est en effet grâce à cette classe qu'il sera possible d'ouvrir ou fermer un fichier, de créer une 
 nouvelle image ou encore lancer un script. Plusieurs de ses méthodes seront donc interdépendantes et se baseront sur d'autres
