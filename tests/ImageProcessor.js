@@ -88,6 +88,7 @@ function toArray2D(pixels,w,h) {
   return result;
 }
 
+
 describe('ImageProcessor', function () {
     describe('sqr() => ', function () {
       it('Should do a square transformation on the value of the image,(8bit)', function () {
