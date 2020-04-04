@@ -17,6 +17,109 @@
 
 ### 1.2. Les classes
 #### 1.2.1. ResultsTable :  
+La première classe s'appelle **ResultsTable**. Cette classe contient des méthodes qui permettent le traitement des données sous forme de tableau. Ces tableaux peuvent contenir des informations liés aux données des images tel que la distribution des pixels et il est donc intéressant de pouvoir les créer et les manipuler. Les méthodes implémentées permettront de créer un tableau vide, de charger un tableau, d'y ajouter ou supprimer des lignes ou colonnes, d'y ajouter ou enlever des valeurs, d'obtenir ou changer les noms des colonnes et rangées, d'obtenir les valeurs des lignes et rangées ou d'obtenir le titre et la taille du tableau.
+
+
+Pour cette classe nous implanterons 26 méthodes qui permettront de lire et écrire dans des tableaux:
+
++ **addValue** prend en argument le nom d'une colonne ou l'index d'une colonne ainsi qu'une valeur à ajouter dans la table et permet d'ajouter cette valeur dans la colonne choisie. Si la colonne spécifiée n'existe pas elle sera créée. Elle s'utilise de cette manière :
+
+       let table = new ResultsTable(10);
+       table.addValue(0,10);
+       
++ **addColumns** ne prend pas d'argument et permet d'ajouter une colonne à un tableau. Cette colonne sera nommé automatiquement selon son index (C1, C2, etc). 
+
+       let table = new ResultsTable(10);
+       table.addColumn();
+
++ **addLabel** prend en argument une chaîne de caractères et l'ajoute comme label de la dernière rangée du tableau.
+
+       let table = new ResultsTable(10);
+       table.addLabel('A');
+       
++ **deleteColumn** prend en argument une chaîne de caractères et supprime la colonne qui a comme nom cette chaîne.
+
+       let table = new ResultsTable(10);
+       table.addValue('A',10);
+       table.deleteColumn('A');
+       
++ **deleteRow** prend en argument l'index d'une rangée du tableau et supprime cette rangée.
+
+       let table = new ResultsTable(10);
+       table.deleteRow(0);
+       
++ **deleteRows** se comporte de la même manière que deleteRows mais permet de supprimer plusieurs rangées.
+
+       let table = new ResultsTable(10);
+       table.deleteRows(0,1);
+
++ **getColumnHeading** prend en argument l'index d'une colonne et retourne le nom de cette colonne.
+
+       let table = new ResultsTable(10);
+       table.getColumnHeading(0);
+
++ **getColumnHeadings** ne prend pas d'argument et retourne la liste de tous les noms de colonnes du tableau sous la forme d'une chaîne de caractères séparée par des virgules ou des tabulations.
+
+       let table = new ResultsTable(10);
+       table.addColumn();
+       table.getColumnHeadings();
+       
++ **getColumn** prend en argument l'index d'une colonne et renvoie une copie de cette colonne dans un tableau de valeur de type float.
+
+       let table = new ResultsTable(10);
+       table.getColumn(0);
+
++ **getColumnIndex** prend en argument le nom d'une colonne et retourne l'index de cette colonne.
+
+       let table = new ResultsTable(10);
+       table.getColumnIndex('A');
+       
++ **getHeadings**  ne prend pas d'argument et retourne la liste de tous les noms de colonnes du tableau sous la forme d'un tableau de chaîne de caractères.
+
+        let table = new ResultsTable(10);
+        table.addColumn();
+        table.getColumnHeadings();
+        
++ **getLabel** prend en argument l'index d'une rangée et retourne le label de cette rangée.
+
+       let table = new ResultsTable(10);
+       table.getLabel(0);
+
++ **getValueAsDouble** prend en argument l'index d'une colonne et d'une rangée existantes et retourne la valeur se trouvant à cet emplacement sous la forme d'un double.
+
+       let table = new ResultsTable(10);
+       table.getValueAsDouble(0,0);
+
++ **getValue** prend en argument l'index d'une colonne et d'une rangée existantes et retourne la valeur se trouvant à cet emplacement sous la forme d'un entier. 
+
+       let table = new ResultsTable(10);
+       table.getValue(0,0);
+       
++ **getStringValue** prend en argument l'index ou le nom d'une colonne et d'une rangée existantes et retourne la valeur se trouvant à cet emplacement sous la forme d'une chaîne de caractères.
+
+       let table = new ResultsTable(10);
+       table.getStringValue(0,0);
+
++ **getTitle** retourne le nom du tableau.
+
+       let table = new ResultsTable(10);
+       table.getTitle(0,0);
+
++ **setLabel** prend en argument une chaîne de caractères et l'index d'une rangée et ajoute cette chaîne de caractères comme label de la rangée.
+
+       let table = new ResultsTable(10);
+       table.setLabel('A',0);
+       
++ **setValue** prend en argument l'index ou le nom d'une colonne, l'index d'une rangée ainsi qu'une valeur sous forme de double ou de chaîne de caractères et ajoute cette valeur à l'emplacement spécifié.
+
+       let table = new ResultsTable(10);
+       table.setValue(0,0,10);
+       
++ **size** ne prend pas d'argument et retourne le nombre de rangée du tableau.
+
+       let table = new ResultsTable(10);
+       table.size();
+
 #### 1.2.2. ImageProcessor :  
 #### 1.2.3. ImagePlus :
 #### 1.2.4  IJ :
