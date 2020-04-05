@@ -46,19 +46,17 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   constructor (nRows = 0) {
-      this.nRows = nRows;
-      this.nColumns = 0;
-      this.title = 'MyTable';
-      this.lastColumn = -1;
-
-      // ALl we need to display the ResultsTable in HTML
-      this.table = [];
-      
-      // Add data2d for data storage
-      this.dataset = []; 
-
-   };
-
+    this.nRows = nRows;
+    this.nColumns = 0;
+    this.headings = []
+    this.title = 'undefined';
+    
+    // ALl we need to display the ResultsTable in HTML
+    this.table = new Table();
+    
+    // Add data2d for data storage
+    this.dataset = []; 
+  };
 
   /**
    * 
@@ -572,11 +570,15 @@ export class ResultsTable {
    * 
    * @author Created by ijdoc2js
    */
-  
-    addColumns() {
-        this.nColumns++;
-        this.dataset.push([]);
-    };
+  addColumns() {
+    this.nColumns++;
+    this.dataset.push([]);
+    for(let i = 0; i<this.nRows; i++){
+        this.dataset[this.nColumns - 1].push(0)
+    }
+    this.headings.push("C" + [this.nColumns.toString()]);
+  };
+
   /**
    * Returns the current value of the measurement counter.
    * 
@@ -607,8 +609,8 @@ export class ResultsTable {
    * 
    * @author Created by ijdoc2js
    */
-  addValueInt(column, value) {
-        this.dataset[column].push(value);
+  addValue(column, value) {
+    throw "Not Implemented - ResultsTable.addValue(..)";
   };
 
   /**
@@ -636,7 +638,34 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   addValue(column, value) {
-    throw "Not Implemented - ResultsTable.addValue(..)";
+    // string, int
+    if(typeof(column) === 'string'){
+      for (let i=0; i<this.headings.length; i++){
+        if(this.headings[i] === column){
+                  index = i
+        }
+      }
+
+      if(this.headings.includes(column) === true){
+      this.dataset[index][this.nRows - 1] = value;
+      }
+      else {
+        this.addColumns()
+        this.headings[this.nColumns - 1] = column;
+        this.dataset[this.nColumns - 1][this.nRows - 1] = value;
+      }
+    }
+
+    // int, int
+    if(typeof(column) === 'number'){
+      let number = column-(this.dataset.length-1)
+      if(typeof(this.dataset[column]) === 'undefined'){
+          for(let i=0; i<number; i++){
+              this.addColumns();
+          }
+      }
+      this.dataset[column][this.nRows - 1] = value;
+    }
   };
 
   /**
@@ -696,26 +725,15 @@ export class ResultsTable {
    * 
    * @author Created by ijdoc2js
    */
-  getColumn(column){
-        if ((column <0) || (column >= this.nColumns))
+  getColumn(column) {
+    if ((column <0) || (column >= this.nColumns))
         {
-            throw new Error("Index out of range");
+            throw ("Index out of range");
         }
-        else{
-            let dataArray = [];
-            for (let i=0; i<this.dataset.length;i++)
-            {
-                if (this.dataset[i][column] == null)
-                {
-                    return null;
-                }
-                else{
-                dataArray.push(this.dataset[i][column]);
-                }
-            }           
-            return dataArray;
+        else{       
+            return this.dataset[column];
         }
-    };
+  };
 
   /**
    * Returns a copy of the given column as a double array,
@@ -761,17 +779,9 @@ export class ResultsTable {
    * 
    * @author Created by ijdoc2js
    */
-  columnExists(column){
-        if ((column <0) || (column >= this.nColumns))
-        {
-            return false;
-        }
-        else 
-        {
-            let data = this.dataset[column];
-            return data != null;
-        }
-    };
+  columnExists(column) {
+    "Not Implemented - ResultsTable.getValueAsDouble(..)"
+  };
 
   /**
    * Returns the index of the first column with the given heading.
@@ -826,10 +836,10 @@ export class ResultsTable {
    * 
    * @author Created by ijdoc2js
    */
-  getValue(column, row){
-        let value = this.dataset[column][row];
-        return value;
-    };
+  getValue(column, row) {
+    throw "Not Implemented - ResultsTable.getValue(..)";
+  };
+
   /**
    * Returns the value of the specified column and row, where
  * column is the column heading and row is a number greater
@@ -843,10 +853,16 @@ export class ResultsTable {
    * 
    * @author Created by ijdoc2js
    */
-  getValue(column, row){
-        let value = this.dataset[column][row];
-        return value;
-    };
+  getValue(column, row) {
+    let index;
+    for (let i=0; i<this.headings.length; i++){
+        if(this.headings[i] === column){
+          index = i
+        }
+    }
+    let value = this.dataset[index][row];
+    return value;
+  };
 
   /**
    * Returns 'true' if the specified column exists and is not emptly.
@@ -856,9 +872,25 @@ export class ResultsTable {
    * 
    * @author Created by ijdoc2js
    */
-  
   columnExists(column) {
-    throw "Not Implemented - ResultsTable.columnExists(..)";
+    //string
+    if(typeof(column) === 'string'){
+      for (let i=0; i<this.headings.length; i++){
+          if(this.headings[i] === column){
+              return true
+          }
+      }
+      return false
+  }
+  
+  //int
+  if(typeof(column) === 'number'){
+      if(typeof(this.dataset[column]) != 'undefined'){
+          console.log("test")
+          return true
+      }
+      return false
+  }
   };
 
   /**
@@ -973,7 +1005,6 @@ export class ResultsTable {
    * 
    * @author Created by ijdoc2js
    */
-  
   getColumnHeadings() {
     throw "Not Implemented - ResultsTable.getColumnHeadings(..)";
   };
@@ -1160,7 +1191,14 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   deleteColumn(column) {
-    throw "Not Implemented - ResultsTable.deleteColumn(..)";
+    let index;
+        for (let i=0; i<this.headings.length; i++){
+            if(this.headings[i] === column){
+                index = i
+            }
+        }
+        this.headings.splice([index],1)
+        this.dataset.splice([index],1);
   };
 
   /**
@@ -1191,17 +1229,15 @@ export class ResultsTable {
    * 
    * @author Created by ijdoc2js
    */
-  getLastColumn(){
-        if(this.nColumns == null)
-        {
-            return -1;
-        }
-        else
-        {
-            let lastCol = this.nColumns + this.lastColumn;
-            return lastCol;
-        }
-    };
+  getLastColumn() {
+    if(this.nColumns == null){
+      return -1;
+    }
+    else {
+      let lastCol = this.nColumns -1;
+      return lastCol;
+    }
+  };
 
   /**
    * Adds the last row in this table to the Results window without updating it.
