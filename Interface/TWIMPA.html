@@ -21,7 +21,7 @@
             <p>        
              <a>UploadData
               <br> 
-                 <input type="file" id="data" accepted=".csv" multiple></a>
+                 <input type="file" id="data" accept="image/*" onchange= "UploadIMG(event)" multiple></a>
            </p>
           </div>
 
@@ -37,11 +37,32 @@
   <div id = "inside">
   
   <div class="input">
-  input
+    <input type="file" accept="image/*" onchange="loadFile(event)">
+    <img id="output"/>
+    <script>
+    var loadFile = function(event) {
+      var output = document.getElementById('output');
+      output.src = URL.createObjectURL(event.target.files[0]);
+      output.onload = function() {
+        URL.revokeObjectURL(output.src) // free memory
+      }
+    };
+    </script>
   </div>
   
   <div class = "js">
-  js
+    <input type="file" value="Lire" Onclick="read()">
+    <script>
+    function read() { //fonction de lecture d'un fichier
+        var Object1 = new ActiveXObject('Scripting.FileSystemObject'); //Même formule que dans la fonction précédente, j'ai juste changé le nom de la variable pour ne pas s'embrouiller, même si ce n'est pas indispensable étant donné que l'on change de fonction.
+        var LirTxt = Object1.GetFile('Hello.txt'); // GetFile() permet d'attribuer à l'objet activeX la valeur d'un fichier existant, ici , celui que l'on a créé précedemment. Seulement getfile() ne le rend pas immédiatement accessible comme le createTextFile, il va falloir utiliser une autre fonction.
+        var doc1 = LirTxt.OpenAsTextStream(1); //Maintenant que notre fichier .txt est initialisé on va pouvoir le manipuler, le paramètre 8 signifie que l'on va ouvrir le fichier et le compléter , la valeur 1 permet de l'ouvrir en lecture seule, et le 2 l'ouvre et écrit en écrasant les valeurs déjà existantes.
+        doc1.Skip(5); //cette instruction permet d'exclure les 5 premiers caractères du fichier lors de sa lecture.
+        var txt = doc1.ReadAll(); // On "lit tout" le fichier, il existe aussi ReadLine(x) qui lit la ligne x et Read(x) qui lit les x premiers caractères du fichier.
+        fenetre.value=txt; //On affiche le contenu.
+        doc1.Close(); //On referme.
+      }
+    </script>
   </div>
   </div>
   
