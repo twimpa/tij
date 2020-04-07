@@ -30,6 +30,7 @@ body {
     background-color: white;
     margin: 2px;
     border: 2px black outset; 
+    overflow: auto;
   }
   
   .js {
@@ -38,6 +39,7 @@ body {
     background-color: white;
     margin: 2px;
     border: 2px black outset; 
+    overflow: auto;
   }
   
   .result {
@@ -46,6 +48,7 @@ body {
     background-color: white;
     margin: 2px;
     border: 2px black outset; 
+    overflow: auto;
   }
 
 .bouton p {
