@@ -48,7 +48,7 @@ export class ResultsTable {
   constructor (nRows = 0) {
     this.nRows = nRows;
     this.nColumns = 0;
-    this.headings = []
+    this.headings = [];
     this.title = 'undefined';
     
     // ALl we need to display the ResultsTable in HTML
@@ -574,7 +574,7 @@ export class ResultsTable {
     this.nColumns++;
     this.dataset.push([]);
     for(let i = 0; i<this.nRows; i++){
-        this.dataset[this.nColumns - 1].push(0)
+        this.dataset[this.nColumns - 1].push(0);
     }
     this.headings.push("C" + [this.nColumns.toString()]);
   };
@@ -642,7 +642,7 @@ export class ResultsTable {
     if(typeof(column) === 'string'){
       for (let i=0; i<this.headings.length; i++){
         if(this.headings[i] === column){
-                  index = i
+                  index = i;
         }
       }
 
@@ -650,7 +650,7 @@ export class ResultsTable {
       this.dataset[index][this.nRows - 1] = value;
       }
       else {
-        this.addColumns()
+        this.addColumns();
         this.headings[this.nColumns - 1] = column;
         this.dataset[this.nColumns - 1][this.nRows - 1] = value;
       }
@@ -658,7 +658,7 @@ export class ResultsTable {
 
     // int, int
     if(typeof(column) === 'number'){
-      let number = column-(this.dataset.length-1)
+      let number = column-(this.dataset.length-1);
       if(typeof(this.dataset[column]) === 'undefined'){
           for(let i=0; i<number; i++){
               this.addColumns();
@@ -793,7 +793,13 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   getColumnIndex(heading) {
-    throw "Not Implemented - ResultsTable.getColumnIndex(..)";
+    let index;
+        for (let i=0; i<this.headings.length; i++){
+            if(this.headings[i] === heading){
+                index = i;
+            }
+        }
+        return index;
   };
 
   /**
@@ -857,7 +863,7 @@ export class ResultsTable {
     let index;
     for (let i=0; i<this.headings.length; i++){
         if(this.headings[i] === column){
-          index = i
+          index = i;
         }
     }
     let value = this.dataset[index][row];
@@ -877,19 +883,18 @@ export class ResultsTable {
     if(typeof(column) === 'string'){
       for (let i=0; i<this.headings.length; i++){
           if(this.headings[i] === column){
-              return true
+              return true;
           }
       }
-      return false
+      return false;
   }
   
   //int
   if(typeof(column) === 'number'){
       if(typeof(this.dataset[column]) != 'undefined'){
-          console.log("test")
-          return true
+          return true;
       }
-      return false
+      return false;
   }
   };
 
@@ -921,7 +926,18 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   getStringValue(column, row) {
-    throw "Not Implemented - ResultsTable.getStringValue(..)";
+    //string, int
+    if(typeof(column) === 'string'){
+      let index = this.getColumnIndex(column);
+      let value = this.dataset[index][row].toString();
+      return value;
+  }
+
+  //int, int
+  if(typeof(column) === 'number'){
+      let value = this.dataset[column][row].toString();
+      return value;
+  }
   };
 
   /**
@@ -1168,7 +1184,10 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   deleteRow(rowIndex) {
-    throw "Not Implemented - ResultsTable.deleteRow(..)";
+    for(let i=0; i<this.dataset.length; i++){
+      this.dataset[i].splice(rowIndex,1);
+    }
+    this.nRows--;
   };
 
   /**
@@ -1180,7 +1199,9 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   deleteRows(index1, index2) {
-    throw "Not Implemented - ResultsTable.deleteRows(..)";
+    for(let i=0; i<index2-index1+1; i++){
+      this.deleteRow(index1);
+    } 
   };
 
   /**
@@ -1194,10 +1215,10 @@ export class ResultsTable {
     let index;
         for (let i=0; i<this.headings.length; i++){
             if(this.headings[i] === column){
-                index = i
+                index = i;
             }
         }
-        this.headings.splice([index],1)
+        this.headings.splice([index],1);
         this.dataset.splice([index],1);
   };
 
