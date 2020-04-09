@@ -150,8 +150,8 @@ describe('ResultsTable', function () {
       table.show('MyTable');
       table.addValue('D', 'Un');
       table.deleteColumn('D');
-      const result = table.columnDeleted();
-      expect(result).toBe(true);
+      const result = table.columnExists('D');
+      expect(result).toBe(false);
     });
   });
 
