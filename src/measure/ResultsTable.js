@@ -1022,7 +1022,16 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   getColumnHeadings() {
-    throw "Not Implemented - ResultsTable.getColumnHeadings(..)";
+    let heading_str = "";
+      for(let i=0; i<this.headings.length; i++){
+        if(i < this.headings.length - 1){
+          heading_str += this.headings[i] + "	"; 
+        }
+        else{
+          heading_str += this.headings[i];
+        }
+      }
+    return heading_str;
   };
 
   /**
@@ -1045,7 +1054,11 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   getColumnHeading(column) {
-    throw "Not Implemented - ResultsTable.getColumnHeading(..)";
+    if(column > this.nColumns - 1){
+      return null;
+  }
+  let heading = this.headings[column];
+  return heading;
   };
 
   /**
