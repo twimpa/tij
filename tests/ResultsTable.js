@@ -27,7 +27,6 @@
 'use strict';
 
 
-
 describe('ResultsTable', function () {
   describe('getTitle() => int', function () {
     it('should return the tables title', function () {
