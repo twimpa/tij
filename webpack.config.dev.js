@@ -5,7 +5,7 @@ module.exports = {
   entry: './src/index.js',
   output: {
     libraryTarget: 'umd',
-    filename: 'tij.mjs',
+    filename: 'tij.js',
     path: path.resolve(__dirname, 'dist')
   },
   devServer: {

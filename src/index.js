@@ -35,6 +35,7 @@ import {ImagePlus} from './ImagePlus';
  
  
 export {
+  DataFrame,
   ImageProcessor,
   ByteProcessor,
   ImagePlus,
