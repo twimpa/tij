@@ -601,68 +601,43 @@ export class ResultsTable {
     return this.nRows;
   };
 
-  /**
-   * Adds a value to the end of the given column.
-   * 
-   * @param {int} column - 
-   * @param {double} value - 
-   * 
-   * @author Created by ijdoc2js
-   */
-  addValue(column, value) {
-    throw "Not Implemented - ResultsTable.addValue(..)";
-  };
 
   /**
-   * Adds a value to the end of the given column. If the column
+   * Adds a string or a numeric value to the end of the given column. If the column
    * does not exist, it is created.
-   * There is an example at:<br>
-   * http://imagej.nih.gov/ij/plugins/sine-cosine.html
    * 
-   * @param {java.lang.String} column - 
-   * @param {double} value - 
+   * @param {java.lang.String} column - defined as a heading (String) or as the column number
+   * @param {java.lang.String} value - may be a String or a number
    * 
    * @author Created by ijdoc2js
    */
-  addValue(column, value) {
-    throw "Not Implemented - ResultsTable.addValue(..)";
-  };
-
-  /**
-   * Adds a string value to the end of the given column. If the column
- * does not exist, it is created.
-   * 
-   * @param {java.lang.String} column - 
-   * @param {java.lang.String} value - 
-   * 
-   * @author Created by ijdoc2js
-   */
-  addValue(column, value) {
+  addValue(column_or_heading, value) {
     // string, int
-    if(typeof(column) === 'string'){
-      for (let i=0; i<this.headings.length; i++){
+    if(typeof(column_or_heading) === 'string') {
+      // Use getColumnIndex(heading) instead
+      for (let i=0; i<this.headings.length; i++) {
         if(this.headings[i] === column){
                   index = i;
         }
       }
 
-      if(this.headings.includes(column) === true){
-      this.dataset[index][this.nRows - 1] = value;
+      if(this.headings.includes(column) === true) { // USELESS
+        this.dataset[index][this.nRows - 1] = value;
       }
       else {
-        this.addColumns();
+        this.addColumns(); // OBSOLETE 
         this.headings[this.nColumns - 1] = column;
         this.dataset[this.nColumns - 1][this.nRows - 1] = value;
       }
     }
 
     // int, int
-    if(typeof(column) === 'number'){
+    if (typeof(column) === 'number'){
       let number = column-(this.dataset.length-1);
-      if(typeof(this.dataset[column]) === 'undefined'){
-          for(let i=0; i<number; i++){
-              this.addColumns();
-          }
+      if (typeof(this.dataset[column]) === 'undefined'){
+        for (let i=0; i<number; i++) {
+          this.addColumns(); // OBSOLETE 
+        }
       }
       this.dataset[column][this.nRows - 1] = value;
     }
