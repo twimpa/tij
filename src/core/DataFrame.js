@@ -26,13 +26,12 @@
 
 export class DataFrame {
 
-  constructor(data=undefined,shape=[],dtype='float32') {
+  constructor(data=undefined,shape=[],dtype='float32',columnFirst=true) {
   
     // Data are stored as a 1D Float32Array
-    this._data = data;
+    this._data = (data !== undefined) ? this._setData(data) : undefined;
     
-    
-    // shape = [nRows, nColumns]
+    // shape = [nRows, nColumns, nSlices,...]
     this._shape = shape;
     
     // Strides
@@ -46,6 +45,7 @@ export class DataFrame {
 
     /**
      * Data Types:
+     * 0 = unknown
      * 1 = boolean
      * 4 = date
      * 6 = category
@@ -55,7 +55,7 @@ export class DataFrame {
      * 32 = 32-bit float (pixel value)
      * 64 = number
      */
-    this._dtypes;
+    this._dtypes = this._getDType(dtype);
 
     /**
      * Categorical Data
@@ -71,6 +71,10 @@ export class DataFrame {
 
   get rank() {
     return this._shape.length;
+  }
+  
+  get size() {
+    return this._shape.reduce( (accu,d) => d * accu, 1.0);
   }
   
   get shape() {
@@ -120,54 +124,30 @@ export class DataFrame {
     this._labels = rows.map( (v) => v);
   }
 
-  from(data) {
-    // Step #1: check ResultsTable, ImagePlus, ImageProcessor, and ImageStack.
-    if (data.class) {
-      this.fromIJ(data);
-    }
-    //  Step #2: check 
-    else if (data.columns) {
+  from(data, shape=[], dtype='float32') {
+    // Step #1: check 
+    if (data.columns) {
       this.fromObject(data);
     }
-    //  Step #3: check matrix
+    //  Step #2: check matrix
     else if (data[0] && data[0][0]) {
       this.fromMatrix(data);
     }
   }
 
-  fromIJ(data) {
-    let className = data.class.toString();
-
-    if (className.indexOf('ImagePlus') !== -1 && data.getNSlices() > 1) {
-      this.fromStack(data.getImageStack());
-    }
-    else if (className.indexOf('ImagePlus') !== -1) {
-      this.fromProcessor(data.getProcessor());
-    }
-    else if (className.indexOf('Processor') !== -1) {
-      this.fromProcessor(data);
-    }
-    else if (className.indexOf('ImageStack') !== -1) {
-      this.fromStack(data);
-    }
-    else if (className.indexOf('ResultsTable') !== -1) {
-      this.fromTable(data);
-    }
-  }
-
   fromJSON(json,order='row') {
     // TODO
-    this._rows = [];
-    this._columns = [];
+    this._labels = [];
+    this._headings = [];
     this._dtypes = [];
     let count = 0;
-    if (order == 'row') {
+    if (order === 'row') {
       for (let key in Object.keys(json) ) {
-        this._rows.push(key);
-        this._columns.push(count++);
+        this._labels.push(key);
+        this._headings.push(count++);
       }
     }
-    else if (order == 'column') {
+    else if (order === 'column') {
     }
     else {
       alert('Unknown order - Must be `row` or `column`');
@@ -175,15 +155,13 @@ export class DataFrame {
     this._data = new Float32Array(other);
   }
 
-  fromMatrix(data) {
-
-  }
-
-  fromCSV(table,order='row') {
+  fromCSV(table,sep=',',order='row') {
     // TODO
-    if (order == 'row') {
+    let lines = table.split('\n');
+    
+    if (order === 'row') {
     }
-    else if (order == 'column') {
+    else if (order === 'column') {
     }
     else {
       alert('Unknown order - Must be `row` or `column`');
@@ -201,8 +179,8 @@ export class DataFrame {
     this._width = w * h;
     this._height = num;
     this._dtypes = stack.getBitDepth();
-    this._rows   = Array.from({length: this._height}, (i,v) => i);
-    this._columns = Array.from({length: this._width}, (i,v) => i);
+    this._labels   = Array.from({length: this._height}, (i,v) => i);
+    this._headings = Array.from({length: this._width}, (i,v) => i);
     for (let z=1; z <= num; z++) {
       let ip = stack.getProcessor(z);
       for (let i = 0; i < w * h ; i++) {
@@ -219,75 +197,223 @@ export class DataFrame {
     this._width = w;
     this._height = h;
     this._dtypes = stack.getBitDepth();
-    this._rows   = Array.from({length: this._height}, (i,v) => i);
-    this._columns = Array.from({length: this._width}, (i,v) => i);
+    this._labels   = Array.from({length: this._height}, (i,v) => i);
+    this._headings = Array.from({length: this._width}, (i,v) => i);
     // Copy Processor
     for (let i = 0; i < w * h ; i++) {
       this._data.setf(i, ip.getf(i) );
     }
   }
 
+  from(obj) {
+    // Step #1 - Extract headings and labels if any
+    this._headings = obj.headings ? obj.headings : Object.keys(obj).filter( h => h !== 'headings' && h !== 'labels');
+    this._labels = (obj.labels) ? obj.labels : [];
+
+    // Step #2 - Extract labels if any
+    let nrows = (obj.labels !== undefined) ? obj.labels.length : obj[this._headings[0]].length;
+    // Step #3 - Calc strides
+    this._strides = []
+    this._shape = [nrows, this._headings.length];
+    this._dtypes = this._headings.map( _ => 'float32'); // By default
+    // Step #4 - Set data
+    this._data = new Float32Array(this.size);
+    this._headings.forEach( h => {
+      let col = obj[h];
+      this._data.set(col);
+    });
+  }
+
+
   fromTable(table) {
   }
 
   array() {
     // TODO: replace the Categoricals and the booleans.
-    return this._data.getFloatArray();
+    return {data:this._data, shape: this._shape};
+  }
+
+  data() {
+    // TODO: replace the Categoricals and the booleans.
+    return this._data;
   }
 
   /**
+   * Get the value at given position
    *
+   * @param {string|number} args - row, column, slice, ... N-dimensional 
+   *
+   * @author Jean-Christophe Taveau
+   */
+  loc(...args) {
+    // Convert args to integers
+    // TODO
+    let new_args = [];
+    return this.iloc(...new_args);
+  }
+  
+  /**
+   * Get the value at given integer position
+   *
+   * @author Jean-Christophe Taveau
+   */
+  iloc(...args) {
+    let idx = args.reduce( (idx,pos,i) => pos + this._strides[i], 0);
+    return this._data(idx);
+  }
+  
+  /**
+   * Get the value at given position
+   *
+   * @param {string|number} row
+   * @param {string|number} column
+   * @param {string|number} slice
+   * @param {string|number} value - Value assigned at given location
+   
+   */
+  loc(...args) {
+    let pos = args.slice(0,-1);
+    let value = args[args.length - 1];
+  }
+  
+  /**
+   * Set the value(s) at given position(s)
+   *
+   * @author Jean-Christophe Taveau
+   */
+  assign(...args) {
+    let value = args[args.length - 1];
+    let idx = args.slice(0,-1).reduce( (idx,pos,i) => pos + this._strides[i], 0);
+    this._data[idx] = value;
+    // Step #1 - Allocate memory if needed
+    // Step #2 - Update headings and labels
+  }
+  
+  /**
+   * Set the value(s) at given position(s)
+   *
+   * @author Jean-Christophe Taveau
+   */
+  set(...args) {
+    // TODO
+  }
+  
+  
+  
+  /**
+   * Set all the elements to zero
+   *
+   * @author Jean-Christophe Taveau
+   */
+  zeros(shape=undefined, dtype='unknown') {
+    let sh = (shape === undefined) ? this._shape : shape;
+    let len = sh.reduce( (accu,v) => accu * v, 1);
+    this._fillWith(len,0.0);
+  }
+  
+  /**
+   * Set all the elements to one
+   *
+   * @author Jean-Christophe Taveau
+   */
+  ones(shape=undefined, dtype='unknown') {
+    let sh = (shape === undefined) ? this._shape : shape;
+    let len = sh.reduce( (accu,v) => accu * v, 1);
+    this._fillWith(len,1.0);
+  }
+  
+
+  /**
+   * Get all the values of a given column named by its heading
    * @return {DataFrame} - Returns a new DataFrame
    */
   column(col) {
-    // TODO
+    // TODO - Check if string or number
+    const col_idx = isNaN(col) ? this._headings.indexOf(col) : col;
+    return icolumn(col_idx);
+  }
+
+
+  /**
+   * Get all the values of a given column named by its heading
+   * @return {DataFrame} - Returns a new DataFrame
+   */
+  icolumn(col) {
     let df = new DataFrame();
     let _col = [];
     for (let y = 0; y < this._height; y++) {
-      _col.push(this._data.getf(col,y));
+      _col.push(this._data[this.coord2i([col_idx,y])]);
     }
 
     df._data = new Float32Array(1, this._height, Java.to(_row, "float[]") );
-    df._columns = [this._columns[col]]; 
-    df._rows = this._rows.map( r => r);
+    df._headings = [this._headings[col]]; 
+    df._labels = this._labels.map( r => r);
     // TODO df._dtypes = this.dtypes.map( t => t);
     return df;
   }
-
-  row(index) {
+  
+  /**
+   * Get all the values of a given row at index location
+   *
+   * @param {number} index - index of 
+   * @returns {DataFrame} - Returns a new DataFrame
+   * @author Jean-Christophe Taveau
+   */
+  irow(index) {
     // TODO
     let df = new DataFrame();
     let _row = [];
     for (let x = 0; x < this._width; x++) {
       _row.push(this._data.getf(x,index));
     }
-    // NASHORN Trick
+
     df._data = new Float32Array(this._width, 1, Java.to(_row, "float[]") );
-    df._columns = this.columns.map( c => c);
-    df._rows = [this._rows[index]];
+    df._headings = this.columns.map( c => c);
+    df._labels = [this._labels[index]];
     // TODO df._dtypes = this.dtypes.map( t => t);
     return df;
+  }
+
+  /**
+   * Get all the values of a given row named by its label
+   *
+   * @param {string} label - index of 
+   * @returns {DataFrame} - Returns a new DataFrame
+   * @author Jean-Christophe Taveau
+   */
+  row(label) {
+    // TODO Get index from label
+    let idx = 0;
+    return this.irow(idx);
   }
 
   reshape(nrows,ncols) {
     // TODO
     // Return a new rescaled DataFrame/Float32Array 
     let df = new DataFrame(this._data,[nrows,ncols],this._dtypes);
-    df._headings = this._headings.map( h => h); // Copy
-    df._labels   = this._labels.map( lbl => lbl); // Copy
+    df._headings = this._headings.map( h => h); // Reset headings
+    df._labels   = this._labels.map( lbl => lbl); // Reset labels
     return df;
   }
 
   transpose(index) {
     // TODO
     // Return a new DataFrame/Float32Array rotated by 90°
-    // Update _rows and _columns.
+    // Update _labels and _headings.
   }
 
+  /**
+   * Compute basic column statistics
+   *
+   */
   describe() {
     // count,mean,std,min,25%,50%,75%,max
   }
 
+  /**
+   * Compute overall mean or by column(s)
+   *
+   */
   mean(col=-1) {
     if (col == -1) {
     // Compute mean for all the columns
@@ -297,7 +423,12 @@ export class DataFrame {
     }
   }
 
+  /**
+   * Compute overall standard deviation or by column(s)
+   *
+   */
   std() {
+    // TODO
   }
 
   /**
@@ -312,13 +443,13 @@ export class DataFrame {
    */
   show() {
     // let imp = new ImagePlus('DataFrame',this._data);
-    imp.show();
+    // imp.show();
   }
 
   /**
    * Print in console
    */
-  print(verbose=false) {
+  print(verbose=false,start=0,end=-1) {
 
     const printRow = (data) =>  data.join(' , ');
     
@@ -349,10 +480,28 @@ export class DataFrame {
     }
   }
   
-
+  head(n_first) {
+  
+  }
+  
+  tail(n_last) {
+  
+  }
+  
   /*
    * @private
    */
+  
+  // Index to ZYX..- coordinates
+  i2coord(index) {
+    return this._strides.map( (v,i) => Math.floor(index / v) % this._shape[i]);
+  }
+    
+  // ZYX..- coordinates to Index
+  coord2i(coords) {
+    return  coords.reduce( (accu,v,i) => accu + v * this._strides[i],0);
+  }
+
   _calcDimensions() {
     this._shape = tu.shape(this.data);
     this.strides = this._calcStrides(this._shape);
@@ -370,8 +519,59 @@ export class DataFrame {
 
   }
   
+  /*
+   * Get Data Types:
+   * 1 = boolean
+   * 4 = date
+   * 6 = category
+   * 8 = byte
+   * 16 = short - 16-bit integer (pixel value)
+   * 24 = rgb - 24-bit RGB (pixel value)
+   * 32 = float32 - 32-bit float (pixel value)
+   * 64 = number
+   */
+  _getDType(dtypes) {
+    const codes = {unknown: 0, bool:1, boolean:1, date:4, category:6, byte:8, short:16, rgb:24, float:32, float32:32, number:64};
+    if (Array.isArray(dtypes) ) {
+      this._dtypes = dtypes.map( v => codes[v]);
+    }
+    else {
+      // Same type for all the values in dataset.
+      // Set as a negative code
+      this._dtypes = -codes[dtypes];
+    }
+  }
+  
+  _getShape(arr) {
+    let accu = [arr.length];
+    let a = arr[0];
+    while (Array.isArray(a)) {
+      accu.push(a.length);
+      a = a[0];
+    }
+    return accu;
+  }
+  
   _fillWith(len,data) {
     Array.from({length: len}, (v,i) => data);
+  }
+  
+  _setData(data) {
+    //  Step #1: check object defined as column-first order
+    console.log(data instanceof Object);
+    if (data instanceof Object) {
+      this.from(data);
+      console.log(this._data);
+    }
+    //  Step #2: check N-dimensional array that must be flattened
+    else if (Array.isArray(data) ) {
+      this._shape = this._getShape(data);
+      this.fromMatrix(data);
+    }
+    else {
+
+    }
+    return new Float32Array(data);
   }
   
 } // End of class DataFrame
