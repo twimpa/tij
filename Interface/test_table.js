@@ -1,4 +1,4 @@
-function ajouterLigne(titre,nom)
+function ajouterLigne(titre,nom) 
 {
 	var tableau = document.getElementById("tableau");
 
