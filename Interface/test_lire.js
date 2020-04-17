@@ -3,7 +3,7 @@ function load_csv(event) {
     fetch();
     then(response);
     let text = response.text();
-    parseCSV(text);
+    parseCSV(text); 
 }
 
 let button = document.querySelector('#script');
