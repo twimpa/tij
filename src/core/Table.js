@@ -56,10 +56,17 @@ export class Table {
     this.element.appendChild(thead);
     this.element.appendChild(tbody);
     this.element.appendChild(tfoot);
-    container.appendChild(this.element);
     
     this._setHeading(thead);
     this._setRows(tbody);
+    
+    if (container !== null) {
+      container.appendChild(this.element);
+    }
+    else {
+      document.body.appendChild(this.element);
+    }
+
   }
   
   // Private
