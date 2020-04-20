@@ -25,9 +25,9 @@
 'use strict';
 
 
-let table = new ResultsTable(10);
-table.addValue('Area',100);
-table.addValue('Area',101);
-table.addValue('Feret',200.54);
-table.show('Results001');
+let table001 = new ResultsTable(10);
+table001.addValue('Area',100);
+table001.addValue('Area',101);
+table001.addValue('Feret',200.54);
+table001.show('Table001');
 
