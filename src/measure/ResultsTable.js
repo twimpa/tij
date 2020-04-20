@@ -52,6 +52,7 @@ export class ResultsTable {
     this.nRows = nRows;
     this.nColumns = 0;
     this.headings = [];
+    this.labels = [];
     this.title = 'undefined';
     
     // ALl we need to display the ResultsTable in HTML
@@ -59,6 +60,7 @@ export class ResultsTable {
     
     // Add data2d for data storage
     this.dataset = []; 
+    
   };
 
   /**
@@ -561,10 +563,15 @@ export class ResultsTable {
    * Increments the measurement counter by one.
    * 
    * 
-   * @author Created by ijdoc2js
+   * @author Created by Jean-Christophe Taveau
    */
   incrementCounter() {
-    throw "Not Implemented - ResultsTable.incrementCounter(..)";
+    // Add a new row and fill all the columns by 0 (zero)
+    this.nRows++;
+    this.labels.push(this.getCounter() + 1);
+    for (let i = 0; i < this.headings.length; i++) {
+      this.dataset[i].push(0);
+    }
   };
 
   /**
@@ -575,7 +582,7 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   getCounter() {
-    throw "Not Implemented - ResultsTable.getCounter(..)";
+    return this.nRows - 1;
   };
 
   /**
@@ -602,38 +609,25 @@ export class ResultsTable {
   addValue(column_or_heading, value) {
   
     // Private
-    const addColumns = (head) => {
+    const addColumn = (head) => {
       this.nColumns++;
       // Add a new empty column...
-      this.dataset.push([]);
-      for(let i = 0; i < this.nRows; i++){
-          this.dataset[this.dataset.length - 1].push(0);
-      }
+      this.dataset.push(new Array(this.nRows).fill(0));
       this.headings.push(head);
     };
     
     // Step #1 - Get column index
-    // string, int
     let col_index = (typeof(column_or_heading) === 'number') ? column_or_heading : this.getColumnIndex(column_or_heading);
     let col_heading = (typeof(column_or_heading) === 'string') ? column_or_heading : `C${column_or_heading}`;
 
     // Step #2 - Check if column already exists or must be created
     if (this.columnExists(col_index) === false) { 
-      addColumns(col_heading);
+      addColumn(col_heading);
       col_index = this.headings.length - 1;
     }
 
     // Step #3 - Set value to the given column index
-    
-    // Wrong: When the value doesn't belong to the 1st column, the value is replaced in the last row
-    // CHECK:
-    // table.addValue('A',1);
-    // table.addValue('B',10);
-    // table.addValue('B',20);
-    
-    console.log(column_or_heading,this.headings,col_index,value);
-    this.dataset[col_index].push(value);
-    this.nRows++;
+    this.dataset[col_index][this.getCounter()] = value;
   };
 
   /**
@@ -662,8 +656,8 @@ export class ResultsTable {
 
   /**
    * Adds a label to the beginning of the specified row, 
- * or updates an existing lable, where 0show()
- * to update the window displaying the table.
+   * or updates an existing label, where 0show()
+   * to update the window displaying the table.
    * 
    * @param {java.lang.String} label - 
    * @param {int} row - 
@@ -705,7 +699,7 @@ export class ResultsTable {
 
   /**
    * Returns a copy of the given column as a double array,
- * or null if the column is empty.
+   * or null if the column is empty.
    * 
    * @param {int} column - 
    * @return double[]
@@ -743,7 +737,7 @@ export class ResultsTable {
 
   /**
    * Returns the index of the first column with the given heading.
- * heading. If not found, returns COLUMN_NOT_FOUND.
+   * heading. If not found, returns COLUMN_NOT_FOUND.
    * 
    * @param {jString} heading - 
    * @return int
@@ -923,10 +917,10 @@ export class ResultsTable {
 
   /**
    * Sets the value of the given column and row, where
- * where 0&lt;=row&lt;size(). If the specified column does 
- * not exist, it is created. When adding columns, 
- * <code>show()</code> must be called to update the 
- * window that displays the table.
+   * where 0&lt;=row&lt;size(). If the specified column does 
+   * not exist, it is created. When adding columns, 
+   * <code>show()</code> must be called to update the 
+   * window that displays the table.
    * 
    * @param {java.lang.String} column - 
    * @param {int} row - 
@@ -954,10 +948,10 @@ export class ResultsTable {
 
   /**
    * Sets the string value of the given column and row, where
- * where 0&lt;=row&lt;size(). If the specified column does 
- * not exist, it is created. When adding columns, 
- * <code>show()</code> must be called to update the 
- * window that displays the table.
+   * where 0&lt;=row&lt;size(). If the specified column does 
+   * not exist, it is created. When adding columns, 
+   * <code>show()</code> must be called to update the 
+   * window that displays the table.
    * 
    * @param {java.lang.String} column - 
    * @param {int} row - 
@@ -971,7 +965,7 @@ export class ResultsTable {
 
   /**
    * Sets the string value of the given column and row, where
- * where 0&lt;=column&lt;=(lastRow+1 and 0&lt;=row&lt;=size().
+   * where 0&lt;=column&lt;=(lastRow+1 and 0&lt;=row&lt;=size().
    * 
    * @param {int} column - 
    * @param {int} row - 
@@ -1008,10 +1002,10 @@ export class ResultsTable {
    * 
    * @return java.lang.String[]
    * 
-   * @author Created by ijdoc2js
+   * @author Jean-Christophe Taveau
    */
   getHeadings() {
-    throw "Not Implemented - ResultsTable.getHeadings(..)";
+    return this.headings;
   };
 
   /**
