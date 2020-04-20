@@ -89,7 +89,7 @@ describe('ResultsTable', function () {
       let table = new ResultsTable(10);
       table.show('MyTable');
       table.addValue(0,98); 
-      const result = table.getValue('C1',9);
+      const result = table.getValue(0,9);
       expect(result).toBe(98);
     });
 
@@ -260,12 +260,19 @@ describe('getColumnHeadings() => String', function () {
 
 
   describe('getValue(String column, int row) => int', function () {
-    it('Should return the value of the specified column and row', function () {
+    it('(string, number) => Should return the value of the specified column and row', function () {
       let table = new ResultsTable(2);
       table.addValue('A',99);
       table.show('MyTable');
       const result = table.getValue("A",1);
       expect(result).toBe(99);
+    });
+    it('(number, number) => Should return the value of the specified column and row', function () {
+      let table = new ResultsTable(1);
+      table.addValue('A',999);
+      table.show('MyTable');
+      const result = table.getValue(0,0);
+      expect(result).toBe(999);
     });
   });
 

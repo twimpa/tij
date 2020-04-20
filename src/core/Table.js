@@ -50,9 +50,12 @@ export class Table {
     // TODO
     let container = document.getElementById('workspace');
     // TODO Fill the HTML table
+    let caption = document.createElement('caption');
+    caption.textContent = this.table_data.getTitle();
     let thead = document.createElement('thead');
     let tbody = document.createElement('tbody'); 
     let tfoot = document.createElement('tfoot'); 
+    this.element.appendChild(caption);
     this.element.appendChild(thead);
     this.element.appendChild(tbody);
     this.element.appendChild(tfoot);

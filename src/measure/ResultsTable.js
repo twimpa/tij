@@ -567,11 +567,11 @@ export class ResultsTable {
    */
   incrementCounter() {
     // Add a new row and fill all the columns by 0 (zero)
-    this.nRows++;
     this.labels.push(this.getCounter() + 1);
     for (let i = 0; i < this.headings.length; i++) {
       this.dataset[i].push(0);
     }
+    this.nRows++;
   };
 
   /**
@@ -582,7 +582,7 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   getCounter() {
-    return this.nRows - 1;
+    return this.nRows;
   };
 
   /**
@@ -613,12 +613,13 @@ export class ResultsTable {
       this.nColumns++;
       // Add a new empty column...
       this.dataset.push(new Array(this.nRows).fill(0));
+      this.labels = Array.from({length: this.nRows}, (_,i) => [i,i+1]);
       this.headings.push(head);
     };
     
     // Step #1 - Get column index
     let col_index = (typeof(column_or_heading) === 'number') ? column_or_heading : this.getColumnIndex(column_or_heading);
-    let col_heading = (typeof(column_or_heading) === 'string') ? column_or_heading : `C${column_or_heading}`;
+    let col_heading = (typeof(column_or_heading) === 'string') ? column_or_heading : `C${column_or_heading + 1}`;
 
     // Step #2 - Check if column already exists or must be created
     if (this.columnExists(col_index) === false) { 
@@ -627,7 +628,7 @@ export class ResultsTable {
     }
 
     // Step #3 - Set value to the given column index
-    this.dataset[col_index][this.getCounter()] = value;
+    this.dataset[col_index][this.getCounter() - 1] = value;
   };
 
   /**
@@ -772,9 +773,9 @@ export class ResultsTable {
 
   /**
    * Returns the value of the given column and row, where
- * column must be less than or equal the value returned by
- * getLastColumn() and row must be greater than or equal
- * zero and less than the value returned by size().
+   * column must be less than or equal the value returned by
+   * getLastColumn() and row must be greater than or equal
+   * zero and less than the value returned by size().
    * 
    * @param {int} column - 
    * @param {int} row - 
@@ -783,45 +784,33 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   getValueAsDouble(column, row) {
-    throw "Not Implemented - ResultsTable.getValueAsDouble(..)";
-  };
-
-  /**
-   * <span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">replaced by getValueAsDouble</span>
-   * 
-   * @deprecated .</span>&nbsp;<span class="deprecationComment">replaced by getValueAsDouble</span>
-   * @param {int} column - 
-   * @param {int} row - 
-   * @return float
-   * 
-   * @author Created by ijdoc2js
-   */
-  getValue(column, row) {
-    throw "Not Implemented - ResultsTable.getValue(..)";
+    return this.getValue(column,row);
   };
 
   /**
    * Returns the value of the specified column and row, where
- * column is the column heading and row is a number greater
- * than or equal zero and less than value returned by size(). 
- * Throws an IllegalArgumentException if this ResultsTable
- * does not have a column with the specified heading.
+   * column is the column heading and row is a number greater
+   * than or equal zero and less than value returned by size(). 
+   * Throws an IllegalArgumentException if this ResultsTable
+   * does not have a column with the specified heading.
    * 
-   * @param {java.lang.String} column - 
+   * @param {number or String} column - column index or column headings
    * @param {int} row - 
    * @return double
    * 
-   * @author Created by ijdoc2js
+   * @author ???
+   * @author Jean-Christophe Taveau
    */
-  getValue(column, row) {
-    let index;
-    for (let i=0; i<this.headings.length; i++){
-        if(this.headings[i] === column){
-          index = i;
-        }
+  getValue(column_or_heading, row) {
+
+    // Step #1 - Get column index
+    let col_index = (typeof(column_or_heading) === 'number') ? column_or_heading : this.getColumnIndex(column_or_heading);
+
+    if (col_index === ResultsTable.COLUMN_NOT_FOUND) {
+      throw new IllegalArgumentException();
     }
-    let value = this.dataset[index][row];
-    return value;
+    
+    return this.dataset[col_index][row];
   };
 
   /**
