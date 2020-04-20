@@ -52,7 +52,7 @@ export class Table {
     // TODO Fill the HTML table
     let thead = document.createElement('thead');
     let tbody = document.createElement('tbody'); 
-    let tfoot = document.createElement('tfooter'); 
+    let tfoot = document.createElement('tfoot'); 
     this.element.appendChild(thead);
     this.element.appendChild(tbody);
     this.element.appendChild(tfoot);
