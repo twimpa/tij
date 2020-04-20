@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Tiny ImageJ GUI</title>
+    <link rel="stylesheet" href="css/tij_gui.css">
+  </head>
+
+  <body>
+    <div id="menu">
+      <label for="load_script">UploadScript</label>
+      <input id="load_script" type="file" accepted=".js" multiple>
+
+      <label for="load_data">UploadData</label>
+      <input id="load_data" type="file" accept="image/*" onchange= "UploadIMG(event)" multiple>
+
+      <label for="run">Run</label>
+      <input id="run" type="checkbox">
+
+    </div>
+    
+    <section id = "block1">
+      <div id = "inside">
+      
+        <div class="input">
+          <input type="file" accept="image/*" onchange="loadFile(event)">
+          <img id="output"/>
+
+        </div>
+        
+        <div class = "js">
+        js
+        </div>
+      </div>
+      
+    <div class= "result">
+    result
+    </div>
+    </section>
+  
+  <script type="text/javascript">
+  </script>
+  </body>
+</html>
+

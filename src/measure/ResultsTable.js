@@ -34,6 +34,9 @@
  * ResultsTable used by the <i>Analyze/Measure</i> command.
 */
 
+import {Table} from '../core/Table';
+
+
 export class ResultsTable {
   /**
    * Constructs a ResultsTable with 'nRows' rows.
@@ -52,7 +55,7 @@ export class ResultsTable {
     this.title = 'undefined';
     
     // ALl we need to display the ResultsTable in HTML
-    this.table = new Table();
+    this.table = new Table(this);
     
     // Add data2d for data storage
     this.dataset = []; 
@@ -66,7 +69,7 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   static get COLUMN_NOT_FOUND () {
-    return 0;
+    return -1;
   };
 
   /**
@@ -565,21 +568,6 @@ export class ResultsTable {
   };
 
   /**
-   * Obsolete; the addValue() method automatically adds columns as needed.
-   * 
-   * 
-   * @author Created by ijdoc2js
-   */
-  addColumns() {
-    this.nColumns++;
-    this.dataset.push([]);
-    for(let i = 0; i<this.nRows; i++){
-        this.dataset[this.nColumns - 1].push(0);
-    }
-    this.headings.push("C" + [this.nColumns.toString()]);
-  };
-
-  /**
    * Returns the current value of the measurement counter.
    * 
    * @return int
@@ -612,35 +600,40 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   addValue(column_or_heading, value) {
+  
+    // Private
+    const addColumns = (head) => {
+      this.nColumns++;
+      // Add a new empty column...
+      this.dataset.push([]);
+      for(let i = 0; i < this.nRows; i++){
+          this.dataset[this.dataset.length - 1].push(0);
+      }
+      this.headings.push(head);
+    };
+    
+    // Step #1 - Get column index
     // string, int
-    if(typeof(column_or_heading) === 'string') {
-      // Use getColumnIndex(heading) instead
-      for (let i=0; i<this.headings.length; i++) {
-        if(this.headings[i] === column){
-                  index = i;
-        }
-      }
+    let col_index = (typeof(column_or_heading) === 'number') ? column_or_heading : this.getColumnIndex(column_or_heading);
+    let col_heading = (typeof(column_or_heading) === 'string') ? column_or_heading : `C${column_or_heading}`;
 
-      if(this.headings.includes(column) === true) { // USELESS
-        this.dataset[index][this.nRows - 1] = value;
-      }
-      else {
-        this.addColumns(); // OBSOLETE 
-        this.headings[this.nColumns - 1] = column;
-        this.dataset[this.nColumns - 1][this.nRows - 1] = value;
-      }
+    // Step #2 - Check if column already exists or must be created
+    if (this.columnExists(col_index) === false) { 
+      addColumns(col_heading);
+      col_index = this.headings.length - 1;
     }
 
-    // int, int
-    if (typeof(column) === 'number'){
-      let number = column-(this.dataset.length-1);
-      if (typeof(this.dataset[column]) === 'undefined'){
-        for (let i=0; i<number; i++) {
-          this.addColumns(); // OBSOLETE 
-        }
-      }
-      this.dataset[column][this.nRows - 1] = value;
-    }
+    // Step #3 - Set value to the given column index
+    
+    // Wrong: When the value doesn't belong to the 1st column, the value is replaced in the last row
+    // CHECK:
+    // table.addValue('A',1);
+    // table.addValue('B',10);
+    // table.addValue('B',20);
+    
+    console.log(column_or_heading,this.headings,col_index,value);
+    this.dataset[col_index].push(value);
+    this.nRows++;
   };
 
   /**
@@ -746,41 +739,33 @@ export class ResultsTable {
     throw "Not Implemented - ResultsTable.createTableFromImage(..)";
   };
 
-  /**
-   * Returns true if the specified column exists and is not empty.
-   * 
-   * @param {int} column - 
-   * @return boolean
-   * 
-   * @author Created by ijdoc2js
-   */
-  columnExists(column) {
-    "Not Implemented - ResultsTable.getValueAsDouble(..)"
-  };
+
 
   /**
    * Returns the index of the first column with the given heading.
  * heading. If not found, returns COLUMN_NOT_FOUND.
    * 
-   * @param {java.lang.String} heading - 
+   * @param {jString} heading - 
    * @return int
    * 
    * @author Created by ijdoc2js
    */
   getColumnIndex(heading) {
+  /*
     let index;
-        for (let i=0; i<this.headings.length; i++){
-            if(this.headings[i] === heading){
-                index = i;
-            }
-        }
-        return index;
+    for (let i=0; i<this.headings.length; i++){
+      if(this.headings[i] === heading) {
+        index = i;
+      }
+    }
+    */
+    return this.headings.indexOf(heading);
   };
 
   /**
    * Sets the heading of the the first available column and
- * returns that column's index. Returns COLUMN_IN_USE
- * if this is a duplicate heading.
+   * returns that column's index. Returns COLUMN_IN_USE
+   * if this is a duplicate heading.
    * 
    * @param {java.lang.String} heading - 
    * @return int
@@ -848,11 +833,18 @@ export class ResultsTable {
   /**
    * Returns 'true' if the specified column exists and is not emptly.
    * 
-   * @param {java.lang.String} column - 
+   * @param {number or string} column - Column index or column Headings
    * @return boolean
    * 
-   * @author Created by ijdoc2js
+   * @author ??
+   * @author Jean-Christophe Taveau
    */
+  columnExists(column) {
+    let col_index = (typeof(column) === 'number') ? column : this.getColumnIndex(column);
+    return (this.dataset[col_index]) ? true : false;
+  };
+  
+/*
   columnExists(column) {
     //string
     if(typeof(column) === 'string'){
@@ -872,6 +864,8 @@ export class ResultsTable {
       return false;
   }
   };
+*/
+
 
   /**
    * Returns the string value of the given column and row,
@@ -1281,7 +1275,9 @@ export class ResultsTable {
    */
   show(windowTitle) {
     this.title = windowTitle;
+
     // TODO display the ResultsTable
+    this.table.show(windowTitle);
   };
 
   /**

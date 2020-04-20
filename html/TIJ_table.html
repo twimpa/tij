@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Tiny ImageJ GUI</title>
+    <link rel="stylesheet" href="css/tij_gui.css">
+    <script type="text/javascript" src="../dist/tij.js"></script>
+  </head>
+
+  <body>
+    <h2>Tiny ImageJ</h2>
+    <section id = "workspace">
+
+    </section>
+  
+  <script type="text/javascript">
+    let table = new ResultsTable(10);
+    table.addValue('Area',100);
+    table.addValue('Area',101);
+    table.addValue('Feret',200.54);
+    table.show('Results001');
+  </script>
+  </body>
+</html>
+

@@ -36,16 +36,57 @@ export class Table {
   /**
    * @constructor
    */
-  constructor() {
+  constructor(table) {
     // TODO
     console.info('core/Table created');
+    this.table_data = table;
+    this.element = document.createElement('table');
   }
 
   /**
    * Display a table in a HTML5 page
    */
-  show() {
+  show(title) {
     // TODO
+    let container = document.getElementById('workspace');
+    // TODO Fill the HTML table
+    let thead = document.createElement('thead');
+    let tbody = document.createElement('tbody'); 
+    let tfoot = document.createElement('tfooter'); 
+    this.element.appendChild(thead);
+    this.element.appendChild(tbody);
+    this.element.appendChild(tfoot);
+    container.appendChild(this.element);
+    
+    this._setHeading(thead);
+    this._setRows(tbody);
+  }
+  
+  // Private
+  _setHeading(parent) {
+    let headings = this.table_data.headings;
+    let html = '<tr>';
+    for (let h of headings) {
+      html += `<th>${h}</th>`;
+    }
+    html +='</tr>';
+    parent.innerHTML = html;
+  }
+  
+  _setRows(parent) {
+    let nColumns = this.table_data.nColumns;
+    let nRows = this.table_data.size();
+    let dataset = this.table_data.dataset;
+    let html='';
+    for (let row=0; row < nRows; row++) {
+        html += '<tr>';
+      for (let col=0; col < nColumns; col++) {
+        let v = dataset[col][row];
+        html += `<td>${v}</td>`;
+      }
+      html +='</tr>';
+    }
+    parent.innerHTML = html;
   }
   
 } // End of class Table
