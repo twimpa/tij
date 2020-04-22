@@ -643,19 +643,6 @@ export class ResultsTable {
   };
 
   /**
-   * <span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">Replaced by setValue(String,int,String)</span>
-   * 
-   * @deprecated .</span>&nbsp;<span class="deprecationComment">Replaced by setValue(String,int,String)</span>
-   * @param {java.lang.String} columnHeading - 
-   * @param {java.lang.String} label - 
-   * 
-   * @author Created by ijdoc2js
-   */
-  addLabel(columnHeading, label) {
-    throw "Not Implemented - ResultsTable.addLabel(..)";
-  };
-
-  /**
    * Adds a label to the beginning of the specified row, 
    * or updates an existing label, where 0show()
    * to update the window displaying the table.
@@ -875,7 +862,7 @@ export class ResultsTable {
    * @param {int} row - 
    * @return java.lang.String
    * 
-   * @author Created by ijdoc2js
+   * @author Created by Caroline Meguerditchian
    */
   getStringValue(column, row) {
     //string, int
@@ -971,7 +958,7 @@ export class ResultsTable {
    * 
    * @return java.lang.String
    * 
-   * @author Created by ijdoc2js
+   * @author Created by Caroline Meguerditchian
    */
   getColumnHeadings() {
     let heading_str = "";
@@ -1003,7 +990,7 @@ export class ResultsTable {
    * @param {int} column - 
    * @return java.lang.String
    * 
-   * @author Created by ijdoc2js
+   * @author Created by Caroline Meguerditchian
    */
   getColumnHeading(column) {
     if(column > this.nColumns - 1){
@@ -1048,19 +1035,6 @@ export class ResultsTable {
    */
   setColumn(column, array) {
     throw "Not Implemented - ResultsTable.setColumn(..)";
-  };
-
-  /**
-   * <span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">Replaced by addValue(String,double) and setValue(String,int,double)</span>
-   * 
-   * @deprecated .</span>&nbsp;<span class="deprecationComment">Replaced by addValue(String,double) and setValue(String,int,double)</span>
-   * @param {int} column - 
-   * @param {java.lang.String} heading - 
-   * 
-   * @author Created by ijdoc2js
-   */
-  setHeading(column, heading) {
-    throw "Not Implemented - ResultsTable.setHeading(..)";
   };
 
   /**
@@ -1146,7 +1120,7 @@ export class ResultsTable {
    * 
    * @param {int} rowIndex - 
    * 
-   * @author Created by ijdoc2js
+   * @author Created by Caroline Meguerditchian
    */
   deleteRow(rowIndex) {
     for(let i=0; i<this.dataset.length; i++){
@@ -1161,7 +1135,7 @@ export class ResultsTable {
    * @param {int} index1 - 
    * @param {int} index2 - 
    * 
-   * @author Created by ijdoc2js
+   * @author Created by Caroline Meguerditchian
    */
   deleteRows(index1, index2) {
     for(let i=0; i<index2-index1+1; i++){
@@ -1174,7 +1148,7 @@ export class ResultsTable {
    * 
    * @param {java.lang.String} column - 
    * 
-   * @author Created by ijdoc2js
+   * @author Created by Caroline Meguerditchian
    */
   deleteColumn(column) {
     let index;
@@ -1371,7 +1345,8 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   clone() {
-    throw "Not Implemented - ResultsTable.clone(..)";
+    let clone = this;
+    return clone;
   };
 
   /**
@@ -1460,4 +1435,3 @@ export class ResultsTable {
   };
 
 } // End of class ResultsTable
-
