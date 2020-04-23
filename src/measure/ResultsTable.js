@@ -670,7 +670,7 @@ export class ResultsTable {
 
   /**
    * Returns a copy of the given column as a float array,
- * or null if the column is empty.
+   * or null if the column is empty.
    * 
    * @param {int} column - 
    * @return float[]
@@ -678,13 +678,12 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   getColumn(column) {
-    if ((column <0) || (column >= this.nColumns))
-        {
-            throw ("Index out of range");
-        }
-        else{       
-            return this.dataset[column];
-        }
+    if ((column < 0) || (column >= this.nColumns)) {
+      throw ("Index out of range");
+    }
+    else {
+        return this.dataset[column];
+    }
   };
 
   /**
@@ -722,7 +721,6 @@ export class ResultsTable {
   createTableFromImage(ip) {
     throw "Not Implemented - ResultsTable.createTableFromImage(..)";
   };
-
 
 
   /**
@@ -794,14 +792,14 @@ export class ResultsTable {
 
     // Step #1 - Get column index
     let col_index = (typeof(column_or_heading) === 'number') ? column_or_heading : this.getColumnIndex(column_or_heading);
-
+    // Step #2 - Check Boundaries
     if (col_index === ResultsTable.COLUMN_NOT_FOUND) {
       throw new IllegalArgumentException(`"${column_or_heading}" column not found`);
     }
     if (row < 0 || row > this.size()) {
       throw new IllegalArgumentException('Row out of range');
     }
-    
+    // Step #3 - Return value
     return this.dataset[col_index][row];
   };
 
