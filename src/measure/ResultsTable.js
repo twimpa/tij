@@ -1173,7 +1173,8 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   renameColumn(oldName, newName) {
-    throw "Not Implemented - ResultsTable.renameColumn(..)";
+    let index_oldName = this.getColumnIndex(oldName);
+    this.headings[index_oldName]=newName;
   };
 
   /**
