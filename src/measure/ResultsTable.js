@@ -553,10 +553,10 @@ export class ResultsTable {
    * 
    * @return TextWindow
    * 
-   * @author Created by ijdoc2js
+   * @author Jean-Christophe Taveau
    */
   getResultsWindow() {
-    throw "Not Implemented - ResultsTable.getResultsWindow(..)";
+    return this.table;
   };
 
   /**
@@ -601,8 +601,8 @@ export class ResultsTable {
    * Adds a string or a numeric value to the end of the given column. If the column
    * does not exist, it is created.
    * 
-   * @param {java.lang.String} column - defined as a heading (String) or as the column number
-   * @param {java.lang.String} value - may be a String or a number
+   * @param {String | Number} column - defined as a heading (String) or as the column number
+   * @param {String | Number} value - may be a String or a number
    * 
    * @author Created by ijdoc2js
    */
@@ -616,6 +616,8 @@ export class ResultsTable {
       this.labels = Array.from({length: this.nRows}, (_,i) => [i,i+1]);
       this.headings.push(head);
     };
+    
+    // M A I N
     
     // Step #1 - Get column index
     let col_index = (typeof(column_or_heading) === 'number') ? column_or_heading : this.getColumnIndex(column_or_heading);
@@ -639,19 +641,6 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   addLabel(label) {
-    throw "Not Implemented - ResultsTable.addLabel(..)";
-  };
-
-  /**
-   * <span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">Replaced by setValue(String,int,String)</span>
-   * 
-   * @deprecated .</span>&nbsp;<span class="deprecationComment">Replaced by setValue(String,int,String)</span>
-   * @param {java.lang.String} columnHeading - 
-   * @param {java.lang.String} label - 
-   * 
-   * @author Created by ijdoc2js
-   */
-  addLabel(columnHeading, label) {
     throw "Not Implemented - ResultsTable.addLabel(..)";
   };
 
@@ -806,7 +795,7 @@ export class ResultsTable {
     // Step #1 - Get column index
     let col_index = (typeof(column_or_heading) === 'number') ? column_or_heading : this.getColumnIndex(column_or_heading);
 
-    if (col_index === ResultsTable.COLUMN_NOT_FOUND) {
+    if (col_index === ResultsTable.COLUMN_NOT_FOUND || row < 0 || row > this.size()) {
       throw new IllegalArgumentException();
     }
     
