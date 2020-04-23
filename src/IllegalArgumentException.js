@@ -24,36 +24,11 @@
 
 'use strict';
 
-// Check if we are running this script in ImageJ or a browser
 
-if (typeof(IJ) !== 'undefined') {
-  console = {
-    info: (msg) => {
-      print('ⓘ ' + msg);
-    }
+export class IllegalArgumentException extends Error {
+  constructor(message) {
+    super(message);
   }
-}
+} // End of class IllegalArgumentException
 
-// Main
-
-let table002 = new ResultsTable(10);
-table002.addValue(0,98); 
-// Add values
-const result1 = table002.getValue('C1',9);
-const result2 = table002.getValue(0,9);
-console.info(`${result1} ${result2}`);
-// Check wrong parameters
-try {
-  const result3 = table002.getValue('Area',9);
-} catch (exception) {
-  console.info(exception);
-}
-try {
-  const result4 = table002.getValue('C1',12);
-} catch (exception) {
-  console.info(exception);
-}
-
-
-table002.show('Table002');
 

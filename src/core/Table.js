@@ -83,6 +83,7 @@ export class Table {
     parent.innerHTML = html;
   }
   
+  // Private
   _setRows(parent) {
     let nColumns = this.table_data.nColumns;
     let nRows = this.table_data.size();

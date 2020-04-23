@@ -35,7 +35,7 @@
 */
 
 import {Table} from '../core/Table';
-
+import {IllegalArgumentException} from '../IllegalArgumentException.js';
 
 export class ResultsTable {
   /**
@@ -795,8 +795,11 @@ export class ResultsTable {
     // Step #1 - Get column index
     let col_index = (typeof(column_or_heading) === 'number') ? column_or_heading : this.getColumnIndex(column_or_heading);
 
-    if (col_index === ResultsTable.COLUMN_NOT_FOUND || row < 0 || row > this.size()) {
-      throw new IllegalArgumentException();
+    if (col_index === ResultsTable.COLUMN_NOT_FOUND) {
+      throw new IllegalArgumentException(`"${column_or_heading}" column not found`);
+    }
+    if (row < 0 || row > this.size()) {
+      throw new IllegalArgumentException('Row out of range');
     }
     
     return this.dataset[col_index][row];
@@ -856,9 +859,9 @@ export class ResultsTable {
 
   /**
    * Returns the string value of the given column and row, where
- * column must be less than or equal the value returned by
- * getLastColumn() and row must be greater than or equal
- * zero and less than the value returned by size().
+   * column must be less than or equal the value returned by
+   * getLastColumn() and row must be greater than or equal
+   * zero and less than the value returned by size().
    * 
    * @param {int} column - 
    * @param {int} row - 
