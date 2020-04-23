@@ -54,6 +54,10 @@ try {
   console.info(exception);
 }
 
+// Return null if index out of range
+const result5 = table002.getColumn(2);
+console.info(result5);
+
 
 table002.show('Table002');
 

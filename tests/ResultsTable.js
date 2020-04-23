@@ -96,9 +96,9 @@ describe('ResultsTable', function () {
     it('(string,string) => should add a <string> of the last row of the column', function () {
       let table = new ResultsTable(10);
       table.show('MyTable');
-      table.addValue('D', 'Un');
+      table.addValue('D', 'One');
       const result = table.getStringValue('D',9);
-      expect(result).toBe('Un');
+      expect(result).toBe('One');
     });
   });
 
@@ -106,17 +106,17 @@ describe('ResultsTable', function () {
     it('(string, number) => should return a <string> at (column,row)', function () {
       let table = new ResultsTable(10);
       table.show('MyTable');
-      table.addValue('D', 'Un');
+      table.addValue('D', 'One');
       const result = table.getStringValue('D',9);
-      expect(result).toBe('Un');
+      expect(result).toBe('One');
     });
 
     it('(number, number) => should return a <string>  at (column,row)', function () {
       let table = new ResultsTable(10);
       table.show('MyTable');
-      table.addValue('D', 'Un');
+      table.addValue('D', 'One');
       const result = table.getStringValue(0,9);
-      expect(result).toBe('Un');
+      expect(result).toBe('One');
     });
   });
   
@@ -124,7 +124,7 @@ describe('ResultsTable', function () {
     it('should return true if the column exists and false otherwise', function () {
       let table = new ResultsTable(10);
       table.show('MyTable');
-      table.addValue('D', 'Un');
+      table.addValue('D', 'One');
       const result = table.columnExists('D');
       expect(result).toBe(true);
     });
@@ -135,19 +135,18 @@ describe('ResultsTable', function () {
       let table = new ResultsTable(10);
       table.show('MyTable');
       table.addValue(1, 98);
-      table.addValue('D', 'Un');
+      table.addValue('D', 'One');
       const result = table.columnExists(0);
       expect(result).toBe(true);
     });
   });
 
 
-
   describe('deleteColumn(String column) => ', function () {
     it('should delete the column ', function () {
       let table = new ResultsTable(10);
       table.show('MyTable');
-      table.addValue('D', 'Un');
+      table.addValue('D', 'One');
       table.deleteColumn('D');
       const result = table.columnExists('D');
       expect(result).toBe(false);
@@ -158,7 +157,7 @@ describe('ResultsTable', function () {
     it('should return true if a column is deleted and false otherwise ', function () {
       let table = new ResultsTable(10);
       table.show('MyTable');
-      table.addValue('D', 'Un');
+      table.addValue('D', 'One');
       table.deleteColumn('D');
       const result = table.columnDeleted();
       expect(result).toBe(true);
@@ -169,7 +168,7 @@ describe('ResultsTable', function () {
     it('should delete the specified row', function () {
       let table = new ResultsTable(10);
       table.show('MyTable');
-      table.addValue('D', 'Un');
+      table.addValue('D', 'One');
       table.deleteColumn('D');
       table.deleteRow(9);
       const result = table.size();
@@ -181,7 +180,7 @@ describe('ResultsTable', function () {
     it('should delete the specified row', function () {
       let table = new ResultsTable(10);
       table.show('MyTable');
-      table.addValue('D', 'Un');
+      table.addValue('D', 'One');
       table.deleteColumn('D');
       table.deleteRows(7,8);
       const result = table.size();
@@ -201,60 +200,58 @@ describe('ResultsTable', function () {
   });
 
 
-describe('getColumnHeadings() => String', function () {
-    it('should return a tab or comma delimited string containing the column headings', function () {
-      let table = new ResultsTable(2);
-      table.addValue('A',99);
-      table.addValue('D', 'Un');
-      table.show('MyTable');
-      const result = table.getColumnHeadings();
-      expect(result).toBe("A	D");
+  describe('getColumnHeadings() => String', function () {
+      it('should return a tab or comma delimited string containing the column headings', function () {
+        let table = new ResultsTable(2);
+        table.addValue('A',99);
+        table.addValue('D', 'One');
+        table.show('MyTable');
+        const result = table.getColumnHeadings();
+        expect(result).toBe("A	D");
+      });
     });
+
+   describe('getColumnIndex() => int', function () {
+      it('Should return the index of the first column with the given heading', function () {
+        let table = new ResultsTable(2);
+        table.addValue('A',99);
+        table.addValue('D', 'One');
+        table.show('MyTable');
+        const result = table.getColumnIndex("A");
+        expect(result).toBe(0);
+      });
+    });
+
+
+   describe('getCounter() => int', function () {
+      it('should return the current value of the measurement counter', function () {
+        let table = new ResultsTable(2);
+        table.show('MyTable');
+        const result = table.getCounter();
+        expect(result).toBe(2);
+      });
+   });
+
+   describe('getLastColumn() => int', function () {
+      it('should return the index of the last used column, or -1 if no columns are used', function () {
+        let table = new ResultsTable(2);
+        table.addValue('A',99);
+        table.addValue('D', 'One');
+        table.show('MyTable');
+        const result = table.getLastColumn();
+        expect(result).toBe(1);
+   });
   });
-
-
-
- describe('getColumnIndex() => int', function () {
-    it('Should return the index of the first column with the given heading', function () {
-      let table = new ResultsTable(2);
-      table.addValue('A',99);
-      table.addValue('D', 'Un');
-      table.show('MyTable');
-      const result = table.getColumnIndex("A");
-      expect(result).toBe(0);
-    });
-  });
-
-
- describe('getCounter() => int', function () {
-    it('should return the current value of the measurement counter', function () {
-      let table = new ResultsTable(2);
-      table.show('MyTable');
-      const result = table.getCounter();
-      expect(result).toBe(2);
-    });
- });
-
- describe('getLastColumn() => int', function () {
-    it('should return the index of the last used column, or -1 if no columns are used', function () {
-      let table = new ResultsTable(2);
-      table.addValue('A',99);
-      table.addValue('D', 'Un');
-      table.show('MyTable');
-      const result = table.getLastColumn();
-      expect(result).toBe(1);
- });
-});
 
 
   describe('getRowAsString(int row) => string', function () {
     it('Should return a tab or comma delimited string representing the given row', function () {
       let table = new ResultsTable(2);
       table.addValue('A',99);
-      table.addValue('D', 'Un');
+      table.addValue('D', 'One');
       table.show('MyTable');
       const result = table.getRowAsString(1);
-      expect(result).toBe("99	Un");
+      expect(JSON.stringify(result)).toBe("99\tOne");
     });
   });
 
@@ -274,55 +271,73 @@ describe('getColumnHeadings() => String', function () {
       const result = table.getValue(0,0);
       expect(result).toBe(999);
     });
+    it('column not found => Should throw an Exception', function () {
+      const func = () => {
+        let table = new ResultsTable(1);
+        table.addValue('A',999);
+        table.show('MyTable');
+        return table.getValue('B',0);
+      }
+      expect(func).toThrow(new Error('"B" column not found'));
+    });
+    it('Row out of range => Should throw an Exception', function () {
+      const func = () => {
+        let table = new ResultsTable(1);
+        table.addValue('A',999);
+        table.show('MyTable');
+        return table.getValue('A',2);
+      }
+      expect(func).toThrow(new Error('Row out of range'));
+    });
   });
 
 
-describe('getValueAsDouble(int column, int row) => int', function () {
-  it('Should return the value of the specified column and row', function () {
-    let table = new ResultsTable(2);
-    table.addValue('A',99);
-    table.show('MyTable');
-    const result = table.getValueAsDouble(0,1);
-    expect(result).toBe(99);
+  describe('getValueAsDouble(int column, int row) => int', function () {
+    it('Should return the value of the specified column and row', function () {
+      let table = new ResultsTable(2);
+      table.addValue('A',99);
+      table.show('MyTable');
+      const result = table.getValueAsDouble(0,1);
+      expect(result).toBe(99);
+    });
   });
-});
 
 
 
-describe('clone() => Object', function () {
-  it('Should duplicate the ResultsTable', function () {
-    let table = new ResultsTable(2);
-    table.addValue('A',99);
-    table.show('MyTable');
-    let table_clone = table.clone();
-    const result = table_clone.size();
-    expect(result).toBe(2);
+  describe('clone() => Object', function () {
+    it('Should duplicate the ResultsTable', function () {
+      let table = new ResultsTable(2);
+      table.addValue('A',99);
+      table.show('MyTable');
+      let table_clone = table.clone();
+      const result = table_clone.size();
+      expect(result).toBe(2);
+    });
   });
-});
 
 
-describe('getColumn(int column) => float []', function () {
-  it('should return the specified column', function () {
-    let table = new ResultsTable(3);
-    table.setValue('A',1,99);
-    table.setValue('A',2,98);
-    table.show('MyTable');
-    const result = table.getColumn(0);
-    expect(result).toEqual([0,99,98]);
+  describe('getColumn(int column) => float []', function () {
+    it('should return the specified column', function () {
+      let table = new ResultsTable(3);
+      table.setValue('A',1,99);
+      table.setValue('A',2,98);
+      table.show('MyTable');
+      const result = table.getColumn(0);
+      expect(result).toEqual([0,99,98]);
+    });
   });
-});
 
 
-//donne le label par défaut 
-describe('getDefaultHeading(int index) => String', function () {
-  it('should return the default heading for a specified index', function () {
-    const result = ResultsTable.getDefaultHeading(0);
-    expect(result).toBe("Area");
+  //donne le label par défaut 
+  describe('getDefaultHeading(int index) => String', function () {
+    it('should return the default heading for a specified index', function () {
+      const result = ResultsTable.getDefaultHeading(0);
+      expect(result).toBe("Area");
+    });
   });
-});
 
 
- describe('sort(String column) => ', function () {
+  describe('sort(String column) => ', function () {
     it('should sort this table on the specified column, with string support', function () {
       let table = new ResultsTable(3);
       table.setValue('A',1,99);
@@ -333,7 +348,6 @@ describe('getDefaultHeading(int index) => String', function () {
       expect(result).toBe(99);
     });
   });
-
 
   
   describe('disableRowLabels()', function () {
@@ -420,7 +434,7 @@ describe('getDefaultHeading(int index) => String', function () {
     });
   });
 
-  describe(' #getColumnAsDoubles() => float[] / null', function(){
+  describe('getColumnAsDoubles() => float[] / null', function(){
     it('should return a copy of the given column as a double array, or null if the column is empty', function(){
         let table = new ResultsTable(4);
         table.addValue('B',99);
@@ -434,9 +448,9 @@ describe('getDefaultHeading(int index) => String', function () {
         const result = table.getColumnAsDoubles(0);
         expect(result).toEqual([0,0,0,99]);
     });
-});
+  });
 
-describe(' #setDecimalPlaces(int column, int digits', function(){
+  describe('setDecimalPlaces(int column, int digits', function(){
     it('should set the decimal places of a given column', function(){
         let table = new ResultsTable(4);
         table.addValue('B',99);
@@ -451,9 +465,9 @@ describe(' #setDecimalPlaces(int column, int digits', function(){
         const result = table.getColumnAsDoubles(0);
         expect(result).toEqual([0.000, 0.000, 0.000, 99.000]);
     });
-});
+  });
 
-describe(' #setHeading(int column, String heading', function(){
+  describe('setHeading(int column, String heading', function(){
     it('should set heading of a given column', function(){
         let table = new ResultsTable(4);
         table.addValue('B',99.8967);
@@ -469,9 +483,9 @@ describe(' #setHeading(int column, String heading', function(){
         const result = table.getHeadings();
         expect(result).toEqual(["Label","B","C2","3ème colonne"]);
     });
-});
+  });
 
-describe(' #getHeadings() => String[]', function(){
+  describe('getHeadings() => String[]', function(){
     it('should return the column headings as an array of Strings', function(){
         let table = new ResultsTable(4);
         table.addValue('B',99.8967);
@@ -486,9 +500,9 @@ describe(' #getHeadings() => String[]', function(){
         const result = table.getHeadings();
         expect(result).toEqual(["Label","B","C2","3ème colonne"]);
     });
-});
+  });
 
-describe(' #setPrecision(int precision)', function(){
+  describe('setPrecision(int precision)', function(){
     it('should set the decimal places that are used when this table is displayed', function(){
         let table = new ResultsTable(4);
         table.addValue('B',99);
@@ -503,81 +517,83 @@ describe(' #setPrecision(int precision)', function(){
         const result = table.getColumn(0);
         expect(result).toEqual([0.00, 0.00, 0.00, 99.00]);
     });
-}); 
+  }); 
 
-describe(' #renameColumn(String oldName, String newName', function(){
+  describe('renameColumn(String oldName, String newName', function(){
     it('should rename a given column', function(){
-        let table = new ResultsTable(4);
-        table.addValue('B',99);
-        table.addValue(1,98); 
-        table.addValue('D', 97);
-        table.setLabel('I',0);
-        table.setLabel('II',1);
-        table.setLabel('III',2);
-        table.addLabel('Last row');
-        table.getHeadings();
-        table.setHeading(2,"3ème colonne");
-        table.show('MyTable');
-        const rename_Column = table.renameColumn("C2","2ème colonne");
-        const result = table.getHeadings();
-        expect(result).toEqual(["Label", "B", "2ème colonne", "3ème colonne"]);
+      let table = new ResultsTable(4);
+      table.addValue('B',99);
+      table.addValue(1,98); 
+      table.addValue('D', 97);
+      table.setLabel('I',0);
+      table.setLabel('II',1);
+      table.setLabel('III',2);
+      table.addLabel('Last row');
+      table.getHeadings();
+      table.setHeading(2,"3ème colonne");
+      table.show('MyTable');
+      const rename_Column = table.renameColumn("C2","2ème colonne");
+      const result = table.getHeadings();
+      expect(result).toEqual(["Label", "B", "2ème colonne", "3ème colonne"]);
     });
-}); 
+  }); 
 
-describe(' #setValue(int column, int row, double value)', function(){
-    it('should set the value of the given column and row, where 0<=row<size()', function(){
+
+  describe('setValue( column, row, value)', function() {
+    it('(int,int, number) => should throw an "row>counter" Exception when row<size()', function(){
+      const func = () => {
         let table = new ResultsTable(4);
-        table.addValue('B',99);
-        table.addValue(1,98); 
-        table.addValue('D', 97);
-        const setValue = table.setValue(0,0,2.33);
+        table.setValue(3,5,1);
         table.show('MyTable');
-        const result = table.getValue("B",0);
-        expect(result).toBe(2.33);
+      }
+      expect(func).toThrow(new Error('row>counter'));
     });
-});
-
-describe(' #setValue(int column, int row, String value)', function(){
-    it('should set the string value of the given column and row, where 0<=column<=(lastRow+1 and 0<=row<=size()', function(){
+    
+    it('(int,int, number) => should throw an "out of range" Exception when 0<=row', function(){
+      const func = () => {
         let table = new ResultsTable(4);
-        table.addValue('B',99);
-        table.addValue(1,98); 
-        table.addValue('D', 97);
-        const set_value = table.setValue(1,0,"Un");
+        table.setValue(3,-10,1);
         table.show('MyTable');
-        const result = table.getStringValue(1,0);
-        expect(result).toBe("Un");
+      }
+      expect(func).toThrow(new Error(`-10`));
     });
-});
-
-describe(' #setValue(String column, int row, double value)', function(){
-    it('should set the value of the given column and row', function(){
-        let table = new ResultsTable(4);
-        table.addValue('B',99);
-        table.addValue(1,98); 
-        table.addValue('D', 97);
-        const set_value = table.setValue("D",0,5);
-        table.show('MyTable');
-        const result = table.getValue("D",0)
-        expect(result).toBe(5);
+    
+    it('(int,int, number) => should set the value of the given column and row, where 0<=row<size()', function(){
+      let table = new ResultsTable(4);
+      table.setValue(3,0,2.33);
+      table.show('MyTable');
+      let result = table.getValue(3,0);
+      expect(result).toBeCloseTo(2.33);
     });
-});
-
-describe(' #setValue(String column, int row, String value)', function(){
-    it('should set the value of the given dolumn and row', function(){
-        let table = new ResultsTable(4);
-        table.addValue('B',99);
-        table.addValue(1,98); 
-        table.addValue('D', 97);
-        const set_value = table.setValue("D",2,"Sept");
-        table.show('MyTable');
-        const result = table.getStringValue("D",2);
-        expect(result).toBe("Sept");
+    
+    it('(int,int,string) => should set the string value of the given column and row, where 0<=column<=lastRow+1 and 0<=row<=size()', function() {
+      let table = new ResultsTable(4);
+      table.setValue(1,0,"One");
+      table.show('MyTable');
+      let result = table.getStringValue(1,0);
+      expect(result).toBe("One");
     });
-});
+    
+    it('(string,int,int) => should set the value of the given column and row', function() {
+      let table = new ResultsTable();
+      table.setValue("A",0,10);
+      table.setValue("D",0,5);
+      table.show('MyTable');
+      let result = table.getValue("D",0);
+      expect(result).toBe(5);
+    });
+
+    it('(string,int,string) => should set the value of the given column and row', function() {
+      let table = new ResultsTable(4);
+      table.setValue("D",2,"Seven");
+      table.show('MyTable');
+      const result = table.getStringValue("D",2);
+      expect(result).toBe("Seven");
+    });
+  });
 
 
-});
+}); // End of tests for ResultsTable
 
 
 

@@ -70,7 +70,8 @@ const pass = (not,condition,msg) => {
 
 const fail = (e) => {
   // TODO must catch the exception
-  print(`${repeat(' ',TUNIT.level)}   ☐ not ok ${TUNIT.count++}: ${e}`);
+  let headspacing = repeat(' ',TUNIT.level);
+  print(`${headspacing}   ☐ not ok ${TUNIT.count++}: ${e}\n${headspacing}   ⮕ ${TUNIT.msg_error}`);
   TUNIT.failed++;
   return false;
 }
@@ -86,7 +87,14 @@ const assert = (condition) => {
 }
 
 const matchers = (exp) => ({
-  toBe: (assertion) => assert(exp === assertion),
+  toBe: (assertion) => {
+    TUNIT.msg_error = `Expected ${exp} to be ${assertion}.`;
+    assert(exp === assertion);
+  },
+  toBeCloseTo: (assertion,precision=2) => {
+    TUNIT.msg_error = `Expected ${exp.toFixed(precision)} to be close to ${assertion.toFixed(precision)}.`;
+    assert(exp.toFixed(precision) === assertion.toFixed(precision));
+  },
   toBeNaN: () => assert(isNaN(exp)),
   toEqual: (assertion) => {
     let flag = false;
@@ -97,6 +105,17 @@ const matchers = (exp) => ({
       flag = exp == assertion;
     }
     assert(flag);
+  },
+  toThrow: (assertion) => {
+    try {
+      exp();
+    }
+    catch (e) {
+      let err_assert = assertion.toString().split(':')[1].trim();
+      let err_exp = e.toString().split(':')[1].trim();
+      TUNIT.msg_error = `Expected function to throw Error: ${err_assert}, but it threw Error: ${err_exp}.`;
+      assert( err_assert === err_exp);
+    }
   },
   get not() {
     TUNIT.not = !TUNIT.not;
