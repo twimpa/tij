@@ -1187,7 +1187,8 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   reset() {
-    throw "Not Implemented - ResultsTable.reset(..)";
+    this.nRows = 0;
+    this.nColumns=0;
   };
 
   /**
@@ -1459,7 +1460,8 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   sort(column) {
-    throw "Not Implemented - ResultsTable.sort(..)";
+    let index = this.getColumnIndex(column);
+    this.dataset[index].sort();
   };
 
 } // End of class ResultsTable
