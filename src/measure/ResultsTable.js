@@ -1048,10 +1048,13 @@ export class ResultsTable {
    * Sets the headings used by the Measure command ("Area", "Mean", etc.).
    * 
    * 
-   * @author Created by ijdoc2js
+   * @author Created by Desquerre Emilie
    */
   setDefaultHeadings() {
-    throw "Not Implemented - ResultsTable.setDefaultHeadings(..)";
+    this.headings.splice(0,this.headings.length);
+    for (let i = 0; i < this.nColumns; i++) {
+      this.headings.push(ResultsTable.getDefaultHeading(i));
+    }
   };
 
   /**
@@ -1185,7 +1188,7 @@ export class ResultsTable {
   /**
    * 
    * 
-   * @author Created by ijdoc2js
+   * @author Created by Desquerre Emilie
    */
   reset() {
     this.nRows = 0;
@@ -1458,7 +1461,7 @@ export class ResultsTable {
    * 
    * @param {java.lang.String} column - 
    * 
-   * @author Created by ijdoc2js
+   * @author Created by Desquerre Emilie
    */
   sort(column) {
     let index = this.getColumnIndex(column);
