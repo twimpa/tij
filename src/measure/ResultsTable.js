@@ -1288,12 +1288,16 @@ export class ResultsTable {
       console.log('PARSE CSV');
       console.log(data);
       let table = new ResultsTable();
-      // Fill in table with data
+      // TODO Fill in table with data
+      table.incrementCounter();
+      table.addValue('A',10);
+      table.addValue('B',20);
+      // Send ResultsTable...
       return table;
     }
     
     // Main
-    fetch(path)
+    return fetch(path)
     .then(response => response.text())
     .then(txt => parseCSV(txt));
   };

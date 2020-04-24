@@ -40,5 +40,4 @@ for (let row = 0; row < 4; row++) {
 table000.show('Table000');
 
 
-document.getElementById('workspace').appendChild(document.createElement('hr'));
 

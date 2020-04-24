@@ -24,9 +24,29 @@
 
 'use strict';
 
-// const path = IJ.getDirectory('');
-let path='.';
-ResultsTable.open(path+'/Table003_labels_numbers.csv')
-  .then(table003 => table003.show('Table003') );
+// ImageJ Version
+const ij_open = () => {
+  const path = IJ.getDirectory('');
+  let table003 = ResultsTable.open(path+'/Table003_labels_numbers.csv');
+  table003.show('Table003');
+}
+
+
+// TIJ version
+const tij_open = async() => {
+  const path = '.';
+  let table003 = await ResultsTable.open(path+'/Table003_labels_numbers.csv');
+  await table003.show('Table003'); 
+}
+
+// Check if we are running this script in ImageJ or a browser
+if (typeof(IJ) === 'undefined') {
+  tij_open();
+}
+else {
+  ij_open();
+}
+  
+
 
 
