@@ -1166,6 +1166,7 @@ export class ResultsTable {
         }
         this.headings.splice([index],1);
         this.dataset.splice([index],1);
+    this.columnDeleted();
   };
 
   /**
@@ -1435,7 +1436,7 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   columnDeleted() {
-    throw "Not Implemented - ResultsTable.columnDeleted(..)";
+    return true;
   };
 
   /**
