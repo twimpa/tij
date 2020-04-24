@@ -370,13 +370,12 @@ describe('ResultsTable', function () {
 
   describe('sort(String column) => ', function () {
     it('should sort this table on the specified column, with string support', function () {
-      let table = new ResultsTable(3);
-      table.setValue('A',1,99);
-      table.setValue('A',2,98);
+      let table = new ResultsTable(2);
+      table.addValue('A',-1);
       table.sort('A');
       table.show('MyTable');
-      const result = table.getValue("A",2);
-      expect(result).toBe(99);
+      const result = table.getValue("A",1);
+      expect(result).toBe(0);
     });
   });
 
@@ -420,9 +419,9 @@ describe('ResultsTable', function () {
   describe('reset() => ', function () {
     it('Should return an empty table', function () {
       let table = new ResultsTable(3);
-      table.setValue('A',1,99);
+      table.addValue('A',99);
       table.reset();
-    table.show('MyTable');
+      table.show('MyTable');
       const result = table.size();
       expect(result).toBe(0);
     });
