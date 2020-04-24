@@ -471,10 +471,6 @@ describe('ResultsTable', function () {
         table.addValue('B',99);
         table.addValue(1,98);
         table.addValue('D',97);
-        table.setLabel('I',0);
-        table.setLabel('II',1);
-        table.setLabel('III',2);
-        table.addLabel('Last row');
         table.show('MyTable');
         const result = table.getColumnAsDoubles(0);
         expect(result).toEqual([0,0,0,99]);
@@ -487,10 +483,6 @@ describe('ResultsTable', function () {
         table.addValue('B',99);
         table.addValue(1,98);
         table.addValue('D',97);
-        table.setLabel('I',0);
-        table.setLabel('II',1);
-        table.setLabel('III',2);
-        table.addLabel('Last row');
         table.show('MyTable');
         const set_digits = table.setDecimalPlaces(0,3);
         const result = table.getColumnAsDoubles(0);
@@ -504,10 +496,6 @@ describe('ResultsTable', function () {
         table.addValue('B',99.8967);
         table.addValue(1,98.4354);
         table.addValue('D',97.356784);
-        table.setLabel('I',0);
-        table.setLabel('II',1);
-        table.setLabel('III',2);
-        table.addLabel('Last row');
         table.setHeading(2,"3ème colonne");
         table.show('MyTable');
         const set_Heading = table.setHeading(2,"3ème colonne");
@@ -522,11 +510,6 @@ describe('ResultsTable', function () {
         table.addValue('B',99.8967);
         table.addValue(1,98.4354);
         table.addValue('D',97.356784);
-        table.setLabel('I',0);
-        table.setLabel('II',1);
-        table.setLabel('III',2);
-        table.addLabel('Last row');
-        table.setHeading(2,"3ème colonne");
         table.show('MyTable');
         const result = table.getHeadings();
         expect(result).toEqual(["Label","B","C2","3ème colonne"]);
@@ -539,10 +522,6 @@ describe('ResultsTable', function () {
         table.addValue('B',99);
         table.addValue(1,98);
         table.addValue('D',97);
-        table.setLabel('I',0);
-        table.setLabel('II',1);
-        table.setLabel('III',2);
-        table.addLabel('Last row');
         table.show('MyTable');
         const setPrecision = table.setPrecision(2);
         const result = table.getColumn(0);
@@ -550,15 +529,34 @@ describe('ResultsTable', function () {
     });
   }); 
 
-  describe('renameColumn(String oldName, String newName)', function(){
-    it('should rename a given column', function(){
+  describe('renameColumn( oldName, newName)', function(){
+    it('(String, String) => should rename a given column', function(){
       let table = new ResultsTable(4);
-      table.addValue('B',99);
-      table.addValue('D', 97);
+      table.addValue('A',99);
+      table.addValue('B', 97);
       table.show('MyTable');
-      const rename_Column = table.renameColumn("D","A");
-      const result = table.getColumnIndex("A");
+      table.renameColumn("B","W");
+      const result = table.getColumnIndex("W");
       expect(result).toBe(1);
+    });
+    it('(String, String) => should throw a "column not found" Exception', function() {
+      const func = () => {
+        let table = new ResultsTable(4);
+        table.addValue('A',99);
+        table.show('MyTable');
+        table.renameColumn("D","W");
+      }
+      expect(func).toThrow(new Error('"D" column not found'));
+    });
+    it('(String, String) => should throw a "column exists" Exception', function() {
+      const func = () => {
+        let table = new ResultsTable(4);
+        table.addValue('A',99);
+        table.addValue('B',99);
+        table.show('MyTable');
+        table.renameColumn("A","B");
+      }
+      expect(func).toThrow(new Error('"B" column exists'));
     });
   }); 
 
