@@ -1019,7 +1019,12 @@ export class ResultsTable {
   getRowAsString(row) {
     let row_string='';
     for (let i = 0; i < this.nColumns; i++) {
-      row_string += this.getValue(i,row).toString();
+      if (i < this.nColumns -1) {
+        row_string += this.getValue(i,row).toString()+'\t';
+      }
+      else {
+        row_string += this.getValue(i,row).toString();
+      }
     }
     return row_string;
   };
