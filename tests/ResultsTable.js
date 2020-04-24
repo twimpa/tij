@@ -120,24 +120,36 @@ describe('ResultsTable', function () {
     });
   });
   
-  describe('columnExists(String column) => boolean', function () {
-    it('should return true if the column exists and false otherwise', function () {
+  describe('columnExists(column) => boolean', function () {
+    it('(string) => should return true if the column exists', function () {
       let table = new ResultsTable(10);
       table.show('MyTable');
       table.addValue('D', 'One');
       const result = table.columnExists('D');
       expect(result).toBe(true);
     });
-  });
-
-  describe('columnExists(int column) => boolean', function () {
-    it('should return true if the column exists and false otherwise', function () {
+    it('(string) => should return false if the column does not exist', function () {
+      let table = new ResultsTable(10);
+      table.show('MyTable');
+      table.addValue('D', 'One');
+      const result = table.columnExists('A');
+      expect(result).toBe(false);
+    });
+    it('(number) => should return true if the column exists', function () {
       let table = new ResultsTable(10);
       table.show('MyTable');
       table.addValue(1, 98);
       table.addValue('D', 'One');
       const result = table.columnExists(0);
       expect(result).toBe(true);
+    });
+    it('(number) => should return false if the column does not exist', function () {
+      let table = new ResultsTable(10);
+      table.show('MyTable');
+      table.addValue(1, 98);
+      table.addValue('D', 'One');
+      const result = table.columnExists(-1);
+      expect(result).toBe(false);
     });
   });
 
@@ -251,7 +263,7 @@ describe('ResultsTable', function () {
       table.addValue('D', 'One');
       table.show('MyTable');
       const result = table.getRowAsString(1);
-      expect(JSON.stringify(result)).toBe("99\tOne");
+      expect(JSON.stringify(result)).toBe('"99\\tOne"');
     });
   });
 
@@ -271,7 +283,7 @@ describe('ResultsTable', function () {
       const result = table.getValue(0,0);
       expect(result).toBe(999);
     });
-    it('column not found => Should throw an Exception', function () {
+    it('column not found => Should throw a "column not found" Exception', function () {
       const func = () => {
         let table = new ResultsTable(1);
         table.addValue('A',999);
@@ -280,7 +292,16 @@ describe('ResultsTable', function () {
       }
       expect(func).toThrow(new Error('"B" column not found'));
     });
-    it('Row out of range => Should throw an Exception', function () {
+    it('column index out of range => Should throw a "Column not defined" Exception', function () {
+      const func = () => {
+        let table = new ResultsTable(1);
+        table.addValue('A',999);
+        table.show('MyTable');
+        return table.getValue(10,0);
+      }
+      expect(func).toThrow(new Error('Column not defined: 10'));
+    });
+    it('Row out of range => Should throw a "out of range" Exception', function () {
       const func = () => {
         let table = new ResultsTable(1);
         table.addValue('A',999);
@@ -318,13 +339,23 @@ describe('ResultsTable', function () {
 
   describe('getColumn(int column) => float []', function () {
     it('should return the specified column', function () {
-      let table = new ResultsTable(3);
-      table.setValue('A',1,99);
-      table.setValue('A',2,98);
+      let table = new ResultsTable();
+      table.incrementCounter();
+      table.addValue('A',99);
+      table.incrementCounter();
+      table.addValue('A',98);
       table.show('MyTable');
       const result = table.getColumn(0);
-      expect(result).toEqual([0,99,98]);
+      expect(result).toEqual([99,98]);
     });
+    
+    it('should return null for an unknown column index', function () {
+      let table = new ResultsTable(3);
+      table.show('MyTable');
+      const result = table.getColumn(3);
+      expect(result).toBeNull();
+    });
+
   });
 
 
@@ -519,22 +550,15 @@ describe('ResultsTable', function () {
     });
   }); 
 
-  describe('renameColumn(String oldName, String newName', function(){
+  describe('renameColumn(String oldName, String newName)', function(){
     it('should rename a given column', function(){
       let table = new ResultsTable(4);
       table.addValue('B',99);
-      table.addValue(1,98); 
       table.addValue('D', 97);
-      table.setLabel('I',0);
-      table.setLabel('II',1);
-      table.setLabel('III',2);
-      table.addLabel('Last row');
-      table.getHeadings();
-      table.setHeading(2,"3ème colonne");
       table.show('MyTable');
-      const rename_Column = table.renameColumn("C2","2ème colonne");
-      const result = table.getHeadings();
-      expect(result).toEqual(["Label", "B", "2ème colonne", "3ème colonne"]);
+      const rename_Column = table.renameColumn("D","A");
+      const result = table.getColumnIndex("A");
+      expect(result).toBe(1);
     });
   }); 
 

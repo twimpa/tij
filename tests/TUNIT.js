@@ -95,7 +95,14 @@ const matchers = (exp) => ({
     TUNIT.msg_error = `Expected ${exp.toFixed(precision)} to be close to ${assertion.toFixed(precision)}.`;
     assert(exp.toFixed(precision) === assertion.toFixed(precision));
   },
-  toBeNaN: () => assert(isNaN(exp)),
+  toBeNaN: () => {
+    TUNIT.msg_error = `Expected ${exp} to be NaN.`;
+    assert(isNaN(exp));
+  },
+  toBeNull: () => {
+    TUNIT.msg_error = `Expected ${exp} to be null.`;
+    assert(exp == null);
+  },
   toEqual: (assertion) => {
     let flag = false;
     if (Array.isArray(assertion) ) {
@@ -111,8 +118,10 @@ const matchers = (exp) => ({
       exp();
     }
     catch (e) {
-      let err_assert = assertion.toString().split(':')[1].trim();
-      let err_exp = e.toString().split(':')[1].trim();
+      let err_s = assertion.toString();
+      let err_assert = err_s.slice(err_s.indexOf(':')).trim();
+      let err_e = e.toString();
+      let err_exp = err_e.slice(err_e.indexOf(':')).trim();
       TUNIT.msg_error = `Expected function to throw Error: ${err_assert}, but it threw Error: ${err_exp}.`;
       assert( err_assert === err_exp);
     }

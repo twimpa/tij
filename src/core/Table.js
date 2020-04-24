@@ -40,7 +40,6 @@ export class Table {
     // TODO
     console.info('core/Table created');
     this.table_data = table;
-    this.element = document.createElement('table');
   }
 
   /**
@@ -55,6 +54,10 @@ export class Table {
     let thead = document.createElement('thead');
     let tbody = document.createElement('tbody'); 
     let tfoot = document.createElement('tfoot'); 
+    
+    this.element = document.querySelector(`#${title}`) || document.createElement('table');
+    this.element.id = title;
+    this.element.innerHTML = ''; // Reset content
     this.element.appendChild(caption);
     this.element.appendChild(thead);
     this.element.appendChild(tbody);

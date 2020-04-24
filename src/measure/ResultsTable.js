@@ -679,7 +679,7 @@ export class ResultsTable {
    */
   getColumn(column) {
     if ((column < 0) || (column >= this.nColumns)) {
-      throw ("Index out of range");
+      return null;
     }
     else {
         return this.dataset[column];
@@ -733,19 +733,11 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   getColumnIndex(heading) {
-  /*
-    let index;
-    for (let i=0; i<this.headings.length; i++){
-      if(this.headings[i] === heading) {
-        index = i;
-      }
-    }
-    */
     return this.headings.indexOf(heading);
   };
 
   /**
-   * Sets the heading of the the first available column and
+   * Sets the heading of the first available column and
    * returns that column's index. Returns COLUMN_IN_USE
    * if this is a duplicate heading.
    * 
@@ -768,7 +760,7 @@ export class ResultsTable {
    * @param {int} row - 
    * @return double
    * 
-   * @author Created by ijdoc2js
+   * @author Jean-Christophe Taveau
    */
   getValueAsDouble(column, row) {
     return this.getValue(column,row);
@@ -791,10 +783,22 @@ export class ResultsTable {
   getValue(column_or_heading, row) {
 
     // Step #1 - Get column index
+    /*
+    let col_index;
+    if (typeof(column_or_heading) === 'number') {
+      col_index = column_or_heading;
+    }
+    else {
+      col_index = this.getColumnIndex(column_or_heading)
+    }
+    */
     let col_index = (typeof(column_or_heading) === 'number') ? column_or_heading : this.getColumnIndex(column_or_heading);
     // Step #2 - Check Boundaries
     if (col_index === ResultsTable.COLUMN_NOT_FOUND) {
       throw new IllegalArgumentException(`"${column_or_heading}" column not found`);
+    }
+    else if (col_index < 0 || col_index > this.headings.length) {
+      throw new IllegalArgumentException(`Column not defined: ${col_index}`);
     }
     if (row < 0 || row > this.size()) {
       throw new IllegalArgumentException('Row out of range');
@@ -804,7 +808,7 @@ export class ResultsTable {
   };
 
   /**
-   * Returns 'true' if the specified column exists and is not emptly.
+   * Returns 'true' if the specified column exists and is not empty.
    * 
    * @param {number or string} column - Column index or column Headings
    * @return boolean
@@ -1106,7 +1110,7 @@ export class ResultsTable {
 
   /**
    * This is a version of IJ.d2s() that uses scientific notation for
-   * small numbes that would otherwise display as zero.
+   * small numbers that would otherwise display as zero.
    * 
    * @param {double} n - 
    * @param {int} decimalPlaces - 
@@ -1263,7 +1267,7 @@ export class ResultsTable {
    * 
    * @author Created by ijdoc2js
    */
-  open2(path) {
+  static open2(path) {
     throw "Not Implemented - ResultsTable.open2(..)";
   };
 
@@ -1277,8 +1281,21 @@ export class ResultsTable {
    * 
    * @author Created by ijdoc2js
    */
-  open(path) {
-    throw "Not Implemented - ResultsTable.open(..)";
+  static open(path) {
+  
+    const parseCSV = (data) => {
+      // TODO
+      console.log('PARSE CSV');
+      console.log(data);
+      let table = new ResultsTable();
+      // Fill in table with data
+      return table;
+    }
+    
+    // Main
+    fetch(path)
+    .then(response => response.text())
+    .then(txt => parseCSV(txt));
   };
 
   /**
@@ -1326,8 +1343,11 @@ export class ResultsTable {
    * 
    * @author Created by ijdoc2js
    */
-  getDefaultHeadings() {
-    throw "Not Implemented - ResultsTable.getDefaultHeadings(..)";
+  static getDefaultHeadings() {
+    return ['Area','Mean','StdDev','Mode','Min','Max','X','Y','XM','YM','Perim.',
+    'BX','BY','Width','Height','Major','Minor','Angle','Circ.','Feret','IntDen','Median',
+    'Skew','Kurt','%Area','RawIntDen','Ch','Slice','Frame','FeretX','FeretY','FeretAngle',
+    'MinFeret','AR','Round','Solidity','MinThr','MaxThr'];
   };
 
   /**
@@ -1337,8 +1357,8 @@ export class ResultsTable {
    * 
    * @author Created by ijdoc2js
    */
-  getDefaultHeading(index) {
-    throw "Not Implemented - ResultsTable.getDefaultHeading(..)";
+  static getDefaultHeading(index) {
+    return ResultsTable.getDefaultHeadings()[index];
   };
 
   /**

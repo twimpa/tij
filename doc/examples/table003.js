@@ -24,21 +24,9 @@
 
 'use strict';
 
-let labels = ['i','ii','iii','iv'];
-let table000 = new ResultsTable();
-let count = 1;
-for (let row = 0; row < 4; row++) {
-  table000.incrementCounter();
-  // table000.addLabel(labels[row]);
-  for (let col of ['A','B','C','D']) {
-    table000.addValue(col,count++);
-  }
-}
-// table000.disableRowLabels();
-// table000.showRowNumbers(true);
-// table000.showRowIndexes(true);
-table000.show('Table000');
+// const path = IJ.getDirectory('');
+let path='.';
+ResultsTable.open(path+'/Table003_labels_numbers.csv')
+  .then(table003 => table003.show('Table003') );
 
-
-document.getElementById('workspace').appendChild(document.createElement('hr'));
 
