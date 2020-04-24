@@ -460,7 +460,7 @@ describe('ResultsTable', function () {
       table.setDefaultHeadings();
       table.show('MyTable');
       const result = table.getColumnHeadings();
-      expect(JSON.stringify(result)).toBe('"Area\\tMean"');   
+      expect(JSON.stringify(result)).toBe('"\\tArea\\tMean"');   
     });
   });
 
