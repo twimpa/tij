@@ -455,12 +455,12 @@ describe('ResultsTable', function () {
   describe('setDefaultHeadings() => String', function () {
     it('Should set the headings used by the Measure command ("Area", "Mean", etc.)', function () {
       let table = new ResultsTable(3);
-      table.setValue('A',1,99);
-      table.setValue('B',1,99);
+      table.addValue('A',99);
+      table.addValue('B',99);
       table.setDefaultHeadings();
       table.show('MyTable');
       const result = table.getColumnHeadings();
-      expect(result).toBe(" 	Area	Mean");
+      expect(JSON.stringify(result)).toBe('"Area\\tMean"');   
     });
   });
 
