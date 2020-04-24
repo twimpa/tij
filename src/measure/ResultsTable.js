@@ -1017,7 +1017,11 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   getRowAsString(row) {
-    throw "Not Implemented - ResultsTable.getRowAsString(..)";
+    let row_string='';
+    for (let i = 0; i < this.nColumns; i++) {
+      row_string += this.getValue(i,row).toString();
+    }
+    return row_string;
   };
 
   /**
@@ -1052,6 +1056,7 @@ export class ResultsTable {
    */
   setDefaultHeadings() {
     this.headings.splice(0,this.headings.length);
+    this.headings.push(' ');
     for (let i = 0; i < this.nColumns; i++) {
       this.headings.push(ResultsTable.getDefaultHeading(i));
     }
