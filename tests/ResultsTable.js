@@ -57,12 +57,19 @@ describe('ResultsTable', function () {
   });
 
   describe('getLabel(int row) => String', function () {
-    it('should return the name of the row', function () {
-      let table = new ResultsTable(10);
+    it('should return the label of the specified row', function () {
+      let table = new ResultsTable(2);
+      table.addLabel('I');
       table.show('MyTable');
-      table.setLabel('I',0);
-      const result = table.getLabel(0);
+      const result = table.getLabel(1);
       expect(result).toBe('I');
+    });
+    it('should return null if the row does not have a label.', function () {
+        let table = new ResultsTable(2);
+        table.addLabel('I');
+        table.show('MyTable');
+        const result = table.getLabel(0);
+        expect(result).toBe(null);
     });
   });
 
