@@ -696,10 +696,17 @@ export class ResultsTable {
    * @param {int} column - 
    * @return double[]
    * 
-   * @author Created by ijdoc2js
+   * @author Thao-Uyen Vu
    */
   getColumnAsDoubles(column) {
-    throw "Not Implemented - ResultsTable.getColumnAsDoubles(..)";
+    let col_heading = this.getColumnHeading(column)
+    let col_index = this.getColumnIndex(col_heading);
+    if (col_index === ResultsTable.COLUMN_NOT_FOUND) {
+      throw new IllegalArgumentException(`"${column}" column not found`);
+    }
+    else{
+      return this.dataset[col_index];
+    }
   };
 
   /**
