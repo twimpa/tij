@@ -1088,10 +1088,14 @@ export class ResultsTable {
    * 
    * @param {int} precision - 
    * 
-   * @author Created by ijdoc2js
+   * @author Thao-Uyen Vu
    */
   setPrecision(precision) {
-    throw "Not Implemented - ResultsTable.setPrecision(..)";
+    for (let i=0; i<this.dataset.length; i++){
+      for(let j=0; j<this.dataset[i].length;j++){
+        this.dataset[i][j].toFixed(precision);
+      }
+    }
   };
 
   /**
