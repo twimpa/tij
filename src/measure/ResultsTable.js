@@ -1174,14 +1174,12 @@ export class ResultsTable {
    * @author Created by Caroline Meguerditchian
    */
   deleteColumn(column) {
-    let index;
-        for (let i=0; i<this.headings.length; i++){
-            if(this.headings[i] === column){
-                index = i;
-            }
-        }
-        this.headings.splice([index],1);
-        this.dataset.splice([index],1);
+    let index = this.getColumnIndex(column);
+        if (index === ResultsTable.COLUMN_NOT_FOUND) {
+            throw new IllegalArgumentException(`"${column}" column not found`);
+          }
+    this.headings.splice([index],1);
+    this.dataset.splice([index],1);
     this.columnDeleted();
   };
 
