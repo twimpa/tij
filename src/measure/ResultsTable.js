@@ -633,15 +633,18 @@ export class ResultsTable {
     this.dataset[col_index][this.getCounter() - 1] = value;
   };
 
-  /**
+    /**
    * Adds a label to the beginning of the current row.
    * 
    * @param {java.lang.String} label - 
    * 
-   * @author Created by ijdoc2js
+   * @author Thao-Uyen Vu
    */
   addLabel(label) {
-    throw "Not Implemented - ResultsTable.addLabel(..)";
+    this.headings.unshift("Label");
+    this.nColumns++;
+    this.dataset.unshift(this.labels);
+    this.addValue(0,label);
   };
 
   /**
