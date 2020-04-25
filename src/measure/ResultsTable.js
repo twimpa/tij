@@ -678,7 +678,7 @@ export class ResultsTable {
    * @param {int} column - 
    * @return float[]
    * 
-   * @author Created by ijdoc2js
+   * @author Thao-Uyen Vu
    */
   getColumn(column) {
     if ((column < 0) || (column >= this.nColumns)) {
@@ -780,7 +780,7 @@ export class ResultsTable {
    * @param {int} row - 
    * @return double
    * 
-   * @author ???
+   * @author Caroline Meguerditchian
    * @author Jean-Christophe Taveau
    */
   getValue(column_or_heading, row) {
@@ -816,7 +816,7 @@ export class ResultsTable {
    * @param {number or string} column - Column index or column Headings
    * @return boolean
    * 
-   * @author ??
+   * @author Thao-Uyen Vu
    * @author Jean-Christophe Taveau
    */
   columnExists(column) {
@@ -895,10 +895,15 @@ export class ResultsTable {
    * @param {int} row - 
    * @return java.lang.String
    * 
-   * @author Created by ijdoc2js
+   * @author Thao-Uyen Vu
    */
   getLabel(row) {
-    throw "Not Implemented - ResultsTable.getLabel(..)";
+    if(this.getValue(0,row)==null){
+      return null;
+    }
+    else{
+      return this.getValue(0,row);
+    }
   };
 
   /**
@@ -1189,7 +1194,7 @@ export class ResultsTable {
    * @param {java.lang.String} oldName - 
    * @param {java.lang.String} newName - 
    * 
-   * @author Created by ijdoc2js
+   * @author Thao-Uyen Vu
    */
   renameColumn(oldName, newName) {
     let index_oldName = this.getColumnIndex(oldName);
@@ -1214,7 +1219,7 @@ export class ResultsTable {
    * 
    * @return int
    * 
-   * @author Created by ijdoc2js
+   * @author Thao-Uyen Vu
    */
   getLastColumn() {
     if(this.nColumns == null){
