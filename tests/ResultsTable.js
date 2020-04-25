@@ -163,6 +163,14 @@ describe('ResultsTable', function () {
       const result = table.columnExists('D');
       expect(result).toBe(false);
     });
+    it('column not found => Should throw a "column not found" Exception', function () {
+      const func = () => {
+        let table = new ResultsTable(1);
+        table.addValue('D', 'One');
+        return table.deleteColumn('B');
+      }
+      expect(func).toThrow(new Error('"B" column not found'));
+    });
   });
 
   describe('columnDeleted() => boolean', function () {
