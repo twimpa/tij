@@ -1205,7 +1205,10 @@ export class ResultsTable {
    */
   reset() {
     this.nRows = 0;
-    this.nColumns=0;
+    this.nColumns = 0;
+    this.headings = [];
+    this.dataset = [];
+    this.labels = [];
   };
 
   /**
