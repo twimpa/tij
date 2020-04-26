@@ -532,14 +532,13 @@ describe('ResultsTable', function () {
 
   describe('setPrecision(int precision)', function(){
     it('should set the decimal places that are used when this table is displayed', function(){
-        let table = new ResultsTable(4);
+        let table = new ResultsTable(2);
         table.addValue('B',99);
-        table.addValue(1,98);
         table.addValue('D',97);
         table.show('MyTable');
         const setPrecision = table.setPrecision(2);
         const result = table.getColumn(0);
-        expect(result).toEqual([0.00, 0.00, 0.00, 99.00]);
+        expect(result).toEqual([0.00, 99.00]);
     });
   }); 
 
