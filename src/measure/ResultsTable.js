@@ -665,10 +665,13 @@ export class ResultsTable {
    * Set the row label column to null if the column label is "Label".
    * 
    * 
-   * @author Created by ijdoc2js
+   * @author Thao-Uyen Vu
    */
   disableRowLabels() {
-    throw "Not Implemented - ResultsTable.disableRowLabels(..)";
+    let col_label= this.getColumnHeading(0);
+    if(col_label=="Label"){
+      return this.labels=null;
+    }
   };
 
   /**
