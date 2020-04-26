@@ -1212,6 +1212,12 @@ export class ResultsTable {
    */
   renameColumn(oldName, newName) {
     let index_oldName = this.getColumnIndex(oldName);
+    if (index_oldName === ResultsTable.COLUMN_NOT_FOUND) {
+      throw new IllegalArgumentException(`"${oldName}" column not found`);
+    }
+    if (this.headings.includes(newName)) {
+      throw new IllegalArgumentException(`"${newName}" column exists`);
+    }
     this.headings[index_oldName]=newName;
   };
 
