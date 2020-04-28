@@ -1056,7 +1056,7 @@ export class ResultsTable {
 
   /**
    * Sets the decimal places (digits to the right of decimal point)
- * that are used when this table is displayed.
+  * that are used when this table is displayed.
    * 
    * @param {int} precision - 
    * 
