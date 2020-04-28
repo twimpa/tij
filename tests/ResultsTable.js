@@ -57,12 +57,19 @@ describe('ResultsTable', function () {
   });
 
   describe('getLabel(int row) => String', function () {
-    it('should return the name of the row', function () {
-      let table = new ResultsTable(10);
+    it('should return the label of the specified row', function () {
+      let table = new ResultsTable(2);
+      table.addLabel('I');
       table.show('MyTable');
-      table.setLabel('I',0);
-      const result = table.getLabel(0);
+      const result = table.getLabel(1);
       expect(result).toBe('I');
+    });
+    it('should return null if the row does not have a label.', function () {
+        let table = new ResultsTable(2);
+        table.addLabel('I');
+        table.show('MyTable');
+        const result = table.getLabel(0);
+        expect(result).toBe(null);
     });
   });
 
@@ -162,6 +169,14 @@ describe('ResultsTable', function () {
       table.deleteColumn('D');
       const result = table.columnExists('D');
       expect(result).toBe(false);
+    });
+    it('column not found => Should throw a "column not found" Exception', function () {
+      const func = () => {
+        let table = new ResultsTable(1);
+        table.addValue('D', 'One');
+        return table.deleteColumn('B');
+      }
+      expect(func).toThrow(new Error('"B" column not found'));
     });
   });
 
@@ -370,13 +385,12 @@ describe('ResultsTable', function () {
 
   describe('sort(String column) => ', function () {
     it('should sort this table on the specified column, with string support', function () {
-      let table = new ResultsTable(3);
-      table.setValue('A',1,99);
-      table.setValue('A',2,98);
+      let table = new ResultsTable(2);
+      table.addValue('A',-1);
       table.sort('A');
       table.show('MyTable');
-      const result = table.getValue("A",2);
-      expect(result).toBe(99);
+      const result = table.getValue("A",1);
+      expect(result).toBe(0);
     });
   });
 
@@ -420,9 +434,9 @@ describe('ResultsTable', function () {
   describe('reset() => ', function () {
     it('Should return an empty table', function () {
       let table = new ResultsTable(3);
-      table.setValue('A',1,99);
+      table.addValue('A',99);
       table.reset();
-    table.show('MyTable');
+      table.show('MyTable');
       const result = table.size();
       expect(result).toBe(0);
     });
@@ -456,12 +470,12 @@ describe('ResultsTable', function () {
   describe('setDefaultHeadings() => String', function () {
     it('Should set the headings used by the Measure command ("Area", "Mean", etc.)', function () {
       let table = new ResultsTable(3);
-      table.setValue('A',1,99);
-      table.setValue('B',1,99);
+      table.addValue('A',99);
+      table.addValue('B',99);
       table.setDefaultHeadings();
       table.show('MyTable');
       const result = table.getColumnHeadings();
-      expect(result).toBe(" 	Area	Mean");
+      expect(JSON.stringify(result)).toBe('" \\tArea\\tMean"');   
     });
   });
 
@@ -518,14 +532,13 @@ describe('ResultsTable', function () {
 
   describe('setPrecision(int precision)', function(){
     it('should set the decimal places that are used when this table is displayed', function(){
-        let table = new ResultsTable(4);
+        let table = new ResultsTable(2);
         table.addValue('B',99);
-        table.addValue(1,98);
         table.addValue('D',97);
         table.show('MyTable');
         const setPrecision = table.setPrecision(2);
         const result = table.getColumn(0);
-        expect(result).toEqual([0.00, 0.00, 0.00, 99.00]);
+        expect(result).toEqual([0.00, 99.00]);
     });
   }); 
 

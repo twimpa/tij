@@ -633,15 +633,18 @@ export class ResultsTable {
     this.dataset[col_index][this.getCounter() - 1] = value;
   };
 
-  /**
+    /**
    * Adds a label to the beginning of the current row.
    * 
    * @param {java.lang.String} label - 
    * 
-   * @author Created by ijdoc2js
+   * @author Thao-Uyen Vu
    */
   addLabel(label) {
-    throw "Not Implemented - ResultsTable.addLabel(..)";
+    this.headings.unshift("Label");
+    this.nColumns++;
+    this.dataset.unshift(this.labels);
+    this.addValue(0,label);
   };
 
   /**
@@ -662,10 +665,13 @@ export class ResultsTable {
    * Set the row label column to null if the column label is "Label".
    * 
    * 
-   * @author Created by ijdoc2js
+   * @author Thao-Uyen Vu
    */
   disableRowLabels() {
-    throw "Not Implemented - ResultsTable.disableRowLabels(..)";
+    let col_label= this.getColumnHeading(0);
+    if(col_label=="Label"){
+      return this.labels=null;
+    }
   };
 
   /**
@@ -675,7 +681,7 @@ export class ResultsTable {
    * @param {int} column - 
    * @return float[]
    * 
-   * @author Created by ijdoc2js
+   * @author Thao-Uyen Vu
    */
   getColumn(column) {
     if ((column < 0) || (column >= this.nColumns)) {
@@ -693,10 +699,17 @@ export class ResultsTable {
    * @param {int} column - 
    * @return double[]
    * 
-   * @author Created by ijdoc2js
+   * @author Thao-Uyen Vu
    */
   getColumnAsDoubles(column) {
-    throw "Not Implemented - ResultsTable.getColumnAsDoubles(..)";
+    let col_heading = this.getColumnHeading(column)
+    let col_index = this.getColumnIndex(col_heading);
+    if (col_index === ResultsTable.COLUMN_NOT_FOUND) {
+      throw new IllegalArgumentException(`"${column}" column not found`);
+    }
+    else{
+      return this.dataset[col_index];
+    }
   };
 
   /**
@@ -777,7 +790,7 @@ export class ResultsTable {
    * @param {int} row - 
    * @return double
    * 
-   * @author ???
+   * @author Caroline Meguerditchian
    * @author Jean-Christophe Taveau
    */
   getValue(column_or_heading, row) {
@@ -813,7 +826,7 @@ export class ResultsTable {
    * @param {number or string} column - Column index or column Headings
    * @return boolean
    * 
-   * @author ??
+   * @author Thao-Uyen Vu
    * @author Jean-Christophe Taveau
    */
   columnExists(column) {
@@ -892,10 +905,15 @@ export class ResultsTable {
    * @param {int} row - 
    * @return java.lang.String
    * 
-   * @author Created by ijdoc2js
+   * @author Thao-Uyen Vu
    */
   getLabel(row) {
-    throw "Not Implemented - ResultsTable.getLabel(..)";
+    if(this.getValue(0,row)==null){
+      return null;
+    }
+    else{
+      return this.getValue(0,row);
+    }
   };
 
   /**
@@ -1017,7 +1035,16 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   getRowAsString(row) {
-    throw "Not Implemented - ResultsTable.getRowAsString(..)";
+    let row_string='';
+    for (let i = 0; i < this.nColumns; i++) {
+      if (i < this.nColumns -1) {
+        row_string += this.getValue(i,row).toString()+'\t';
+      }
+      else {
+        row_string += this.getValue(i,row).toString();
+      }
+    }
+    return row_string;
   };
 
   /**
@@ -1048,10 +1075,14 @@ export class ResultsTable {
    * Sets the headings used by the Measure command ("Area", "Mean", etc.).
    * 
    * 
-   * @author Created by ijdoc2js
+   * @author Created by Desquerre Emilie
    */
   setDefaultHeadings() {
-    throw "Not Implemented - ResultsTable.setDefaultHeadings(..)";
+    this.headings.splice(0,this.headings.length);
+    this.headings.push(' ');
+    for (let i = 0; i < this.nColumns; i++) {
+      this.headings.push(ResultsTable.getDefaultHeading(i));
+    }
   };
 
   /**
@@ -1060,10 +1091,14 @@ export class ResultsTable {
    * 
    * @param {int} precision - 
    * 
-   * @author Created by ijdoc2js
+   * @author Thao-Uyen Vu
    */
   setPrecision(precision) {
-    throw "Not Implemented - ResultsTable.setPrecision(..)";
+    for (let i=0; i<this.dataset.length; i++){
+      for(let j=0; j<this.dataset[i].length;j++){
+        this.dataset[i][j].toFixed(precision);
+      }
+    }
   };
 
   /**
@@ -1158,14 +1193,13 @@ export class ResultsTable {
    * @author Created by Caroline Meguerditchian
    */
   deleteColumn(column) {
-    let index;
-        for (let i=0; i<this.headings.length; i++){
-            if(this.headings[i] === column){
-                index = i;
-            }
-        }
-        this.headings.splice([index],1);
-        this.dataset.splice([index],1);
+    let index = this.getColumnIndex(column);
+        if (index === ResultsTable.COLUMN_NOT_FOUND) {
+            throw new IllegalArgumentException(`"${column}" column not found`);
+          }
+    this.headings.splice([index],1);
+    this.dataset.splice([index],1);
+    this.columnDeleted();
   };
 
   /**
@@ -1174,20 +1208,30 @@ export class ResultsTable {
    * @param {java.lang.String} oldName - 
    * @param {java.lang.String} newName - 
    * 
-   * @author Created by ijdoc2js
+   * @author Thao-Uyen Vu
    */
   renameColumn(oldName, newName) {
     let index_oldName = this.getColumnIndex(oldName);
+    if (index_oldName === ResultsTable.COLUMN_NOT_FOUND) {
+      throw new IllegalArgumentException(`"${oldName}" column not found`);
+    }
+    if (this.headings.includes(newName)) {
+      throw new IllegalArgumentException(`"${newName}" column exists`);
+    }
     this.headings[index_oldName]=newName;
   };
 
   /**
    * 
    * 
-   * @author Created by ijdoc2js
+   * @author Created by Desquerre Emilie
    */
   reset() {
-    throw "Not Implemented - ResultsTable.reset(..)";
+    this.nRows = 0;
+    this.nColumns = 0;
+    this.headings = [];
+    this.dataset = [];
+    this.labels = [];
   };
 
   /**
@@ -1195,7 +1239,7 @@ export class ResultsTable {
    * 
    * @return int
    * 
-   * @author Created by ijdoc2js
+   * @author Thao-Uyen Vu
    */
   getLastColumn() {
     if(this.nColumns == null){
@@ -1434,7 +1478,7 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   columnDeleted() {
-    throw "Not Implemented - ResultsTable.columnDeleted(..)";
+    return true;
   };
 
   /**
@@ -1456,10 +1500,11 @@ export class ResultsTable {
    * 
    * @param {java.lang.String} column - 
    * 
-   * @author Created by ijdoc2js
+   * @author Created by Desquerre Emilie
    */
   sort(column) {
-    throw "Not Implemented - ResultsTable.sort(..)";
+    let index = this.getColumnIndex(column);
+    this.dataset[index].sort();
   };
 
 } // End of class ResultsTable
