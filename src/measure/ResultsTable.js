@@ -923,60 +923,20 @@ export class ResultsTable {
    * <code>show()</code> must be called to update the 
    * window that displays the table.
    * 
-   * @param {java.lang.String} column - 
-   * @param {int} row - 
-   * @param {double} value - 
+   * @param {java.lang.String} column - Column index (number) or heading (string)
+   * @param {int} row - Row Index (number)
+   * @param {double} value - A number or a string
    * 
    * @author Created by ijdoc2js
    */
   setValue(column, row, value) {
-    throw "Not Implemented - ResultsTable.setValue(..)";
+    // (int,int,double) => void
+    // (int,int,string)=> void
+    // (string,int,double)=> void
+    // (string,int,string)=> void
+     throw "Not Implemented - ResultsTable.setValue(..)";
   };
 
-  /**
-   * Sets the value of the given column and row, where
- * where 0&lt;=column&lt;=(lastRow+1 and 0&lt;=row&lt;=size().
-   * 
-   * @param {int} column - 
-   * @param {int} row - 
-   * @param {double} value - 
-   * 
-   * @author Created by ijdoc2js
-   */
-  setValue(column, row, value) {
-    throw "Not Implemented - ResultsTable.setValue(..)";
-  };
-
-  /**
-   * Sets the string value of the given column and row, where
-   * where 0&lt;=row&lt;size(). If the specified column does 
-   * not exist, it is created. When adding columns, 
-   * <code>show()</code> must be called to update the 
-   * window that displays the table.
-   * 
-   * @param {java.lang.String} column - 
-   * @param {int} row - 
-   * @param {java.lang.String} value - 
-   * 
-   * @author Created by ijdoc2js
-   */
-  setValue(column, row, value) {
-    throw "Not Implemented - ResultsTable.setValue(..)";
-  };
-
-  /**
-   * Sets the string value of the given column and row, where
-   * where 0&lt;=column&lt;=(lastRow+1 and 0&lt;=row&lt;=size().
-   * 
-   * @param {int} column - 
-   * @param {int} row - 
-   * @param {java.lang.String} value - 
-   * 
-   * @author Created by ijdoc2js
-   */
-  setValue(column, row, value) {
-    throw "Not Implemented - ResultsTable.setValue(..)";
-  };
 
   /**
    * Returns a tab or comma delimited string containing the column headings.
