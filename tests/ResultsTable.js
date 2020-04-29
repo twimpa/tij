@@ -107,6 +107,14 @@ describe('ResultsTable', function () {
       const result = table.getStringValue('D',9);
       expect(result).toBe('One');
     });
+    it('column out of range => Should throw a "column out of range" Exception', function () {
+      const func = () => {
+        let table = new ResultsTable(1);
+        table.addValue(-1,999);
+        table.show('MyTable');
+      }
+      expect(func).toThrow(new Error('column out of range'));
+    });
   });
 
   describe('getStringValue( column, row) => String', function () {
@@ -124,6 +132,33 @@ describe('ResultsTable', function () {
       table.addValue('D', 'One');
       const result = table.getStringValue(0,9);
       expect(result).toBe('One');
+    });
+    it('row out of range => Should throw a "row out of range" Exception', function () {
+      const func = () => {
+        let table = new ResultsTable(1);
+        table.addValue(0,999);
+        table.getStringValue(0,2)
+        table.show('MyTable');
+      }
+      expect(func).toThrow(new Error('Row out of range'));
+    });
+    it('column not found => Should throw a "column not found" Exception', function () {
+      const func = () => {
+        let table = new ResultsTable(1);
+        table.addValue(0,999);
+        table.getStringValue("a",0)
+        table.show('MyTable');
+      }
+      expect(func).toThrow(new Error('"a" column not found'));
+    });
+    it('column not defined => Should throw a "column not defined" Exception', function () {
+      const func = () => {
+        let table = new ResultsTable(1);
+        table.addValue(0,999);
+        table.getStringValue(2,0)
+        table.show('MyTable');
+      }
+      expect(func).toThrow(new Error('Column not defined: 2'));
     });
   });
   
