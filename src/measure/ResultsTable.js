@@ -618,6 +618,10 @@ export class ResultsTable {
     };
     
     // M A I N
+
+    if(column_or_heading < 0) {
+      throw new IllegalArgumentException('column out of range');
+    }
     
     // Step #1 - Get column index
     let col_index = (typeof(column_or_heading) === 'number') ? column_or_heading : this.getColumnIndex(column_or_heading);
@@ -884,19 +888,22 @@ export class ResultsTable {
    * 
    * @author Created by Caroline Meguerditchian
    */
-  getStringValue(column, row) {
-    //string, int
-    if(typeof(column) === 'string'){
-      let index = this.getColumnIndex(column);
-      let value = this.dataset[index][row].toString();
-      return value;
-  }
+  getStringValue(column_or_heading, row) {
 
-  //int, int
-  if(typeof(column) === 'number'){
-      let value = this.dataset[column][row].toString();
-      return value;
-  }
+    let col_index = (typeof(column_or_heading) === 'number') ? column_or_heading : this.getColumnIndex(column_or_heading);
+
+    if(col_index === ResultsTable.COLUMN_NOT_FOUND){
+      throw new IllegalArgumentException(`"${column_or_heading}" column not found`)
+    }
+    else if (col_index < 0 || col_index > this.headings.length) {
+      throw new IllegalArgumentException(`Column not defined: ${col_index}`)
+    }
+    if(row < 0 || row > this.size() - 1) {
+      throw new IllegalArgumentException("Row out of range");
+    }
+
+    let value = this.dataset[col_index][row].toString();
+    return value;
   };
 
   /**
