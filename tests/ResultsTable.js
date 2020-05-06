@@ -630,17 +630,17 @@ describe('ResultsTable', function () {
     
     it('(int,int, number) => should set the value of the given column and row, where 0<=row<size()', function(){
       let table = new ResultsTable(4);
-      table.setValue(3,0,2.33);
+      table.setValue(0,0,2.33);
       table.show('MyTable');
-      let result = table.getValue(3,0);
+      let result = table.getValue(0,0);
       expect(result).toBeCloseTo(2.33);
     });
     
     it('(int,int,string) => should set the string value of the given column and row, where 0<=column<=lastRow+1 and 0<=row<=size()', function() {
       let table = new ResultsTable(4);
-      table.setValue(1,0,"One");
+      table.setValue(0,0,"One");
       table.show('MyTable');
-      let result = table.getStringValue(1,0);
+      let result = table.getStringValue(0,0);
       expect(result).toBe("One");
     });
     
