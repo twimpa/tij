@@ -53,6 +53,7 @@ export class ResultsTable {
     this.nColumns = 0;
     this.headings = [];
     this.labels = [];
+    this.rowLabelHeading = "";
     this.title = 'undefined';
     
     // ALl we need to display the ResultsTable in HTML
@@ -567,7 +568,7 @@ export class ResultsTable {
    */
   incrementCounter() {
     // Add a new row and fill all the columns by 0 (zero)
-    this.labels.push(this.getCounter() + 1);
+    this.labels.push([this.getCounter() - 1, this.getCounter()]);
     for (let i = 0; i < this.headings.length; i++) {
       this.dataset[i].push(0);
     }
@@ -613,7 +614,6 @@ export class ResultsTable {
       this.nColumns++;
       // Add a new empty column...
       this.dataset.push(new Array(this.nRows).fill(0));
-      this.labels = Array.from({length: this.nRows}, (_,i) => [i,i+1]);
       this.headings.push(head);
     };
     
@@ -645,10 +645,7 @@ export class ResultsTable {
    * @author Thao-Uyen Vu
    */
   addLabel(label) {
-    this.headings.unshift("Label");
-    this.nColumns++;
-    this.dataset.unshift(this.labels);
-    this.addValue(0,label);
+    this.setLabel(label, this.getCounter() - 1);
   };
 
   /**
@@ -662,7 +659,11 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   setLabel(label, row) {
-    throw "Not Implemented - ResultsTable.setLabel(..)";
+    if(this.rowLabelHeading === "") {
+      this.rowLabelHeading = "Label";
+      this.labels = Array.from({length: this.nRows}, (_,i) => [i,i+1]);
+      }
+    this.labels[row][1] = label;
   };
 
   /**
@@ -915,11 +916,11 @@ export class ResultsTable {
    * @author Thao-Uyen Vu
    */
   getLabel(row) {
-    if(this.getValue(0,row)==null){
+    if(this.rowLabelHeading === ""){
       return null;
     }
     else{
-      return this.getValue(0,row);
+      return this.labels[row][1];
     }
   };
 
@@ -936,12 +937,22 @@ export class ResultsTable {
    * 
    * @author Created by ijdoc2js
    */
-  setValue(column, row, value) {
-    // (int,int,double) => void
-    // (int,int,string)=> void
-    // (string,int,double)=> void
-    // (string,int,string)=> void
-     throw "Not Implemented - ResultsTable.setValue(..)";
+  setValue(column_or_heading, row_index, value) {
+    const addColumn = (head) => {
+      this.nColumns++;
+      // Add a new empty column...
+      this.dataset.push(new Array(this.nRows).fill(0));
+      this.headings.push(head);
+    };
+
+  let col_index = (typeof(column_or_heading) === 'number') ? column_or_heading : this.getColumnIndex(column_or_heading);
+
+  if (col_index === -1 || col_index > this.headings.length - 1){
+    let col_heading = (typeof(column_or_heading) === 'string') ? column_or_heading : `C${column_or_heading + 1}`;
+    addColumn(col_heading);
+    col_index = this.headings.length - 1;
+    }
+    this.dataset[col_index][row_index] = value;
   };
 
 
