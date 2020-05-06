@@ -642,7 +642,7 @@ export class ResultsTable {
    * 
    * @param {java.lang.String} label - 
    * 
-   * @author Thao-Uyen Vu
+   * @author Caroline Meguerditchian
    */
   addLabel(label) {
     this.setLabel(label, this.getCounter() - 1);
@@ -656,7 +656,7 @@ export class ResultsTable {
    * @param {java.lang.String} label - 
    * @param {int} row - 
    * 
-   * @author Created by ijdoc2js
+   * @author Created by Caroline Meguerditchian
    */
   setLabel(label, row) {
     if(this.rowLabelHeading === "") {
@@ -935,7 +935,7 @@ export class ResultsTable {
    * @param {int} row - Row Index (number)
    * @param {double} value - A number or a string
    * 
-   * @author Created by ijdoc2js
+   * @author Created by Caroline Meguerditchian
    */
   setValue(column_or_heading, row_index, value) {
     const addColumn = (head) => {
@@ -944,6 +944,10 @@ export class ResultsTable {
       this.dataset.push(new Array(this.nRows).fill(0));
       this.headings.push(head);
     };
+    
+    if(row_index < 0){
+      throw new IllegalArgumentException(`${row_index}`);
+    }  
 
   let col_index = (typeof(column_or_heading) === 'number') ? column_or_heading : this.getColumnIndex(column_or_heading);
 
@@ -1392,7 +1396,7 @@ export class ResultsTable {
    * 
    * @return java.lang.Object
    * 
-   * @author Created by ijdoc2js
+   * @author Created by Caroline Meguerditchian
    */
   clone() {
     let clone = this;
