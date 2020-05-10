@@ -55,6 +55,7 @@ export class ResultsTable {
     this.labels = [];
     this.rowLabelHeading = "";
     this.title = 'undefined';
+    this.emptyCells = 0
     
     // ALl we need to display the ResultsTable in HTML
     this.table = new Table(this);
@@ -608,33 +609,11 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   addValue(column_or_heading, value) {
-  
-    // Private
-    const addColumn = (head) => {
-      this.nColumns++;
-      // Add a new empty column...
-      this.dataset.push(new Array(this.nRows).fill(0));
-      this.headings.push(head);
-    };
-    
-    // M A I N
-
     if(column_or_heading < 0) {
       throw new IllegalArgumentException('column out of range');
     }
     
-    // Step #1 - Get column index
-    let col_index = (typeof(column_or_heading) === 'number') ? column_or_heading : this.getColumnIndex(column_or_heading);
-    let col_heading = (typeof(column_or_heading) === 'string') ? column_or_heading : `C${column_or_heading + 1}`;
-
-    // Step #2 - Check if column already exists or must be created
-    if (this.columnExists(col_index) === false) { 
-      addColumn(col_heading);
-      col_index = this.headings.length - 1;
-    }
-
-    // Step #3 - Set value to the given column index
-    this.dataset[col_index][this.getCounter() - 1] = value;
+    this.setValue(column_or_heading,this.getCounter()-1,value);
   };
 
     /**
@@ -762,10 +741,14 @@ export class ResultsTable {
    * @param {java.lang.String} heading - 
    * @return int
    * 
-   * @author Created by ijdoc2js
+   * @author Created by Caroline Meguerditchian
    */
   getFreeColumn(heading) {
-    throw "Not Implemented - ResultsTable.getFreeColumn(..)";
+    this.nColumns++;
+    // Add a new empty column...
+    this.dataset.push(new Array(this.nRows).fill(this.emptyCells));
+    this.headings.push(heading);
+    return this.getColumnIndex(heading);
   };
 
   /**
@@ -935,27 +918,26 @@ export class ResultsTable {
    * @param {int} row - Row Index (number)
    * @param {double} value - A number or a string
    * 
+   * @author Created by Jean-Christophe Taveau
    * @author Created by Caroline Meguerditchian
    */
   setValue(column_or_heading, row_index, value) {
-    const addColumn = (head) => {
-      this.nColumns++;
-      // Add a new empty column...
-      this.dataset.push(new Array(this.nRows).fill(0));
-      this.headings.push(head);
-    };
-    
+
     if(row_index < 0){
       throw new IllegalArgumentException(`${row_index}`);
-    }  
-
-  let col_index = (typeof(column_or_heading) === 'number') ? column_or_heading : this.getColumnIndex(column_or_heading);
-
-  if (col_index === -1 || col_index > this.headings.length - 1){
-    let col_heading = (typeof(column_or_heading) === 'string') ? column_or_heading : `C${column_or_heading + 1}`;
-    addColumn(col_heading);
-    col_index = this.headings.length - 1;
     }
+
+    // Step #1 - Get column index
+    let col_index = (typeof(column_or_heading) === 'number') ? column_or_heading : this.getColumnIndex(column_or_heading);
+    let col_heading = (typeof(column_or_heading) === 'string') ? column_or_heading : `C${column_or_heading + 1}`;
+
+    // Step #2 - Check if column already exists or must be created
+    if (this.columnExists(col_index) === false) { 
+      this.getFreeColumn(col_heading);
+      col_index = this.headings.length - 1;
+    }
+
+    // Step #3 - Set value to the given column index
     this.dataset[col_index][row_index] = value;
   };
 
@@ -1099,10 +1081,15 @@ export class ResultsTable {
    * 
    * @param {boolean} NaNEmptyCells - 
    * 
-   * @author Created by ijdoc2js
+   * @author Created by Caroline Meguerditchian
    */
   setNaNEmptyCells(NaNEmptyCells) {
-    throw "Not Implemented - ResultsTable.setNaNEmptyCells(..)";
+    if (NaNEmptyCells === true){
+      this.emptyCells = NaN
+    }
+    if (NaNEmptyCells === false){
+      this.emptyCells = 0
+    }
   };
 
   /**
