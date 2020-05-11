@@ -652,10 +652,11 @@ export class ResultsTable {
    * @author Thao-Uyen Vu
    */
   disableRowLabels() {
-    let col_label= this.getColumnHeading(0);
-    if(col_label=="Label"){
-      return this.labels=null;
-    }
+      if(this.rowLabelHeading==="Label"){
+        for (let i=0; i<this.labels.length; i++){
+          this.labels[i][1]=null;
+        }
+      }
   };
 
   /**
@@ -896,16 +897,15 @@ export class ResultsTable {
    * @param {int} row - 
    * @return java.lang.String
    * 
-   * @author Thao-Uyen Vu
+   * @author Caroline Meguerditchian
    */
   getLabel(row) {
-    if (row < 0 || row > this.size()) {
-      throw new IllegalArgumentException('Row out of range');
+    if(this.rowLabelHeading === ""){
+      return null;
     }
-    if(this.labels!=null && this.labels[row][1]!=null){
-      this.labels[row][1];
+    else{
+      return this.labels[row][1];
     }
-    return this.labels[row][1];
   };
 
   /**
@@ -1071,7 +1071,7 @@ export class ResultsTable {
    * @param {int} column - 
    * @param {int} digits - 
    * 
-   * @author Created by ijdoc2js
+   * @author Thao-Uyen Vu
    */
   setDecimalPlaces(column, digits) {
     if(column < 0 || column > this.nColumns) {
