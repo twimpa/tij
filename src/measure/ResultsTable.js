@@ -899,12 +899,13 @@ export class ResultsTable {
    * @author Thao-Uyen Vu
    */
   getLabel(row) {
-    if(this.rowLabelHeading === ""){
-      return null;
+    if (row < 0 || row > this.size()) {
+      throw new IllegalArgumentException('Row out of range');
     }
-    else{
-      return this.labels[row][1];
+    if(this.labels!=null && this.labels[row][1]!=null){
+      this.labels[row][1];
     }
+    return this.labels[row][1];
   };
 
   /**
