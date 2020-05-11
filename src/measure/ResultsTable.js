@@ -1074,9 +1074,14 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   setDecimalPlaces(column, digits) {
-    throw "Not Implemented - ResultsTable.setDecimalPlaces(..)";
+    if(column < 0 || column > this.nColumns) {
+      throw new IllegalArgumentException('column out of range');
+    }
+    let getColArray=this.getColumn(column);
+    for(let i=0; i<getColArray.length-1;i++){
+      getColArray[i].toFixed(digits);
+    }
   };
-
   /**
    * Set 'true' to initially fill data arrays with NaNs instead of zeros.
    * 
