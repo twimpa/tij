@@ -62,7 +62,7 @@ describe('ResultsTable', function () {
       table.addLabel('I');
       table.show('MyTable');
       const result = table.getLabel(1);
-      expect(result).toBe('I');
+      expect(result).toEqual('I');
     });
   });
 
