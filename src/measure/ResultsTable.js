@@ -785,15 +785,6 @@ export class ResultsTable {
   getValue(column_or_heading, row) {
 
     // Step #1 - Get column index
-    /*
-    let col_index;
-    if (typeof(column_or_heading) === 'number') {
-      col_index = column_or_heading;
-    }
-    else {
-      col_index = this.getColumnIndex(column_or_heading)
-    }
-    */
     let col_index = (typeof(column_or_heading) === 'number') ? column_or_heading : this.getColumnIndex(column_or_heading);
     // Step #2 - Check Boundaries
     if (col_index === ResultsTable.COLUMN_NOT_FOUND) {
@@ -823,29 +814,6 @@ export class ResultsTable {
     return (this.dataset[col_index]) ? true : false;
   };
   
-/*
-  columnExists(column) {
-    //string
-    if(typeof(column) === 'string'){
-      for (let i=0; i<this.headings.length; i++){
-          if(this.headings[i] === column){
-              return true;
-          }
-      }
-      return false;
-  }
-  
-  //int
-  if(typeof(column) === 'number'){
-      if(typeof(this.dataset[column]) != 'undefined'){
-          return true;
-      }
-      return false;
-  }
-  };
-*/
-
-
   /**
    * Returns the string value of the given column and row,
  * where row must be greater than or equal zero
