@@ -609,7 +609,7 @@ describe('ResultsTable', function () {
 
 
   describe('setValue( column, row, value)', function() {
-    it('(int,int, number) => should throw an "row>counter" Exception when row<size()', function(){
+    it('(int,int, number) => should throw an "row>counter" Exception when row>size()', function(){
       const func = () => {
         let table = new ResultsTable(4);
         table.setValue(3,5,1);
