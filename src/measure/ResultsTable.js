@@ -927,6 +927,10 @@ export class ResultsTable {
     if(row_index < 0){
       throw new IllegalArgumentException(`${row_index}`);
     }
+    
+    if(row_index>this.size()){
+      throw new IllegalArgumentException('row>counter');
+    }
 
     // Step #1 - Get column index
     let col_index = (typeof(column_or_heading) === 'number') ? column_or_heading : this.getColumnIndex(column_or_heading);
