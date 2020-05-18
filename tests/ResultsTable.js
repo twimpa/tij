@@ -539,19 +539,6 @@ describe('ResultsTable', function () {
     });
   });
 
-  describe('setHeading(int column, String heading', function(){
-    it('should set heading of a given column', function(){
-        let table = new ResultsTable(4);
-        table.addValue('B',99.8967);
-        table.addValue(1,98.4354);
-        table.addValue('D',97.356784);
-        table.setHeading(2,"3ème colonne");
-        table.show('MyTable');
-        const set_Heading = table.setHeading(2,"3ème colonne");
-        const result = table.getHeadings();
-        expect(result).toEqual(["Label","B","C2","3ème colonne"]);
-    });
-  });
 
   describe('getHeadings() => String[]', function(){
     it('should return the column headings as an array of Strings', function(){
