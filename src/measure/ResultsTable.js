@@ -1364,8 +1364,7 @@ export class ResultsTable {
    * @author Created by Caroline Meguerditchian
    */
   clone() {
-    let clone = this;
-    return clone;
+    throw "Not Implemented - ResultsTable.getHeadingsAsVariableNames(..)";
   };
 
   /**
