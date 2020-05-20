@@ -62,10 +62,9 @@ export class Table {
     this.element.appendChild(thead);
     this.element.appendChild(tbody);
     this.element.appendChild(tfoot);
-    
     this._setHeading(thead);
     this._setRows(tbody);
-    
+
     if (container !== null) {
       container.appendChild(this.element);
     }
@@ -96,7 +95,7 @@ export class Table {
         html += '<tr>';
       for (let col=0; col < nColumns; col++) {
         let v = dataset[col][row];
-        html += `<td>${v}</td>`;
+        html += `<td><div id='table1'>${v}</div></td>`;
       }
       html +='</tr>';
     }
