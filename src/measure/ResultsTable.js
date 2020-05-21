@@ -53,10 +53,12 @@ export class ResultsTable {
     this.nColumns = 0;
     this.headings = [];
     this.labels = [];
-    this.labels_name = []
+    this.labels_name = [];
     this.rowLabelHeading = "";
     this.title = 'undefined';
-    this.emptyCells = 0
+    this.emptyCells = 0;
+    this.rowIndex = false;
+    this.rowNumber = false;
     
     // ALl we need to display the ResultsTable in HTML
     this.table = new Table(this);
@@ -1081,7 +1083,13 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   showRowNumbers(showNumbers) {
-    throw "Not Implemented - ResultsTable.showRowNumbers(..)";
+    if (showNumbers === true) {
+      this.rowNumber = true;
+      this.rowIndex = false;
+    }
+    else {
+      this.rowNumber = false;
+    }
   };
 
   /**
@@ -1091,7 +1099,13 @@ export class ResultsTable {
    * @author Created by ijdoc2js
    */
   showRowIndexes(showIndexes) {
-    throw "Not Implemented - ResultsTable.showRowIndexes(..)";
+    if (showIndexes === true) {
+      this.rowIndex = true;
+      this.rowNumber = false;
+    }
+    else {
+      this.rowIndex = false;
+    }
   };
 
   /**
