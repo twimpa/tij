@@ -53,6 +53,7 @@ export class ResultsTable {
     this.nColumns = 0;
     this.headings = [];
     this.labels = [];
+    this.labels_name = []
     this.rowLabelHeading = "";
     this.title = 'undefined';
     this.emptyCells = 0
@@ -640,9 +641,11 @@ export class ResultsTable {
   setLabel(label, row) {
     if(this.rowLabelHeading === "") {
       this.rowLabelHeading = "Label";
-      this.labels = Array.from({length: this.nRows}, (_,i) => [i,i+1]);
+      for(let i=0; i<this.nRows; i++){
+          this.labels_name.push("");
       }
-    this.labels[row][1] = label;
+    }
+    this.labels_name[row] = label;
   };
 
   /**
@@ -748,6 +751,7 @@ export class ResultsTable {
     this.nColumns++;
     // Add a new empty column...
     this.dataset.push(new Array(this.nRows).fill(this.emptyCells));
+    this.labels = Array.from({length: this.nRows}, (_,i) => [i,i+1]);
     this.headings.push(heading);
     return this.getColumnIndex(heading);
   };
@@ -872,7 +876,7 @@ export class ResultsTable {
       return null;
     }
     else{
-      return this.labels[row][1];
+      return this.labels_name[row];
     }
   };
 
@@ -896,7 +900,7 @@ export class ResultsTable {
       throw new IllegalArgumentException(`${row_index}`);
     }
     
-    if(row_index>this.size()){
+    if(row_index>this.size() - 1){
       throw new IllegalArgumentException('row>counter');
     }
 
