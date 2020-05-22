@@ -659,7 +659,7 @@ export class ResultsTable {
   disableRowLabels() {
       if(this.rowLabelHeading==="Label"){
         for (let i=0; i<this.labels.length; i++){
-          this.labels[i][1]=null;
+          this.labels_name[i]=null;
         }
       }
   };
