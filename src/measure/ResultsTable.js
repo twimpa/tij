@@ -897,12 +897,15 @@ export class ResultsTable {
    * @author Created by Caroline Meguerditchian
    */
   setValue(column_or_heading, row_index, value) {
-
+    if(this.nRows === 0){
+      this.incrementCounter();
+    }
+    
     if(row_index < 0){
       throw new IllegalArgumentException(`${row_index}`);
     }
     
-    if(row_index>this.size()){
+    if(row_index>this.size() - 1){
       throw new IllegalArgumentException('row>counter');
     }
 
