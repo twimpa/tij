@@ -902,7 +902,7 @@ export class ResultsTable {
       throw new IllegalArgumentException(`${row_index}`);
     }
     
-    if(row_index>this.size() - 1){
+    if(row_index>this.size()){
       throw new IllegalArgumentException('row>counter');
     }
 
