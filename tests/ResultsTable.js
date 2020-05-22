@@ -438,7 +438,7 @@ describe('ResultsTable', function () {
       table.disableRowLabels();
       table.show('MyTable');
       const result = table.getLabel(0);
-      expect(result).toBe(null); 
+      expect(result).toEqual(null); 
     });
   });
 
