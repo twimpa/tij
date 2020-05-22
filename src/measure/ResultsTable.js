@@ -1384,10 +1384,23 @@ export class ResultsTable {
    * 
    * @return java.lang.Object
    * 
-   * @author Created by Caroline Meguerditchian
+   * @author Created by Thao-Uyen Vu
    */
   clone() {
-    throw "Not Implemented - ResultsTable.getHeadingsAsVariableNames(..)";
+    const copy = new ResultsTable();
+    copy.nRows = this.nRows;
+    copy.nColumns = this.nColumns;
+    copy.headings = this.headings;
+    copy.labels = this.labels;
+    copy.labels_name = this.labels_name;
+    copy.rowLabelHeading = this.rowLabelHeading;
+    copy.title = this.title;
+    copy.emptyCells = this.emptyCells;
+    copy.rowIndex = this.rowIndex;
+    copy.rowNumber = this.rowNumber;
+    copy.table = this.table;
+    copy.dataset = this.dataset; 
+    return copy;
   };
 
   /**
