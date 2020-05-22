@@ -573,7 +573,7 @@ export class ResultsTable {
   incrementCounter() {
     // Add a new row and fill all the columns by 0 (zero)
     this.nRows++;
-    
+
     this.labels.push([this.getCounter() - 1, this.getCounter()]);
     for (let i = 0; i < this.headings.length; i++) {
       this.dataset[i].push(0);
@@ -616,7 +616,10 @@ export class ResultsTable {
     if(column_or_heading < 0) {
       throw new IllegalArgumentException('column out of range');
     }
-    
+    if(this.nRows === 0){
+      this.incrementCounter();
+    }
+
     this.setValue(column_or_heading,this.getCounter()-1,value);
   };
 
