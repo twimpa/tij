@@ -76,8 +76,25 @@ export class Table {
   
   // Private
   _setHeading(parent) {
+    
     let headings = this.table_data.headings;
+    let label_status = this.table_data.rowLabelHeading;
+    let rowIndex_status = this.table_data.rowIndex
+    let rowNumber_status = this.table_data.rowNumber
     let html = '<tr>';
+
+    if (rowIndex_status === true){
+      html += `<th></th>`;
+    }
+
+    if (rowNumber_status === true){
+      html += `<th></th>`;
+    }
+
+    if (label_status === "Label"){
+      html += `<th>${label_status}</th>`;
+    }
+
     for (let h of headings) {
       html += `<th>${h}</th>`;
     }
@@ -87,12 +104,38 @@ export class Table {
   
   // Private
   _setRows(parent) {
+    let labels = this.table_data.labels_name;
+    let label_status = this.table_data.rowLabelHeading;
+    let row_index_number = this.table_data.labels;
+    let rowIndex_status = this.table_data.rowIndex
+    let rowNumber_status = this.table_data.rowNumber
+
     let nColumns = this.table_data.nColumns;
     let nRows = this.table_data.size();
     let dataset = this.table_data.dataset;
     let html='';
+
     for (let row=0; row < nRows; row++) {
         html += '<tr>';
+
+        //add row index if enabled
+        if(rowIndex_status === true) {
+          let i = row_index_number[row][0];
+          html += `<td><div id='table1'>${i}</div></td>`;
+        }
+
+        //add row number if enabled
+        if(rowNumber_status === true) {
+          let n = row_index_number[row][1];
+          html += `<td><div id='table1'>${n}</div></td>`;
+        }
+
+        //add label column if enabled
+        if(label_status === "Label"){
+          let l = labels[row];
+          html += `<td><div id='table1'>${l}</div></td>`;
+        }
+
       for (let col=0; col < nColumns; col++) {
         let v = dataset[col][row];
         html += `<td><div id='table1'>${v}</div></td>`;
