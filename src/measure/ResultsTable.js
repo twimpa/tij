@@ -572,11 +572,12 @@ export class ResultsTable {
    */
   incrementCounter() {
     // Add a new row and fill all the columns by 0 (zero)
+    this.nRows++;
+    
     this.labels.push([this.getCounter() - 1, this.getCounter()]);
     for (let i = 0; i < this.headings.length; i++) {
       this.dataset[i].push(0);
     }
-    this.nRows++;
   };
 
   /**
