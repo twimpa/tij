@@ -30,7 +30,12 @@
         </div>
         
         <div class = "js">
-        js
+          <label for="fileUpload">UploadCSV </label>
+          <input type="file" id="fileUpload" />
+          <label for="upload">Afficher </label>
+          <input type="button" id="upload" value="Upload" onclick="Upload()" />
+          <div id="dvCSV">
+          </div>
         </div>
       </div>
     <div id="workspace1">
@@ -83,11 +88,7 @@
         }
     } 
   </script>
-    <input type="file" id="fileUpload" />
-  <input type="button" id="upload" value="Upload" onclick="Upload()" />
   <hr />
-  <div id="dvCSV">
-  </div>
   </body>
 </html>
 
