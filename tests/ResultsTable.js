@@ -395,7 +395,7 @@ describe('ResultsTable', function () {
       table.incrementCounter();
       table.addValue('A',98);
       table.show('MyTable');
-      const result = table.getColumn(1);
+      const result = table.getColumn(0);
       expect(result).toEqual([99,98]);
     });
     
