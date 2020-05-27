@@ -572,6 +572,10 @@ export class ResultsTable {
    */
   incrementCounter() {
     // Add a new row and fill all the columns by 0 (zero)
+    if (this.nRows === 0) {
+      this.getFreeColumn("C1")
+    }
+
     this.nRows++;
 
     this.labels.push([this.getCounter() - 1, this.getCounter()]);
@@ -1299,13 +1303,49 @@ export class ResultsTable {
   
     const parseCSV = (data) => {
       // TODO
-      console.log('PARSE CSV');
-      console.log(data);
       let table = new ResultsTable();
       // TODO Fill in table with data
-      table.incrementCounter();
-      table.addValue('A',10);
-      table.addValue('B',20);
+      let csv_array = data.split('\n')
+      let array = []
+      let label = []
+      for(let i=0; i<csv_array.length; i++){
+        array.push(csv_array[i].split(','))
+      }
+
+      for(let i=0; i<array.length; i++){
+          if (array[0][i] == "Label") {
+              for(let j=0; j<array.length; j++) {
+                  label.push(array[j][i])
+                  array[j].splice(i,1)
+              }
+          }
+      }
+
+      for(let i=0; i<array.length; i++){
+          if (array[0][i] == " ") {
+              for(let j=0; j<array.length; j++) {
+                  array[j].splice(i,1)
+              }
+          }
+      }
+
+      for(let i=0; i<array[0].length; i++){
+          table.incrementCounter()
+      }
+
+      for(let i=0; i<array[0].length; i++){
+          table.labels_name[i] = (label[i + 1])
+      }
+
+      for(let i=0; i<array[i].length; i++){
+          for(let j=0; j<array[i].length; j++){
+              table.setValue(i,j,array[i + 1][j])        
+          }
+      }
+
+      for(let i=0; i<array[0].length ; i++){
+          table.headings[i] = (array[0][i])
+        }
       // Send ResultsTable...
       return table;
     }
