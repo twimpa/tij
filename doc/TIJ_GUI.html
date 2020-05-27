@@ -8,6 +8,7 @@
     <title>Tiny ImageJ GUI</title>
     <link rel="stylesheet" href="css/tij_gui.css">
     <script type="text/javascript" src="../dist/tij.js"></script>
+	  <script type="text/javascript" src="image.js"></script>
   </head>
 
   <body>
@@ -15,8 +16,8 @@
       <label for="load_script">UploadScript</label>
       <input id="load_script" type="file" accepted=".js" multiple>
 
-      <label for="load_data">UploadData</label>
-      <input id="load_data" type="file" accept="image/*" onchange= "UploadIMG(event)" multiple>
+      <label for="data">UploadIMG</label>
+      <input type="file" id="data" accept="image/*" onchange="loadFile(event)">
 
       <label for="run">Run</label>
       <input id="run" type="checkbox">
@@ -27,7 +28,6 @@
       <div id = "inside">
       
         <div class="input">
-          <input type="file" accept="image/*" onchange="loadFile(event)">
           <img id="output"/>
 
         </div>
