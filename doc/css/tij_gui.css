@@ -142,7 +142,6 @@ td {
  }
 
 div {
-  overflow: auto;
   resize: both;
   overflow: auto;
   display:block;
