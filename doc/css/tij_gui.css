@@ -1,7 +1,9 @@
+/*
 body {
     font-family: 'Strait', sans-serif;
     background-color: #BFBFBF;
   }
+*/
 
  #menu {
    color: white;
@@ -46,7 +48,8 @@ body {
     display: flex;
     flex-direction: row;
   }
-  
+
+/*
 #workspace1 {
   height: 506px;
   width: 600px; 
@@ -61,6 +64,7 @@ body {
   max-width:300px;
   overflow:auto
 }
+*/
 
 label {
   margin-left: 10px;
@@ -114,6 +118,7 @@ caption {
   border: 0px solid #000000;
 }
 
+/*
 table {
   margin-left: 20px;
   margin-top: 15px;
@@ -147,3 +152,111 @@ div {
   display:block;
 
 }
+*/
+
+
+
+/***** New Resizable Table ***/
+
+body {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
+}
+
+table {
+  background-color: transparent;
+  border-spacing: 0;
+  border-collapse: collapse;
+  box-sizing: border-box;
+}
+
+.table {
+  table-layout: fixed;
+  width: 30%;
+  /* max-width: 100%; */
+  margin-bottom: 20px;
+}
+
+.table-bordered {
+    border: 1px solid #ddd;
+}
+
+.table-resizable.resizing, .table-resizable th::before {
+  cursor: col-resize;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.table-resizable th {
+  position: relative;
+}
+
+.table-resizable th::before {
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 1em;
+}
+.table-resizable th:last-of-type::before {
+  display: none;
+}
+
+.table-resizable td {
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.table > caption + thead > tr:first-child > td, .table > caption + thead > tr:first-child > th, .table > colgroup + thead > tr:first-child > td, .table > colgroup + thead > tr:first-child > th, .table > thead:first-child > tr:first-child > td, .table > thead:first-child > tr:first-child > th {
+  border-top: 0;
+}
+
+.table > thead > tr > th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #ddd;
+}
+
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+  padding: 8px;
+  line-height: 1.42857143;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+}
+
+.table > caption + thead > tr:first-child > td, .table > caption + thead > tr:first-child > th, .table > colgroup + thead > tr:first-child > td, .table > colgroup + thead > tr:first-child > th, .table > thead:first-child > tr:first-child > td, .table > thead:first-child > tr:first-child > th {
+  border-top: 0;
+}
+
+.table-bordered > thead > tr > td, .table-bordered > thead > tr > th {
+  border-bottom-width: 2px;
+}
+
+.table-bordered > tbody > tr > td, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > td, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > thead > tr > th {
+  border: 1px solid #ddd;
+}
+
+.table-striped > tbody > tr:nth-of-type(2n+1) {
+  background-color: #f2f2f2;
+}
+
+.table-resizable th {
+  position: relative;
+}
+
+th {
+  text-align: left;
+}
+
+thead {
+  box-sizing: border-box;
+}
+
+

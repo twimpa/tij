@@ -57,6 +57,7 @@ export class Table {
     
     this.element = document.querySelector(`#${title}`) || document.createElement('table');
     this.element.id = title;
+    this.element.className = 'table table-striped table-bordered table-resizable';
     this.element.innerHTML = ''; // Reset content
     this.element.appendChild(caption);
     this.element.appendChild(thead);
@@ -64,6 +65,9 @@ export class Table {
     this.element.appendChild(tfoot);
     this._setHeading(thead);
     this._setRows(tbody);
+    
+    // Resizable columns
+    this._resizableColumns(this.element,thead);
 
     if (container !== null) {
       container.appendChild(this.element);
@@ -75,6 +79,54 @@ export class Table {
   }
   
   // Private
+  _resizableColumns(table,thead) {
+    let startX,
+       startWidth,
+       handle,
+       pressed = false;
+
+    // let thead = document.querySelector(`#${table.id} thead`);
+    
+    thead.addEventListener('mousedown', function(event) {
+      event.preventDefault();
+      console.log('MOUSE DOWN',event.target);
+      handle = event.target;
+      pressed = true;
+      startX = event.pageX;
+      startWidth = handle.offsetWidth;
+      console.log(handle);
+      handle.closest('.table-resizable').classList.add('resizing');
+      
+      const move = (event) => {
+        if (pressed) {
+          console.log('MOUSE MOVE', startWidth,event.pageX, startX);
+          handle.style.width  = `${startWidth + (event.pageX - startX)}px`;
+        }
+      }
+      
+      const endMove = (event) => {
+        if (pressed) {
+          // let table = event.target.closest('.table-resizable');
+          table.classList.remove('resizing');
+          pressed = false;
+        }
+        document.removeEventListener('mousemove',move,true);
+      }
+      
+      document.addEventListener('mousemove', move);
+      document.addEventListener('mouseup', endMove);
+    
+    });
+
+    // Reset column widths when double click
+    thead.addEventListener('dblclick', function(event) {
+      // Reset column sizes on double click
+      console.log(this.querySelectorAll('th'));
+      this.querySelectorAll('th').forEach(th => th.style.width = null);
+    });
+
+  }
+
   _setHeading(parent) {
     
     let headings = this.table_data.headings;
@@ -121,24 +173,24 @@ export class Table {
         //add row index if enabled
         if(rowIndex_status === true) {
           let i = row_index_number[row][0];
-          html += `<td><div id='table1'>${i}</div></td>`;
+          html += `<td>${i}</td>`;
         }
 
         //add row number if enabled
         if(rowNumber_status === true) {
           let n = row_index_number[row][1];
-          html += `<td><div id='table1'>${n}</div></td>`;
+          html += `<td>${n}</td>`;
         }
 
         //add label column if enabled
         if(label_status === "Label"){
           let l = labels[row];
-          html += `<td><div id='table1'>${l}</div></td>`;
+          html += `<td>${l}</td>`;
         }
 
       for (let col=0; col < nColumns; col++) {
         let v = dataset[col][row];
-        html += `<td><div id='table1'>${v}</div></td>`;
+        html += `<td>${v}</td>`;
       }
       html +='</tr>';
     }
